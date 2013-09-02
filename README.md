@@ -1,4 +1,0 @@
-pairness.com
-============
-
-Pairness\Tariq
