@@ -1,0 +1,148 @@
+<h1>Search</h1>
+
+<div class="search-body">
+
+
+<?php
+
+	$action = request_var('action','');
+	$count = 0;
+	$column = request_var('search_query','familyfullname');
+	$value = request_var('search_text','');
+	 $gender= request_var('gender','');
+
+switch ($action) {
+    case "main":
+        $p = $mysqli->query("SELECT * FROM pairness_family WHERE $column LIKE '%$value%'");
+        break;
+    case "explore":
+       echo $d = '<div class="gsl"><select onchange="changegender(this.options[this.selectedIndex].value)">
+	<option>Select Preference</option>   
+	<option value="male">Male</option>
+	<option value="female">Female</option>
+	</select></div>';
+	if($gender==''){
+		$gender = 'female';
+	}
+		$p = $mysqli->query("SELECT * FROM pairness_family WHERE familygender ='$gender'");
+        break;
+	default:
+       ?>
+	   <form action="?action=main" method="post" name="search" id="search">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>Search Here:</td>
+    <td><input type="text" class="ipt" name="search_text" id="search_text" size="40" required /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><select name="search_query" id="search_query" required> 
+    <option value="" >Select Search Query</option>
+    <option value="familyfullname">User Name</option>
+	<option value="	familyemailaddress">Email</option>
+	<option value="familygender">Gender</option>
+	<option value="familyseekinggender">Seeking Gender</option>
+	<option value="	familydateofbirth">Data of Birth</option>
+	<option value="familycountry">Country</option>
+	<option value="	familystate">State</option>
+	<option value="familycity">City</option>
+	<option value="familyterms">Terms</option>
+	<option value="familyfirstname">First Name</option>
+	<option value="familylastname">Last Name</option>
+	<option value="familyphone">Phone</option>
+	<option value="familycell">Mobile</option>
+	<option value="familyhaircolor">Hair Color</option>
+	<option value="familyhairtype">Hair Type</option>
+	<option value="familyeyecolor">Eye Color</option>
+	<option value="familyeyewear">Eye Wear</option>
+	<option value="familyheight">Height</option>
+	<option value="familyweight">Weight</option>
+	<option value="familybodytype">Body Type</option> 
+    <option value="familyappearance">Appearance</option>
+    <option value="familyfacialhair">Facial Hair</option>
+    <option value="familyphysicalstatus">Physical Status</option>
+    <option value="familymaritalstatus">Marital Status</option>
+    <option value="familyhavechildrens">Childrens</option>
+    <option value="familyvalues">Family Values</option>
+    <option value="familylivingsituation">Living Situation</option>
+    <option value="familylikes">Likes</option>
+    <option value="familydislikes">Dislikes</option>
+    <option value="familyzodiachormony">Zodiac Hormony</option>
+    <option value="familyfoodhabits">Food Habits</option>
+    <option value="familyeducation">Education</option>
+    <option value="familyoccupation">Occupation</option>
+    <option value="familyrelocate">Relocate</option>
+    <option value="familyreligion">Religion</option>
+    <option value="familybornreverted">Born Reverted</option>
+    <option value="familyreligiousvalues">Religious Values</option>
+    <option value="familyattendreligiousservices">Religious Services</option>
+    <option value="familymothertongue">Mother Language</option>
+    <option value="familyethnicity">Ethnicity</option>
+    <option value="familycast">Cast</option>
+    <option value="familynationality">Nationality</option>
+    <option value="familyplaceofbirth">Place of Birth</option>
+    <option value="familylanguagesspoken">Languages Spoken</option>
+    <option value="familyambition">Ambition</option>
+    <option value="familyhobbies">Hobbies</option>
+    <option value="familydreams">Dreams</option>
+    <option value="familygetmarried">Get Married</option>
+    <option value="familywantmorechildrens">More Childrens</option>
+    <option value="familydowry">Dowry</option>
+    <option value="familycnicnumber">CNIC</option>
+    </select></td>
+  
+  <td><input type="image" src="./assets/css/img/btn_submit.png" name="submit" id="submit" value="Submit" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	 
+  </tr>
+
+</table>
+</form>
+	   <?php
+}
+
+ if($_POST || $_GET){
+	if(($p->num_rows)>0)
+	{
+	
+		
+	
+		while($row= $p->fetch_object()){	
+		$count++;
+?>	
+
+
+<div class="search-pfl"><div class="search-inner left">
+<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
+<div class="search-bio left">
+<div class="search-name"><?php echo $row->familyfullname;	 ?></div>
+<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().fixheight($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
+<div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
+</div>
+
+
+</div></div>
+
+
+<?php
+		}
+		
+		?>
+		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
+		<?php
+}
+}
+?>
+
+</div>
+
+
+
+

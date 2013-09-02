@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Pairness.Com</title>
+	<link rel="stylesheet" href="<?php echo $sitepath;  ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo $sitepath;  ?>/assets/css/style_one.css">
+	<link rel="stylesheet" href="<?php echo $sitepath;  ?>/assets/css/bootstrap.css">
+	<link rel="stylesheet" href="<?php echo $sitepath;  ?>/assets/css/notify.css">
+	<script>   var ret = "<?php echo  $ret ;  ?>";
+			var baseurl=  "<?php echo $sitepath;  ?>"
+	</script>
+	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>/assets/css/tcal.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>/assets/css/tcal_two.css" />
+
+
+</head>
+<body class="<?php echo pgname(); ?>">
+	<section class="container">
+	
+		
+<section class="header">
+<?php
+if(pgname()!='index'){
+?>
+
+<div class="hdr">
+	<div class="logo">
+		<img src="<?php echo $sitepath;  ?>/assets/css/img/logo_pairness.png" width="280" height="64" />
+	</div>
+	
+	<?php   if(pgname()!=='candidate' && check_login()){?>
+	<div class="usr-img">
+		<img src="<?php echo user_image(); ?>" width="40" align="absmiddle" /><a href="#" class="user-mini"> <?php  echo $_SESSION['name'];  ?> <img src="<?php echo $sitepath;  ?>/assets/css/img/login_aero.png" width="9" height="5" /></a>
+		<div class="user-opt"><a href="<?php echo $logoutpage; ?>">Logout</a><br /><a class="button-purge" href="#">Purge Cache</a></div>
+	</div>
+	<?php  }?>
+</div>
+</section>
+<section class="navbar">
+<div class="nav">
+<?php if(check_login()){ ?>
+<a class="topmenu" href="<?php  echo $homepage; ?>">Home</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $searchpage; ?>">Search</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $matchpage; ?>">Matches</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $inboxpage; ?>">Inbox</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $explorepage; ?>">Explore</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $logoutpage; ?>">Logout</a>
+<?php }else{?>
+<a class="topmenu" href="<?php  echo $indexpage; ?>">Home</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $searchpage; ?>">Search</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="login-mini topmenu" href="#"> Login</a>
+<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+<a class="topmenu" href="<?php  echo $candidatepage; ?>?f=0">Register</a>
+
+<?php }?>
+<?php  if(pgname()!='index' &&pgname()!='candidate' && check_login()){  echo '<span class="fstatus right">' .fstatus() . '</span>'; }else if(pgname()=='candidate'){  echo  '<span class="fstatus right">'; if($f==1){ echo "You are registering as a family member.";}else{echo "You are registering as a bride or groom";} echo '</span>'; } ?>
+</div>
+<?php   }else {  echo "<!--   Header to be added -->";  } ?>	
+	
+
+		</section><section class="layout">
+		<?php if(pgname()!='index' &&pgname()!='candidate' && check_login()){
+		
+		?>
+		
+		<div class="page">
+		<div class="home-body">
+<div class="side-bar">
+<div class="dpl">
+<div class="gray bar">
+Profile
+</div><div class="impfl">
+<img src="<?php echo user_image(); ?>" width="70" />
+Hello <?php  echo $_SESSION['name'];  ?>
+<div class="txtblue">
+<a href="<?php echo $profilepage; ?>">Edit Profile<br />
+                              <a href="<?php echo $photospage; ?>">Manage Photos</a><br />
+                              <a href="<?php echo $settingspage; ?>">Edit Preferences</a></div></div>
+</div>
+
+<div class="dpl">
+<div class="blue bar">
+<?php if(isfamily()){ ?>
+Your Listings
+</div>
+
+<?php  
+
+	$ffd = $_SESSION['id'];
+	$queryy = $mysqli->query("select * from pairness_family where (familyid ='$ffd')");
+	while ($row = $queryy->fetch_object()){
+		 echo '<div class="sub-bar"><a href="profile.php?view='.urlencode(encrypt_text($row ->id)).'">'.$row ->familyfullname.'</a></div>';
+	}
+?>
+
+
+<?php  }else{ ?>
+Inbox
+</div>
+<div class="sub-bar"><a href="#">Emails</a></div>
+<div class="sub-bar"><a href="#">Requests</a></div>
+<?php }?>
+<div class="green bar">
+Proposals
+</div>
+<div class="sub-bar"><a href="#">Sent</a></div>
+<div class="sub-bar"><a href="#">Recieved</a></div>
+</div>
+<div class="dpl no-bottom">
+<div class="unlock bar">
+Upgrade Now!
+</div>
+<div class="sub-bar">
+<ul class="upgrade-now">
+<li>Send Emails directly</li>
+<li>Chat Instantly on IM</li>
+<li>View Verified Phone Nos.</li>
+<li>Access detailed Profiles</li>
+<li>Enjoy Private Browsing</li>
+<li>Get Noticed by more Members</li>
+
+</ul>
+
+
+<div class="sub-bar"><a href="<?php echo $membershippage;?>?c=<?php echo urlencode(encrypt_text($_SESSION['privacylevel'])) ?>">Learn More!</a></div>
+
+</div>
+
+<div class="upgrade-f">
+</div>
+</div>
+
+
+
+</div>
+
+<div class="main-body">
+		
+		
+		<?php
+		
+		}else if (pgname()!='index'){
+		
+		
+		?>
+		
+		<div class="page">
+		<div class="home-body">
+<div class="side-bar">
+<div class="dpl">
+<div class="blue bar">
+Login
+</div>
+<div class="sub-bar"><a class="login-mini" href="#">Login</a></div>
+<div class="sub-bar"><a href="#">Forgot Password</a></div>
+
+<div class="green bar">
+Learn More
+</div>
+<div class="sub-bar"><a href="#">Privacy</a></div>
+<div class="sub-bar"><a href="#">Membership</a></div>
+</div>
+</div>
+
+<div class="main-body">
+
+<?php  } ?>

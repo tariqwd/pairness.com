@@ -1,0 +1,61 @@
+<section class="content">
+<?php
+if(check_login()){
+takemehome();}
+
+$emailt = request_var('email','');
+$keyt= request_var('key','');
+
+
+
+?>
+
+
+
+<div>
+<h1>Verify your Profile</h1><br />
+<?php
+if($_POST || $_GET){
+echo verify_id($emailt,$keyt);
+echo "<br />";}
+
+
+?>
+<form name="candidate" id="register-form" method="post" action="" enctype="multipart/form-data">
+  <table width="400" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td>Eamil:</td>
+    <td><input type="text" class="ipt" required="required" placeholder="Enter Your Emiail" name="email" id="email" /></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+   <tr>
+    <td>Verification Key:</td>
+    <td><input type="text" class="ipt" required="required" placeholder="Enter Your Key" name="key" id="key" /></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+     <tr>
+    <td>&nbsp;</td>
+    <td><input type="image" src="./assets/css/img/btn_submit.png" name="submit" id="submit" value="Submit" /></td>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</form>
+
+
+</div>
+
+
+  
+
+
+
+  </section>

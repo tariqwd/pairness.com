@@ -1,0 +1,35 @@
+<?php
+$uid = $_SESSION['id'];
+auth_check();
+if($_POST){
+
+$pwd = request_var('password','');
+
+$g = "UPDATE login SET password='$pwd' WHERE uid='$uid'";
+if( $mysqli->query($g)){
+
+echo "<div class='login' style='display:block'>updated!</div>";
+}else{
+	echo "<div class='login' style='display:block'>failed!</div>";
+}
+}
+
+
+
+
+$queryy = $mysqli->query("select * from login where uid = $uid");
+echo "<form method='post'>";
+while ($row = $queryy->fetch_object()){
+
+	echo "UID: <input type='text' readonly='' value='".$row ->uid."' /><br />";
+	echo "USERNAME: <input type='text' readonly  value='".$row ->username."' /><br />";
+	echo "PASSWORD: <input type='text' name='password' value='".$row ->password."' /><br />";
+	echo "EMAIL: <input type='text' readonly value='".$row ->email."' /><br />";
+	echo "PRIVACY LEVEL: <input type='text' readonly value='".$row ->privacylevel."' /><br />";
+
+}
+
+
+?>
+<input type="submit" />
+</form>

@@ -1,0 +1,1152 @@
+<tr>
+    <td><?php echo $familyemailaddress ?></td>
+    <td><?php echo $familygender ?></td>
+    <td><?php echo $familyseekinggender ?></td>
+    <td><?php echo $familydateofbirth ?></td>
+    <td><?php echo $familycountry ?></td>
+    <td><?php echo $familystate ?></td>
+    <td><?php echo $familycity ?></td>
+    <td><?php echo $familyterms ?></td>
+    <td><?php echo $familyfirstname ?></td>
+    <td><?php echo $familylastname ?></td>
+    <td><?php echo $familyphone ?></td>
+    <td><?php echo $familycell ?></td>
+    <td>&nbsp;</td>
+    <td><?php echo $familyprofiledate ?></td>
+    <td><?php if($familyhaircolor  == '375')
+					{
+	echo 'Bald / Shaved';
+					}
+	else if($familyhaircolor == '371')
+	{
+		echo 'Black';
+		}
+	else if($familyhaircolor == '373')
+	{
+		echo'Blonde';
+		}
+	else if($familyhaircolor == '370')
+	{
+		echo'Brown';
+		}
+		else if($familyhaircolor == '374')
+	{
+		echo'Grey / White';
+		}
+		else if($familyhaircolor == '369')
+	{
+		echo'Light Brown';
+		}
+		else if($familyhaircolor == '372')
+	{
+		echo'Red';
+		}
+		else if($familyhaircolor == '377')
+	{
+		echo'Changes frequently';
+		}
+		else if($familyhaircolor == '252')
+	{
+		echo'Other';
+		}
+	else
+	{
+		echo'Prefer not to say';
+		}  ?></td>
+    <td><?php if($familyhairtype == '384')
+	{
+		echo'Straight';
+		}
+		else if($familyhairtype == '385')
+	{
+		echo'Wavy';
+		}
+		else if($familyhairtype == '386')
+	{
+		echo'Curly';
+		}
+		else if($familyhairtype == '252')
+	{
+		echo'Other';
+		}
+	else
+	{
+		echo'Prefer not to say';
+		}   ?></td>
+    <td><?php if($familyeyecolor == '355')
+	{
+		echo'Black';
+		}
+		else if($familyeyecolor == '352')
+	{
+		echo'Blue';
+		}
+		else if($familyeyecolor == '354')
+	{
+		echo'Brown';
+		}
+		else if($familyeyecolor == '356')
+	{
+		echo'Green';
+		}
+		else if($familyeyecolor == '353')
+	{
+		echo'Grey';
+		}
+		else if($familyeyecolor == '357')
+	{
+		echo'Hazel';
+		}
+	else
+	{
+		echo'Other';
+		}
+	?></td>
+    <td><?php if($familyeyewear == '360')
+	{
+		echo'Contacts';
+		}
+		else if($familyeyewear == '359')
+	{
+		echo'Glasses';
+		}
+		else if($familyeyewear == '358')
+	{
+		echo'None';
+		}
+		else if($familyeyewear == '252')
+	{
+		echo'Other';
+		}
+	else
+	{
+		echo'Prefer not to say';
+		}
+	?></td>
+    <td><?php if($familyheight  == '140')
+					{
+	echo '4.7 (140 cm)';
+					}
+	else if($familyheight == '143')
+	{
+		echo '4.8 (143 cm)';
+		}
+	else if($familyheight == '145')
+	{
+		echo'4.9 (145 cm)';
+		}
+	else if($familyheight == '148')
+	{
+		echo'4.10 (148 cm)';
+		}
+		else if($familyheight == '150')
+	{
+		echo'4.11 (150 cm)';
+		}
+		else if($familyheight == '153')
+	{
+		echo'5 (153 cm)';
+		}
+		else if($familyheight == '155')
+	{
+		echo'5.1 (155 cm)';
+		}
+		else if($familyheight == '158')
+	{
+		echo'5.2 (158 cm)';
+		}
+		else if($familyheight == '161')
+	{
+		echo'5.3 (161 cm)';
+		}
+		else if($familyheight == '163')
+	{
+		echo'5.4 (163 cm)';
+		}
+		else if($familyheight == '166')
+	{
+		echo'5.5 (166 cm)';
+		}
+		else if($familyheight == '168')
+	{
+		echo'5.6 (168 cm)';
+		}
+		else if($familyheight == '171')
+	{
+		echo'5.7 (171 cm)';
+		}
+		else if($familyheight == '173')
+	{
+		echo'5.8 (173 cm)';
+		}
+		else if($familyheight == '176')
+	{
+		echo'5.9 (176 cm)';
+		}
+		else if($familyheight == '178')
+	{
+		echo'5.10 (178 cm)';
+		}
+		else if($familyheight == '181')
+	{
+		echo'5.11 (181 cm)';
+		}
+		else if($familyheight == '183')
+	{
+		echo'6 (183 cm)';
+		}
+		else if($familyheight == '186')
+	{
+		echo'6.1 (186 cm)';
+		}
+		else if($familyheight == '188')
+	{
+		echo'6.2 (188 cm)';
+		}
+		else if($familyheight == '191')
+	{
+		echo'6.3 (191 cm)';
+		}
+		else if($familyheight == '194')
+	{
+		echo'6.4 (194 cm)';
+		}
+		else if($familyheight == '196')
+	{
+		echo'6.5 (196 cm)';
+		}
+		else if($familyheight == '199')
+	{
+		echo'6.6 (199 cm)';
+		}
+		else if($familyheight == '201')
+	{
+		echo'6.7 (201 cm)';
+		}
+		else if($familyheight == '204')
+	{
+		echo'6.8 (204 cm)';
+		}
+		else if($familyheight == '206')
+	{
+		echo'6.9 (206 cm)';
+		}
+		else if($familyheight == '209')
+	{
+		echo'6.10 (209 cm)';
+		}
+		else if($familyheight == '211')
+	{
+		echo'6.11 (211 cm)';
+		}
+		else if($familyheight == '214')
+	{
+		echo'7 (214 cm)';
+		}
+		else if($familyheight == '216')
+	{
+		echo'7.1 (216 cm)';
+		}
+		
+	else
+	{
+		echo'7.2 (219 cm)';
+		}
+	 ?></td>
+    <td><?php if($familyweight  == '40')
+					{
+	echo '40 kg (88 lb)';
+					}
+	else if($familyweight == '41')
+	{
+		echo '41 kg (90 lb)';
+		}
+	else if($familyweight == '42')
+	{
+		echo'42 kg (93 lb)';
+		}
+	else if($familyweight == '43')
+	{
+		echo'43 kg (95 lb)';
+		}
+		else if($familyweight == '44')
+	{
+		echo'44 kg (97 lb)';
+		}
+		else if($familyweight == '45')
+	{
+		echo'45 kg (99 lb)';
+		}
+		else if($familyweight == '46')
+	{
+		echo'46 kg (101 lb)';
+		}
+		else if($familyweight == '47')
+	{
+		echo'47 kg (104 lb)';
+		}
+		else if($familyweight == '48')
+	{
+		echo'48 kg (106 lb)';
+		}
+		else if($familyweight == '49')
+	{
+		echo'49 kg (108 lb)';
+		}
+		else if($familyweight == '50')
+	{
+		echo'50 kg (110 lb)';
+		}
+		else if($familyweight == '51')
+	{
+		echo'51 kg (112 lb)';
+		}
+		else if($familyweight == '52')
+	{
+		echo'52 kg (115 lb)';
+		}
+		else if($familyweight == '53')
+	{
+		echo'53 kg (117 lb)';
+		}
+		else if($familyweight == '54')
+	{
+		echo'54 kg (119 lb)';
+		}
+		else if($familyweight == '55')
+	{
+		echo'55 kg (121 lb)';
+		}
+		else if($familyweight == '56')
+	{
+		echo'56 kg (123 lb)';
+		}
+		else if($familyweight == '57')
+	{
+		echo'57 kg (126 lb)';
+		}
+		else if($familyweight == '58')
+	{
+		echo'58 kg (128 lb)';
+		}
+		else if($familyweight == '59')
+	{
+		echo'59 kg (130 lb)';
+		}
+		else if($familyweight == '60')
+	{
+		echo'60 kg (132 lb)';
+		}
+		else if($familyweight == '61')
+	{
+		echo'61 kg (134 lb)';
+		}
+		else if($familyweight == '62')
+	{
+		echo'62 kg (137 lb)';
+		}
+		else if($familyweight == '63')
+	{
+		echo'63 kg (139 lb)';
+		}
+		else if($familyweight == '64')
+	{
+		echo'64 kg (141 lb)';
+		}
+		else if($familyweight == '65')
+	{
+		echo'65 kg (143 lb)';
+		}
+		else if($familyweight == '66')
+	{
+		echo'66 kg (146 lb)';
+		}
+		else if($familyweight == '67')
+	{
+		echo'67 kg (148 lb)';
+		}
+		else if($familyweight == '68')
+	{
+		echo'68 kg (150 lb)';
+		}
+		else if($familyweight == '69')
+	{
+		echo'69 kg (152 lb)';
+		}
+		else if($familyweight == '70')
+	{
+		echo'70 kg (154 lb)';
+		}
+		else if($familyweight == '71')
+	{
+		echo'71 kg (157 lb)';
+		}
+		else if($familyweight == '72')
+	{
+		echo'72 kg (159 lb)';
+		}
+		else if($familyweight == '73')
+	{
+		echo'73 kg (161 lb)';
+		}
+		else if($familyweight == '74')
+	{
+		echo'74 kg (163 lb)';
+		}
+		else if($familyweight == '75')
+	{
+		echo'75 kg (165 lb)';
+		}
+		else if($familyweight == '76')
+	{
+		echo'76 kg (168 lb)';
+		}
+		else if($familyweight == '77')
+	{
+		echo'77 kg (170 lb)';
+		}
+		else if($familyweight == '78')
+	{
+		echo'78 kg (172 lb)';
+		}
+		else if($familyweight == '79')
+	{
+		echo'79 kg (174 lb)';
+		}
+		else if($familyweight == '80')
+	{
+		echo'80 kg (176 lb)';
+		}
+		else if($familyweight == '81')
+	{
+		echo'81 kg (179 lb)';
+		}
+		else if($familyweight == '82')
+	{
+		echo'82 kg (181 lb)';
+		}
+		else if($familyweight == '83')
+	{
+		echo'83 kg (183 lb)';
+		}
+		else if($familyweight == '84')
+	{
+		echo'84 kg (185 lb)';
+		}
+		else if($familyweight == '85')
+	{
+		echo'85 kg (187 lb)';
+		}
+		else if($familyweight == '86')
+	{
+		echo'86 kg (190 lb)';
+		}
+		else if($familyweight == '87')
+	{
+		echo'87 kg (192 lb)';
+		}
+		else if($familyweight == '88')
+	{
+		echo'88 kg (194 lb)';
+		}
+		else if($familyweight == '89')
+	{
+		echo'89 kg (196 lb)';
+		}
+		else if($familyweight == '90')
+	{
+		echo'90 kg (198 lb)';
+		}
+		else if($familyweight == '91')
+	{
+		echo'91 kg (201 lb)';
+		}
+		else if($familyweight == '92')
+	{
+		echo'92 kg (203 lb)';
+		}
+		else if($familyweight == '93')
+	{
+		echo'93 kg (205 lb)';
+		}else if($familyweight == '94')
+	{
+		echo'94 kg (207 lb)';
+		}else if($familyweight == '95')
+	{
+		echo'95 kg (209 lb)';
+		}else if($familyweight == '96')
+	{
+		echo'96 kg (212 lb)';
+		}
+		else if($familyweight == '97')
+	{
+		echo'97 kg (214 lb)';
+		}
+		else if($familyweight == '98')
+	{
+		echo'98 kg (216 lb)';
+		}
+		else if($familyweight == '99')
+	{
+		echo'99 kg (218 lb)';
+		}
+		else if($familyweight == '100')
+	{
+		echo'100 kg (220 lb)';
+		}
+		else if($familyweight == '101')
+	{
+		echo'101 kg (223 lb)';
+		}
+		else if($familyweight == '102')
+	{
+		echo'102 kg (225 lb)';
+		}
+		else if($familyweight == '103')
+	{
+		echo'103 kg (227 lb)';
+		}
+		else if($familyweight == '104')
+	{
+		echo'104 kg (229 lb)';
+		}
+		else if($familyweight == '105')
+	{
+		echo'105 kg (231 lb)';
+		}else if($familyweight == '106')
+	{
+		echo'106 kg (234 lb)';
+		}
+		else if($familyweight == '107')
+	{
+		echo'107 kg (236 lb)';
+		}else if($familyweight == '108')
+	{
+		echo'108 kg (238 lb)';
+		}
+		else if($familyweight == '109')
+	{
+		echo'109 kg (240 lb)';
+		}else if($familyweight == '110')
+	{
+		echo'110 kg (243 lb)';
+		}
+		else if($familyweight == '111')
+	{
+		echo'111 kg (245 lb)';
+		}
+		else if($familyweight == '112')
+	{
+		echo'112 kg (247 lb)';
+		}
+		else if($familyweight == '113')
+	{
+		echo'113 kg (249 lb)';
+		}
+		else if($familyweight == '114')
+	{
+		echo'114 kg (251 lb)';
+		}
+		else if($familyweight == '115')
+	{
+		echo'115 kg (254 lb)';
+		}
+		else if($familyweight == '116')
+	{
+		echo'116 kg (256 lb)';
+		}
+		else if($familyweight == '117')
+	{
+		echo'117 kg (258 lb)';
+		}
+		else if($familyweight == '118')
+	{
+		echo'118 kg (260 lb)';
+		}else if($familyweight == '119')
+	{
+		echo'119 kg (262 lb)';
+		}else if($familyweight == '120')
+	{
+		echo'120 kg (265 lb)';
+		}
+		else if($familyweight == '121')
+	{
+		echo'121 kg (267 lb)';
+		}
+		else if($familyweight == '122')
+	{
+		echo'122 kg (269 lb)';
+		}
+		else if($familyweight == '123')
+	{
+		echo'123 kg (271 lb)';
+		}else if($familyweight == '124')
+	{
+		echo'124 kg (273 lb)';
+		}
+		
+		else if($familyweight == '125')
+	{
+		echo'125 kg (276 lb)';
+		}
+		else if($familyweight == '126')
+	{
+		echo'126 kg (278 lb)';
+		}
+		else if($familyweight == '127')
+	{
+		echo'127 kg (280 lb)';
+		}
+		else if($familyweight == '128')
+	{
+		echo'128 kg (282 lb)';
+		}
+		else if($familyweight == '129')
+	{
+		echo'129 kg (284 lb)';
+		}
+		else if($familyweight == '130')
+	{
+		echo'130 kg (287 lb)';
+		}
+		else if($familyweight == '131')
+	{
+		echo'131 kg (289 lb)';
+		}
+		else if($familyweight == '132')
+	{
+		echo'132 kg (291 lb)';
+		}
+		else if($familyweight == '133')
+	{
+		echo'133 kg (293 lb)';
+		}
+		else if($familyweight == '134')
+	{
+		echo'134 kg (295 lb)';
+		}
+		else if($familyweight == '135')
+	{
+		echo'135 kg (298 lb)';
+		}
+		else if($familyweight == '136')
+	{
+		echo'136 kg (300 lb)';
+		}else if($familyweight == '137')
+	{
+		echo'137 kg (302 lb)';
+		}else if($familyweight == '138')
+	{
+		echo'138 kg (304 lb)';
+		}
+		else if($familyweight == '139')
+	{
+		echo'139 kg (306 lb)';
+		}
+		else if($familyweight == '140')
+	{
+		echo'140 kg (309 lb)';
+		}
+		else if($familyweight == '141')
+	{
+		echo'141 kg (311 lb)';
+		}
+		else if($familyweight == '142')
+	{
+		echo'142 kg (313 lb)';
+		}
+		else if($familyweight == '143')
+	{
+		echo'143 kg (315 lb)';
+		}
+		else if($familyweight == '144')
+	{
+		echo'144 kg (317 lb)';
+		}
+		else if($familyweight == '145')
+	{
+		echo'145 kg (320 lb)';
+		}
+		else if($familyweight == '146')
+	{
+		echo'146 kg (322 lb)';
+		}
+		else if($familyweight == '147')
+	{
+		echo'147 kg (324 lb)';
+		}
+		else if($familyweight == '148')
+	{
+		echo'148 kg (326 lb)';
+		}
+		else if($familyweight == '149')
+	{
+		echo'149 kg (328 lb)';
+		}
+		else if($familyweight == '150')
+	{
+		echo'150 kg (331 lb)';
+		}
+		else if($familyweight == '151')
+	{
+		echo'151 kg (333 lb)';
+		}
+		else if($familyweight == '152')
+	{
+		echo'152 kg (335 lb)';
+		}
+		else if($familyweight == '153')
+	{
+		echo'153 kg (337 lb)';
+		}
+		else if($familyweight == '154')
+	{
+		echo'154 kg (340 lb)';
+		}
+		else if($familyweight == '155')
+	{
+		echo'155 kg (342 lb)';
+		}
+		else if($familyweight == '156')
+	{
+		echo'156 kg (344 lb)';
+		}
+		else if($familyweight == '157')
+	{
+		echo'157 kg (346 lb)';
+		}
+		else if($familyweight == '158')
+	{
+		echo'158 kg (348 lb)';
+		}
+		else if($familyweight == '159')
+	{
+		echo'159 kg (351 lb)';
+		}
+		else if($familyweight == '160')
+	{
+		echo'160 kg (353 lb)';
+		}
+		else if($familyweight == '161')
+	{
+		echo'161 kg (355 lb)';
+		}
+		else if($familyweight == '162')
+	{
+		echo'162 kg (357 lb)';
+		}
+		else if($familyweight == '163')
+	{
+		echo'163 kg (359 lb)';
+		}
+		else if($familyweight == '164')
+	{
+		echo'164 kg (362 lb)';
+		}
+		else if($familyweight == '165')
+	{
+		echo'165 kg (364 lb)';
+		}
+		else if($familyweight == '166')
+	{
+		echo'166 kg (366 lb)';
+		}
+		else if($familyweight == '167')
+	{
+		echo'167 kg (368 lb)';
+		}
+		else if($familyweight == '168')
+	{
+		echo'168 kg (370 lb)';
+		}
+		else if($familyweight == '169')
+	{
+		echo'169 kg (373 lb)';
+		}
+		else if($familyweight == '170')
+	{
+		echo'170 kg (375 lb)';
+		}
+		else if($familyweight == '171')
+	{
+		echo'171 kg (377 lb)';
+		}
+		else if($familyweight == '172')
+	{
+		echo'172 kg (379 lb)';
+		}
+		else if($familyweight == '173')
+	{
+		echo'173 kg (381 lb)';
+		}
+		else if($familyweight == '174')
+	{
+		echo'174 kg (384 lb)';
+		}
+		else if($familyweight == '175')
+	{
+		echo'175 kg (386 lb)';
+		}
+		else if($familyweight == '176')
+	{
+		echo'176 kg (388 lb)';
+		}
+		else if($familyweight == '177')
+	{
+		echo'177 kg (390 lb)';
+		}
+		else if($familyweight == '178')
+	{
+		echo'178 kg (392 lb)';
+		}
+		else if($familyweight == '179')
+	{
+		echo'179 kg (395 lb)';
+		}
+		else if($familyweight == '180')
+	{
+		echo'180 kg (397 lb)';
+		}
+		else if($familyweight == '181')
+	{
+		echo'181 kg (399 lb)';
+		}
+		else if($familyweight == '182')
+	{
+		echo'182 kg (401 lb)';
+		}
+		else if($familyweight == '183')
+	{
+		echo'183 kg (403 lb)';
+		}
+		else if($familyweight == '184')
+	{
+		echo'184 kg (406 lb)';
+		}
+		else if($familyweight == '185')
+	{
+		echo'185 kg (408 lb)';
+		}
+		else if($familyweight == '186')
+	{
+		echo'186 kg (410 lb)';
+		}
+		else if($familyweight == '187')
+	{
+		echo'187 kg (412 lb)';
+		}
+		else if($familyweight == '188')
+	{
+		echo'188 kg (414 lb)';
+		}
+		else if($familyweight == '189')
+	{
+		echo'189 kg (417 lb)';
+		}
+		else if($familyweight == '190')
+	{
+		echo'190 kg (419 lb)';
+		}
+		else if($familyweight == '191')
+	{
+		echo'191 kg (421 lb)';
+		}
+		else if($familyweight == '192')
+	{
+		echo'192 kg (423 lb)';
+		}
+		else if($familyweight == '193')
+	{
+		echo'193 kg (425 lb)';
+		}
+		else if($familyweight == '194')
+	{
+		echo'194 kg (428 lb)';
+		}
+		else if($familyweight == '195')
+	{
+		echo'195 kg (430 lb)';
+		}
+		else if($familyweight == '196')
+	{
+		echo'196 kg (432 lb)';
+		}
+		else if($familyweight == '197')
+	{
+		echo'197 kg (434 lb)';
+		}
+		else if($familyweight == '198')
+	{
+		echo'198 kg (437 lb)';
+		}
+		else if($familyweight == '199')
+	{
+		echo'199 kg (439 lb)';
+		}
+		else if($familyweight == '200')
+	{
+		echo'200 kg (441 lb)';
+		}
+		else if($familyweight == '201')
+	{
+		echo'201 kg (443 lb)';
+		}
+		else if($familyweight == '202')
+	{
+		echo'202 kg (445 lb)';
+		}
+		else if($familyweight == '203')
+	{
+		echo'203 kg (448 lb)';
+		}
+		else if($familyweight == '204')
+	{
+		echo'204 kg (450 lb)';
+		}
+		else if($familyweight == '205')
+	{
+		echo'205 kg (452 lb)';
+		}
+		else if($familyweight == '206')
+	{
+		echo'206 kg (454 lb)';
+		}
+		else if($familyweight == '207')
+	{
+		echo'207 kg (456 lb)';
+		}
+		else if($familyweight == '208')
+	{
+		echo'208 kg (459 lb)';
+		}
+		else if($familyweight == '209')
+	{
+		echo'209 kg (461 lb)';
+		}
+		else if($familyweight == '210')
+	{
+		echo'210 kg (463 lb)';
+		}
+		else if($familyweight == '211')
+	{
+		echo'211 kg (465 lb)';
+		}
+		else if($familyweight == '212')
+	{
+		echo'212 kg (467 lb)';
+		}
+		else if($familyweight == '213')
+	{
+		echo'213 kg (470 lb)';
+		}
+		else if($familyweight == '214')
+	{
+		echo'214 kg (472 lb)';
+		}
+		else if($familyweight == '215')
+	{
+		echo'215 kg (474 lb)';
+		}
+		else if($familyweight == '216')
+	{
+		echo'216 kg (476 lb)';
+		}
+		else if($familyweight == '217')
+	{
+		echo'217 kg (478 lb)';
+		}
+		else if($familyweight == '218')
+	{
+		echo'218 kg (481 lb)';
+		}
+		else if($familyweight == '219')
+	{
+		echo'219 kg (483 lb)';
+		}		
+		
+	else
+	{
+		echo'220 kg (485 lb)';
+		}
+	?></td>
+    <td><?php if($familybodytype == '275')
+	{
+		echo'Petite';
+		}
+		else if($familybodytype == '276')
+	{
+		echo'Slim';
+		}
+		else if($familybodytype == '278')
+	{
+		echo'Athletic';
+		}
+		else if($familybodytype == '277')
+	{
+		echo'Average';
+		}
+		else if($familybodytype == '279')
+	{
+		echo'Few Extra Pounds';
+		}
+		else if($familybodytype == '280')
+	{
+		echo'Full Figured';
+		}
+	else
+	{
+		echo'Large and Lovely';
+		}
+	 ?></td>
+    <td><?php if($familyappearance == '258')
+	{
+		echo'Below average';
+		}
+		else if($familyappearance == '257')
+	{
+		echo'Average';
+		}
+		else if($familyappearance == '256')
+	{
+		echo'Attractive';
+		}
+		
+	else
+	{
+		echo'Very attractive';
+		}
+	 ?></td>
+    <td><?php if($familyfacialhair == '368')
+	{
+		echo'Clean Shaven';
+		}
+		else if($familyfacialhair == '367')
+	{
+		echo'Sideburns';
+		}
+		else if($familyfacialhair == '365')
+	{
+		echo'Mustache';
+		}
+		else if($familyfacialhair == '366')
+	{
+		echo'Goatee';
+		}
+		else if($familyfacialhair == '362')
+	{
+		echo'Short Beard';
+		}
+		else if($familyfacialhair == '363')
+	{
+		echo'Medium Beard';
+		}
+		else if($familyfacialhair == '364')
+	{
+		echo'Long Beard';
+		}
+		
+	else
+	{
+		echo'Other';
+		}
+	 ?></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+
+$id = $row->id;
+				$ip = $row->ip;
+				$familyid = $row->familyid;
+				$familyfullname = 			
+				$familyemailaddress = $row->familyemailaddress;
+				$username = $row->username;				
+				$familypassword = $row->familypassword;
+				$familygender = $row->familygender;
+				$familyseekinggender = $row->familyseekinggender;
+				$familydateofbirth = $row->familydateofbirth;
+				$familycountry = $row->familycountry;
+				$familystate = $row->familystate;
+				$familycity = $row->familycity;
+				$familyterms = $row->familyterms;
+				$familyfirstname = $row->familyfirstname;
+				$familylastname = $row->familylastname;
+				$familyphone = $row->familyphone;
+				$familycell = $row->familycell;
+				$familyprofileimage = ;
+				$familyprofiledate = $row->familyprofiledate;
+				$familyprofiletime = $row->familyprofiletime;
+				$familyhaircolor = $row->familyhaircolor;
+				$familyhairtype = $row->familyhairtype;
+				$familyeyecolor = $row->familyeyecolor;
+				$familyeyewear = $row->familyeyewear;
+				$familyheight = $row->familyheight;
+				$familyweight = $row->familyweight;
+				$familybodytype = $row->familybodytype;
+				$familyappearance = $row->familyappearance;
+				$familyfacialhair = $row->familyfacialhair;
+				$familyphysicalstatus = $row->familyphysicalstatus;
+				$familymaritalstatus = $row->familymaritalstatus;
+				$familyhavechildrens = $row->familyhavechildrens;
+				$familyvalues = $row->familyvalues;
+				$familylivingsituation = $row->familylivingsituation;
+				$familylikes = $row->familylikes;
+				$familydislikes = $row->familydislikes;
+				$familyzodiachormony = $row->familyzodiachormony;
+				$familyfoodhabits = $row->familyfoodhabits;
+				$familyeducation = $row->familyeducation;
+				$familyoccupation = $row->familyoccupation;
+				$familyrelocate = $row->familyrelocate;
+				$familyreligion = $row->familyreligion;
+				$familybornreverted = $row->familybornreverted;
+				$familyreligiousvalues = $row->familyreligiousvalues;
+				$familyattendreligiousservices = $row->familyattendreligiousservices;
+				$familymothertongue = $row->familymothertongue;
+				$familyethnicity = $row->familyethnicity;
+				$familycast = $row->familycast;
+				$familynationality = $row->familynationality;
+				$familyplaceofbirth = $row->familyplaceofbirth;
+				$familylanguagesspoken = $row->familylanguagesspoken;
+				$familyambition = $row->familyambition;
+				$familyhobbies = $row->familyhobbies;
+				$familydreams = $row->familydreams;
+				$familygetmarried = $row->familygetmarried;
+				$familywantmorechildrens = $row->familywantmorechildrens;
+				$familydowry = $row->familydowry;
+				$familycnicnumber = $row->familycnicnumber;
+				$familycnicimage = $row->familycnicimage;	

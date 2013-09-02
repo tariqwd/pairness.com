@@ -1,0 +1,287 @@
+<div style="float:left">
+
+<?php  
+
+if($view!='0'){
+ $em  = $view;
+}
+else{
+
+ if(!isfamily()){
+  $m = getemail($_SESSION['id']);
+  $queryyy = $mysqli->query("select * from pairness_family where (familyemailaddress ='$m')");
+  while($tt = $queryyy->fetch_object()){
+  $em =  $tt->id; 
+ 
+ }
+ 
+  
+ }
+ else{
+
+echo "Please Select your listing profiles to view them!";
+
+	$ffd = $_SESSION['id'];
+	$queryy = $mysqli->query("select * from pairness_family where (familyid ='$ffd')");
+	while ($row = $queryy->fetch_object()){
+		 echo '<div class="listings-pf"><a href="profile.php?view='.urlencode(encrypt_text($row ->id)).'">'.$row ->familyfullname.'</a></div>';
+	}
+
+ }
+ 
+}
+
+
+if(isset($em)){
+ $queryy = $mysqli->query("select * from pairness_family where (id ='$em')");
+ while($tt = $queryy->fetch_object()){ 
+		
+		echo $tt->familyfullname; 
+		
+		
+       
+	   echo '  
+	   <div id="main" style="height:auto; width:690px">
+			<div id="activate" style="height:25px; border: 1px solid #CCC; background:#fef4ea; width:690px">
+			<div id="profile" align="right" style="height:25px; width:680px">
+			<span class="blacktext">Active Profile 100%</span></div> <!--- profile div ends here -->
+			</div><!--- name div ends here --> 
+			</div><!--- activate div ends here -->
+			<div id="space" style="height:15px; width:690px"></div><!--- space div ends here -->
+			
+			<div id="picture" align="left" style="width:155px; height:auto; float:left;">
+			<img src="assets/css/img/profile_picture.png" width="140" height="188" />
+			<br>
+			<a class="blink" href="#" style="text-decoration:underline; float:left; margin-left:20px; color:#2f598d; font-size:11px; font-family:Arial, Helvetica, sans-serif; font-style:normal;">Click for large photo </a>
+			
+			
+			</div><!--- picture div ends here -->
+			
+			<div id="space_two" style="height:5px; width:520px"></div><!--- space_two div ends here -->
+			
+			<div id="profile_detail" style="width:530px; height:auto; float:left; border: 1px solid #CCC;">
+			<div id="profile_self" style="width:260px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age / Height<br>Marital Status<br>Posted</span> <span class="item id1">24 / 5. 9<br>Never Married<br>Self</span><br><br><br>
+			</div><!--- profile_self div ends here -->
+			
+			<div id="profile_self" style="width:260px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Religion / Community<br>Location<br>Mother Tongue</span><span class="item id4">24 / 5. 9<br>Never Married<br>Urdu</span><br><br><br>
+			</div><!--- profile_self div ends here -->
+			<div id="space_two" style="height:20px; width:520px"></div><!--- space_two div ends here -->
+			
+			<div id="manage" style="width:530px; height:auto; float:left; margin-top:10px; background-color:#EFEFEF;">
+			<div id="manage_profile" style="width:530px; height:25px; margin-top:10px; float:left;">
+			<span style="color:#2f598d; font-size:13px; font-family: Georgia, "Times New Roman", Times, serif;">Manage Your Profile</span>
+			</div><!--- manage_profile div ends here -->
+			
+			<div id="manage_options" style="width:530px; height:auto; float:left;">
+			<div id="manage_options_one" style="width:170px; height:auto; float:left;">
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Edit Personal Profile</a><br>
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Edit Partner Profile</a><br>
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Edit Contact Details</a>
+			</div><!--- manage_options_one div ends here -->
+			
+			<div id="manage_options_two" style="width:170px; height:auto; float:left;">
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">View Profile Stats</a><br>
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Manage Photos</a><br>
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Hobbies &amp; Interests</a>
+			</div><!--- manage_options_two div ends here -->
+			
+			<div id="manage_options_three" style="width:170px; height:auto; float:left;">
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Set Contact Filters</a><br>
+			<img src="assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /><a class="redlink2" href="#">Hide / Delete Profile</a>
+			</div><!--- manage_options_three div ends here -->			
+			
+			
+			</div><!--- manage_options div ends here -->
+			
+			
+			</div><!--- manage div ends here -->
+			
+			<br>
+			
+			
+			</div><!--- profile_detail div ends here -->
+			
+			</div> <!--- main div ends here -->
+			
+			<div id="personality_heading" style="width:690px; height:auto; float:left; margin-top:20px; background-color:#fef4ea; border: 1px solid #CCC;">
+			
+			<div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>Personality, Family Details, Career, Partner Expectations etc. </strong></div>
+			
+			<div id="edit" style="width:50px; height:20px; float:right;">
+			<a class="redlink2" style="float:left; margin-top:4px;" href="#">Edit</a><img src="assets/css/img/icon_red_left.png" width="24" height="24" align="left" /></div><!--- edit div ends here -->
+			</div><!--- maintxtgray12 div ends here -->
+			
+			<div id="space" style="width:690px; height:10px; float:left;">
+			</div><!--- space div ends here -->
+			
+			<div id="self_explain" style="width:690px; height:auto; float:left;">
+			<span class="maintxt11">I am very polite, understand the value of   life and relations. I want to make a good relationship with my partner,   not too much religious. Doing a job in an IT company.</span>
+			</div><!--- self_explain div ends here -->
+			
+			</div><!--- personality_heading div ends here -->
+			
+			
+			<div id="basics_heading" style="width:690px; height:auto; float:left; margin-top:20px; background-color:#fef4ea; border: 1px solid #CCC;">
+			
+			<div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>Basics &amp; Lifestyle</strong></div>
+			
+			<div id="edit" style="width:50px; height:20px; float:right;">
+			<a class="redlink2" style="float:left; margin-top:4px;" href="#">Edit</a><img src="assets/css/img/icon_red_left.png" width="24" height="24" align="left" /></div><!--- edit div ends here -->
+			</div><!--- maintxtgray12 div ends here -->
+			
+			<div id="space" style="width:690px; height:20px; float:left;"></div>
+			
+			<div id="basic_detail" align="justify" style="width:670px; height:auto; float:left; border: 1px solid #CCC;">
+			<div id="basic_self_one" align="justify" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth<br>Marital Status<br>Height<br>Complexion<br>Body Type<br>Body Weight<br>Grew up in</span> <span class="item id7">24<br>27-10-1989<br>Never Married<br>5.9<br>Fair<br>Avarage<br>68<br>Pakistan</span><br>
+			
+			</div><!--- basic_self_one div ends here -->
+			
+			<div id="basic_self_two" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth<br>Marital Status<br>Height<br>Complexion<br>Body Type<br>Body Weight<br>Grew up in</span> <span class="item id7">24<br>27-10-1989<br>Never Married<br>5.9<br>Fair<br>Avarage<br>68<br>Pakistan</span><br>
+			</div><!--- basic_self_two div ends here -->
+			</div><!--- basic_detail div ends here -->
+			<!------------------------------------------- Religious div Start -->
+			<div id="basics_heading" style="width:690px; margin-left:22%; height:auto; float:left; margin-top:-90px; background-color:#fef4ea; border: 1px solid #CCC;">
+			
+			<div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left; "><strong>Religious Background</strong></div>
+			
+			<div id="edit" style="width:50px; height:20px; float:right;">
+			<a class="redlink2" style="float:left; margin-top:4px;" href="#">Edit</a><img src="assets/css/img/icon_red_left.png" width="24" height="24" align="left" /></div><!--- edit div ends here -->
+			</div><!--- maintxtgray12 div ends here -->
+			
+			<div id="space" style="width:690px; height:20px; float:left;"></div>
+			
+			<div id="basic_detail" align="left" style="width:670px; height:auto; margin-left:22%; float:left; border: 1px solid #CCC; margin-top:-60px;">
+			<div id="basic_self_one" align="left" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth<br>Marital Status<br>Height<br>Complexion<br>Body Type<br>Body Weight<br>Grew up in</span> <span class="item id7">24<br>27-10-1989<br>Never Married<br>5.9<br>Fair<br>Avarage<br>68<br>Pakistan</span><br><br><br>
+			
+			</div><!--- basic_self_one div ends here -->
+			
+			</div><!--- basic_detail div ends here -->
+						
+			
+			</div><!--- basics_heading div ends here -->
+			
+			<!------------------------------------------- Religious div Ends --></td>
+          
+		  
+		  <!---------------------------------------- Start Family details div Ends -->
+		  <div id="basics_heading" style="width:690px; margin-left:22%; height:auto; float:left; margin-top:20px; background-color:#fef4ea; border: 1px solid #CCC;">
+			
+			<div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>Family details</strong></div>
+			
+			<div id="edit" style="width:50px; height:20px; float:right;">
+			<a class="redlink2" style="float:left; margin-top:4px;" href="#">Edit</a><img src="assets/css/img/icon_red_left.png" width="24" height="24" align="left" /></div><!--- edit div ends here -->
+			</div><!--- maintxtgray12 div ends here -->
+			
+			<div id="space" style="width:690px; height:20px; float:left;"></div>
+			
+			<div id="basic_detail" align="justify" style="width:670px; margin-left:22%; height:auto; float:left; border: 1px solid #CCC;">
+			<div id="basic_self_one" align="justify" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth<br>Marital Status<br>Height<br>Complexion<br>Body Type<br>Body Weight<br>Grew up in</span> <span class="item id7">24<br>27-10-1989<br>Never Married<br>5.9<br>Fair<br>Avarage<br>68<br>Pakistan</span><br>
+			
+			</div><!--- basic_self_one div ends here -->
+			
+			<div id="basic_self_two" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth<br>Marital Status<br>Height<br>Complexion<br>Body Type<br>Body Weight<br>Grew up in</span> <span class="item id7">24<br>27-10-1989<br>Never Married<br>5.9<br>Fair<br>Avarage<br>68<br>Pakistan</span><br>
+			</div><!--- basic_self_two div ends here -->
+			</div><!--- basic_detail div ends here -->
+		  <!----------------------------------------- Ends Family details div Ends -->
+		  
+		  </td>
+		  </tr>
+		  </table>
+		  
+
+	<!-----------------   NEW Table  Education & Career ----->	  
+			
+			
+			<div id="basics_heading" style="width:690px; margin-left:22%; height:auto; float:left; margin-top:20px; background-color:#fef4ea; border: 1px solid #CCC;">
+			
+			<div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left;"><strong> 	Education & Career</strong></div>
+			
+			<div id="edit" style="width:50px; height:20px; float:right;">
+			<a class="redlink2" style="float:left; margin-top:4px;" href="#">Edit</a><img src="assets/css/img/icon_red_left.png" width="24" height="24" align="left" /></div><!--- edit div ends here -->
+			</div><!--- maintxtgray12 div ends here -->
+			
+			<div id="space" style="width:690px; height:20px; float:left;"></div>
+			
+			<div id="basic_detail" align="left" style="width:670px; margin-left:22%; height:auto; float:left; border: 1px solid #CCC;">
+			<div id="basic_self_one" align="left" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth</span> <span class="item id8">24<br>27-10-1989</span><br><br>
+			</div><!--- basic_self_one div ends here -->
+			
+			
+			<div id="basic_self_two" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth</span> <span class="item id8">24<br>27-10-1989</span><br><br>
+			
+			</div><!--- basic_self_two div ends here -->
+			</div><!--- basic_detail div ends here -->
+			
+			<!------------------------------------------- Education & Career div Ends --></td>
+          
+		  
+		  
+		  <!-----------------   NEW Table Partner Location ----->
+		  		  
+		  <div id="basics_heading" style="width:690px; margin-left:22%; height:auto; float:left; margin-top:20px; background-color:#fef4ea; border: 1px solid #CCC;">
+			
+			<div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>Partner Location</strong></div>
+			
+			<div id="edit" style="width:50px; height:20px; float:right;">
+			<a class="redlink2" style="float:left; margin-top:4px;" href="#">Edit</a><img src="assets/css/img/icon_red_left.png" width="24" height="24" align="left" /></div><!--- edit div ends here -->
+			</div><!--- maintxtgray12 div ends here -->
+			
+			<div id="space" style="width:690px; height:20px; float:left;"></div>
+			
+			<div id="basic_detail" align="left" style="width:670px; height:auto; margin-left:22%; float:left; border: 1px solid #CCC;">
+			<div id="basic_self_one" align="left" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth</span> <span class="item id8">24<br>27-10-1989</span><br><br><br>
+			</div><!--- basic_self_one div ends here -->
+			
+			<div id="basic_self_two" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;">Age<br>Date of Birth</span> <span class="item id8">24<br>27-10-1989</span><br><br><br>
+			</div><!--- basic_self_two div ends here -->
+			</div><!--- basic_detail div ends here -->
+		  
+		  
+		  <!-----------------   Ends Table  Partner Location ----->
+		  
+		  
+		  <!-----------------   NEW Table My Contact Detail ----->
+		  
+		  <div id="basics_heading" style="width:690px; height:auto; float:left; margin-top:20px; margin-left:22%; background-color:#006295; border: 1px solid #CCC;">
+			
+			<div class="regtopheading" style="width:500px; height:20px; margin-top:4px; float:left; margin-left:22%;"><strong>My CONTACT DETAIL</strong></div>
+			</div><!--- regtopheading div ends here -->
+			
+			
+			<div id="basic_detail" align="left" style="width:690px; background-color:#f2f2f2; margin-left:22%; height:auto; float:left; border: 1px solid #CCC;">
+			<div id="basic_self_one" align="left" style="width:690px; height:auto; float:left; border: 1px solid #CCC;">
+			<span class="maintxtgray12" style="float:left;"><br>	
+Mobile:<br>Contact Person:<br>Relationship with the member:<br>Convenient Time to Call:<br>Display Option:<br><br></span><br><span class="item id9">+923331245786<br>-<br>-<br>Any time<br> 	You have chosen to display your contact details to all premium members.</span><br><br><br>
+			</div><!--- basic_self_one div ends here -->
+					  
+		  
+			</div><!--- basics_heading div ends here -->
+			
+			
+			
+
+			
+			 
+		';
+		
+	
+	}	
+
+}
+
+
+
+ ?>
+ 
+ </div>
