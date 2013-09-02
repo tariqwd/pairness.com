@@ -1,0 +1,18 @@
+
+
+width="710" border="0" align="left" style="margin-top:10px;" border="0" cellspacing="0" cellpadding="0"
+
+<! --------------------------------------------- Pairness tasks  ---------------------------------------------- >
+
+
+	(i):   Search  Enhance with multipal dropdown menu options, or select multipal fields.
+
+	(ii):  Inbox and proposal just like chat or msg inbox.
+
+	(iii): Manage Photos options, upload photos and delete photos.
+	
+	(iv):  Edit preferences get_config(); functinos.
+
+	(v):   second_step.coz Insert Query of isfanily. 
+
+	(vi):  Email verfication send mail to the user.		
