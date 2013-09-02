@@ -1,0 +1,1 @@
+<?phpinclude('../includes/functions.php');if($_POST){echo purgecache();}else{			$arr = array('s' => 0,'v'=>'Only Post requests are accepted');				echo json_encode($arr);}?>
