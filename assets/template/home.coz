@@ -23,9 +23,9 @@ auth_check();
                   </tr>
                   
                       
-                      <tr>
-                        <td height="25px" align="center" background="images/unlockbar03.png" class="blacktext">Know more / Upgrade now</td>
-                      </tr>
+                            <!--<tr>
+                              <td height="25px" align="center" background="images/unlockbar03.png" class="blacktext">Know more / Upgrade now</td>
+                            </tr>-->
                     </table></td>
                   </tr>
                   
@@ -36,7 +36,7 @@ auth_check();
                     <td><table width="690" border="0" cellspacing="0" cellpadding="0" height="25px">
                       <tr>
                         <td width="25">&nbsp;</td>
-                        <td width="161" align="center" background="images/preffered_matches_bg.png" class="whitetext"><strong>Preferred Matched (124)</strong></td>
+                        <td width="161" align="center" background="./assets/css/img/preffered_matches_bg.png" class="whitetext"><strong>Preferred Matched (124)</strong></td>
                         <td>&nbsp;</td>
                       </tr>
                     </table></td>

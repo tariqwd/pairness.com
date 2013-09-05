@@ -12,6 +12,4 @@ include('./assets/template/header.coz');
 include('./assets/template/search.coz');
 include('./assets/template/footer.coz');
 
-
-
 ?>

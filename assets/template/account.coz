@@ -14,9 +14,6 @@ echo "<div class='login' style='display:block'>updated!</div>";
 }
 }
 
-
-
-
 $queryy = $mysqli->query("select * from login where uid = $uid");
 echo "<form method='post'>";
 while ($row = $queryy->fetch_object()){

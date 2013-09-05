@@ -130,7 +130,7 @@ function get_config($vvalue){  /*  Get values from configuration. Configuration 
 
 
 function redirect($add,$delay=0){ /* Redirection Script */
-	//echo "window.setTimeout(function(){ window.location = '".$add."'; }, ".$delay.")";
+	//echo "<script>window.setTimeout(function(){ window.location = '".$add."'; }, ".$delay.")</script>";
 	header("Refresh:". $delay .";url=". $add ); 
 }
 
@@ -452,7 +452,6 @@ function verify_id($email,$cs){ /* Verification of email*/
 			$d =time();
 			$finfo = $query ->fetch_assoc();
 			$fm = $finfo['isfamily'];
-			
 			if($finfo['emailverification']==0){
 				$quer = $mysqli->query("update login set verificationdate='$d',emailverification=1 where email='$email' and sc='$cs'");
 				

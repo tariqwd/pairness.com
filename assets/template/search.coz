@@ -9,7 +9,7 @@
 	$count = 0;
 	$column = request_var('search_query','familyfullname');
 	$value = request_var('search_text','');
-	 $gender= request_var('gender','');
+	$gender= request_var('gender','');
 
 switch ($action) {
     case "main":
@@ -28,17 +28,17 @@ switch ($action) {
         break;
 	default:
        ?>
-	   <form action="?action=main" method="post" name="search" id="search">
-<table width="600" border="0" cellspacing="0" cellpadding="0">
-  <tr>
+	<form action="?action=main" method="post" name="search" id="search">
+	<table width="600" border="0" cellspacing="0" cellpadding="0">
+	<tr>
     <td>Search Here:</td>
     <td><input type="text" class="ipt" name="search_text" id="search_text" size="40" required /></td>
-  </tr>
-  <tr>
+	</tr>
+	<tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
-  </tr>
-  <tr>
+	</tr>
+	<tr>
     <td>&nbsp;</td>
     <td><select name="search_query" id="search_query" required> 
     <option value="" >Select Search Query</option>
@@ -111,9 +111,6 @@ switch ($action) {
  if($_POST || $_GET){
 	if(($p->num_rows)>0)
 	{
-	
-		
-	
 		while($row= $p->fetch_object()){	
 		$count++;
 ?>	

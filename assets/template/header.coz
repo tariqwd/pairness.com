@@ -26,7 +26,7 @@ if(pgname()!='index'){
 
 <div class="hdr">
 	<div class="logo">
-		<img src="<?php echo $sitepath;  ?>/assets/css/img/logo_pairness.png" width="280" height="64" />
+		<a href="<?php echo $sitepath; ?>"> <img src="<?php echo $sitepath;  ?>/assets/css/img/logo_pairness.png" width="280" height="64" /> </a>
 	</div>
 	
 	<?php   if(pgname()!=='candidate' && check_login()){?>
@@ -66,7 +66,8 @@ if(pgname()!='index'){
 <?php   }else {  echo "<!--   Header to be added -->";  } ?>	
 	
 
-		</section><section class="layout">
+		</section>
+		<section class="layout">
 		<?php if(pgname()!='index' &&pgname()!='candidate' && check_login()){
 		
 		?>
