@@ -12,6 +12,11 @@
 	</script>
 	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>/assets/css/tcal.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>/assets/css/tcal_two.css" />
+    
+    <link rel="stylesheet" type="text/css" href="./assets/css/tcal.css" />
+<link rel="stylesheet" type="text/css" href="./assets/css/tcal_two.css" />
+<script type="text/javascript" src="./assets/js/tcal.js"></script>
+<script type="text/javascript" src="./assets/js/tcal_two.js"></script>
 
 
 </head>
@@ -26,7 +31,7 @@ if(pgname()!='index'){
 
 <div class="hdr">
 	<div class="logo">
-		<a href="<?php echo $sitepath; ?>"> <img src="<?php echo $sitepath;  ?>/assets/css/img/logo_pairness.png" width="280" height="64" /> </a>
+		<img src="<?php echo $sitepath;  ?>/assets/css/img/logo_pairness.png" width="280" height="64" />
 	</div>
 	
 	<?php   if(pgname()!=='candidate' && check_login()){?>
@@ -66,8 +71,7 @@ if(pgname()!='index'){
 <?php   }else {  echo "<!--   Header to be added -->";  } ?>	
 	
 
-		</section>
-		<section class="layout">
+		</section><section class="layout">
 		<?php if(pgname()!='index' &&pgname()!='candidate' && check_login()){
 		
 		?>
@@ -83,6 +87,7 @@ Profile
 Hello <?php  echo $_SESSION['name'];  ?>
 <div class="txtblue">
 <a href="<?php echo $profilepage; ?>">Edit Profile<br />
+
                               <a href="<?php echo $photospage; ?>">Manage Photos</a><br />
                               <a href="<?php echo $settingspage; ?>">Edit Preferences</a></div></div>
 </div>
