@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.4
+-- version 3.5.1
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 02, 2013 at 05:33 AM
--- Server version: 5.6.12-log
--- PHP Version: 5.4.16
+-- Generation Time: Sep 05, 2013 at 05:58 AM
+-- Server version: 5.5.24-log
+-- PHP Version: 5.3.13
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `pairness`
 --
-CREATE DATABASE IF NOT EXISTS `pairness` DEFAULT CHARACTER SET utf8 COLLATE utf8_bin;
-USE `pairness`;
 
 -- --------------------------------------------------------
 
@@ -96,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `uid` int(11) NOT NULL,
   `logtime` int(11) NOT NULL,
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=664 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=694 ;
 
 --
 -- Dumping data for table `log`
@@ -765,7 +763,37 @@ INSERT INTO `log` (`logid`, `action`, `uid`, `logtime`) VALUES
 (660, 'User successfully logged in!', 2, 1378097185),
 (661, 'User successfully logged in!', 2, 1378097764),
 (662, 'User successfully logged in!', 2, 1378098217),
-(663, 'User successfully logged in!', 2, 1378098980);
+(663, 'User successfully logged in!', 2, 1378098980),
+(664, 'User successfully logged in!', 2, 1378108667),
+(665, 'User successfully logged in!', 2, 1378118906),
+(666, 'User successfully logged in!', 2, 1378118942),
+(667, 'User successfully logged in!', 2, 1378119001),
+(668, 'User successfully logged in!', 2, 1378120039),
+(669, 'User successfully logged in!', 2, 1378120977),
+(670, 'User successfully logged in!', 2, 1378121068),
+(671, 'User successfully logged in!', 6, 1378123377),
+(672, 'User successfully logged in!', 2, 1378123392),
+(673, 'User successfully logged in!', 6, 1378123434),
+(674, 'User successfully logged in!', 2, 1378123495),
+(675, 'User successfully logged in!', 6, 1378123539),
+(676, 'User successfully logged in!', 7, 1378124423),
+(677, 'User successfully logged in!', 7, 1378127637),
+(678, 'User successfully logged in!', 18, 1378189887),
+(679, 'User successfully logged in!', 11, 1378191687),
+(680, 'User successfully logged in!', 11, 1378191895),
+(681, 'User successfully logged in!', 11, 1378191923),
+(682, 'User successfully logged in!', 11, 1378191940),
+(683, 'User successfully logged in!', 11, 1378191973),
+(684, 'User successfully logged in!', 11, 1378192003),
+(685, 'User successfully logged in!', 11, 1378192069),
+(686, 'User successfully logged in!', 2, 1378192339),
+(687, 'User successfully logged in!', 18, 1378192490),
+(688, 'User successfully logged in!', 18, 1378268938),
+(689, 'User successfully logged in!', 18, 1378270348),
+(690, 'User successfully logged in!', 18, 1378271701),
+(691, 'User successfully logged in!', 18, 1378293864),
+(692, 'User successfully logged in!', 25, 1378297792),
+(693, 'User successfully logged in!', 26, 1378360528);
 
 -- --------------------------------------------------------
 
@@ -790,7 +818,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `isfamily` int(11) NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `login`
@@ -800,7 +828,93 @@ INSERT INTO `login` (`uid`, `ip`, `username`, `Name`, `email`, `password`, `regi
 (2, '', 'rahber', '', 'rahber50@gmail.com', '123', 0, 0, 1, 'apple', 1375853558, 4, '/pairness.com/logout.php', 0),
 (3, '192.168.1.4', 'PaPu', 'Papu', 'Papu', 'papu', 1377689138, 0, 1, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '/pairness.com/logout.php', 0),
 (4, '192.168.1.4', 'asd', 'asdasd', 'asdfasd', 'asdas', 1377689180, 0, 0, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '', 1),
-(5, '192.168.1.4', 'asdasasd', 'asd', 'asdfasdasd', 'asdasd', 1377689476, 0, 0, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '', 1);
+(5, '192.168.1.4', 'asdasasd', 'asd', 'asdfasdasd', 'asdasd', 1377689476, 0, 0, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '', 1),
+(6, '127.0.0.1', 'mtariq', 'abc', 'coz.test4@gmail.com', '123', 1378123208, 0, 1, 'mueukm43hto2oueravoig2t0l0', 1, 1, '/pairness.com/logout.php', 0),
+(7, '127.0.0.1', 'test1', 'Muhammad Tariq', 'mtariq_sarwar@yahoo.com', '123', 1378124331, 0, 1, '2p1s7f41lbd5jv97vinajfqrd0', 0, 1, '/pairness.com/home.php', 1),
+(8, '127.0.0.1', 'admin', 'abc111', 'test@gmail.com', '123', 1378124963, 0, 0, '9eehv1ppgjfeobkh65aem7p5g0', 0, 1, '', 1),
+(9, '127.0.0.1', 'test2223', 'abc123', 'tariq@gmail.com', '123', 1378126226, 0, 0, '9eehv1ppgjfeobkh65aem7p5g0', 0, 1, '', 1),
+(10, '127.0.0.1', 'testguard', 'test guardian', 'test_guard@yahoo.com', '123', 1378183200, 0, 0, '1v8l2h6sqre044rujr4ss19o84', 0, 1, '', 1),
+(11, '127.0.0.1', 'testself', 'test self', 'test_self@gmail.com', '123', 1378183501, 0, 1, '1v8l2h6sqre044rujr4ss19o84', 0, 1, '/pairness.com/logout.php', 0),
+(12, '127.0.0.1', 'testguard2', 'test guard2', 'test_guard2@gmail.com', '123', 1378185663, 0, 0, '9ne0teqpccta8nfcl7e4a6oo32', 0, 1, '', 1),
+(24, '127.0.0.1', 'test_guard3', 'test_guard3', 'test_guard3@gmail.com', '123', 1378297561, 0, 0, '0hpmd6nkm374dj7bpq9cvfrig2', 0, 1, '', 1),
+(25, '127.0.0.1', 'test_guard4', 'test_guard4', 'test_guard4@gmail.com', '123', 1378297727, 0, 1, '0hpmd6nkm374dj7bpq9cvfrig2', 0, 1, '/pairness.com/home.php', 1),
+(26, '127.0.0.1', 'test_self1', 'test_self1', 'test_self1@gmail.com', '123', 1378360473, 0, 1, '0vgkor1o2lb3hq50svgpmio020', 0, 1, '/pairness.com/home.php', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pairness_candidate`
+--
+
+CREATE TABLE IF NOT EXISTS `pairness_candidate` (
+  `candidateid` int(10) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(20) NOT NULL,
+  `familyid_fk` int(10) NOT NULL,
+  `candidatefullname` varchar(100) NOT NULL,
+  `candidateemailaddress` varchar(200) NOT NULL,
+  `candidatepassword` varchar(20) NOT NULL,
+  `candidategender` varchar(10) NOT NULL,
+  `candidateseekinggender` varchar(10) NOT NULL,
+  `candidatedateofbirth` date NOT NULL,
+  `candidatecountry` varchar(50) NOT NULL,
+  `candidatestate` varchar(100) NOT NULL,
+  `candidatecity` varchar(100) NOT NULL,
+  `candidateterms` varchar(255) NOT NULL,
+  `candidatefirstname` varchar(50) NOT NULL,
+  `candidatelastname` varchar(50) NOT NULL,
+  `candidatephone` int(20) NOT NULL,
+  `candidatecell` int(20) NOT NULL,
+  `candidateprofileimage` varchar(255) NOT NULL,
+  `candidateprofiledate` datetime NOT NULL,
+  `candidateprofiletime` time NOT NULL,
+  `candidatehaircolor` int(10) NOT NULL,
+  `candidatehairtype` int(10) NOT NULL,
+  `candidateeyecolor` int(10) NOT NULL,
+  `candidateeyewear` int(10) NOT NULL,
+  `candidateheight` int(10) NOT NULL,
+  `candidateweight` int(10) NOT NULL,
+  `candidatebodytype` int(10) NOT NULL,
+  `candidateappearance` int(10) NOT NULL,
+  `candidatefacialhair` int(10) NOT NULL,
+  `candidatephysicalstatus` int(10) NOT NULL,
+  `candidatemaritalstatus` int(10) NOT NULL,
+  `candidatehavechildrens` int(10) NOT NULL,
+  `candidatevalues` int(10) NOT NULL,
+  `candidatelivingsituation` int(10) NOT NULL,
+  `candidatelikes` varchar(255) NOT NULL,
+  `candidatedislikes` varchar(255) NOT NULL,
+  `candidatezodiachormony` varchar(30) NOT NULL,
+  `candidatefoodhabits` int(10) NOT NULL,
+  `candidateeducation` int(10) NOT NULL,
+  `candidateoccupation` int(10) NOT NULL,
+  `candidaterelocate` int(10) NOT NULL,
+  `candidatereligion` int(10) NOT NULL,
+  `candidatebornreverted` int(10) NOT NULL,
+  `candidatereligiousvalues` int(10) NOT NULL,
+  `candidateattendreligiousservices` int(10) NOT NULL,
+  `candidatemothertongue` int(10) NOT NULL,
+  `candidateethnicity` int(10) NOT NULL,
+  `candidatecast` varchar(50) NOT NULL,
+  `candidatenationality` int(10) NOT NULL,
+  `candidateplaceofbirth` int(10) NOT NULL,
+  `candidatelanguagesspoken` int(10) NOT NULL,
+  `candidateambition` varchar(255) NOT NULL,
+  `candidatehobbies` varchar(255) NOT NULL,
+  `candidatedreams` varchar(255) NOT NULL,
+  `candidategetmarried` int(10) NOT NULL,
+  `candidatewantmorechildrens` int(10) NOT NULL,
+  `candidatedowry` int(10) NOT NULL,
+  `candidatecnicnumber` int(20) NOT NULL,
+  `candidatecnicimage` varchar(255) NOT NULL,
+  PRIMARY KEY (`candidateid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `pairness_candidate`
+--
+
+INSERT INTO `pairness_candidate` (`candidateid`, `ip`, `familyid_fk`, `candidatefullname`, `candidateemailaddress`, `candidatepassword`, `candidategender`, `candidateseekinggender`, `candidatedateofbirth`, `candidatecountry`, `candidatestate`, `candidatecity`, `candidateterms`, `candidatefirstname`, `candidatelastname`, `candidatephone`, `candidatecell`, `candidateprofileimage`, `candidateprofiledate`, `candidateprofiletime`, `candidatehaircolor`, `candidatehairtype`, `candidateeyecolor`, `candidateeyewear`, `candidateheight`, `candidateweight`, `candidatebodytype`, `candidateappearance`, `candidatefacialhair`, `candidatephysicalstatus`, `candidatemaritalstatus`, `candidatehavechildrens`, `candidatevalues`, `candidatelivingsituation`, `candidatelikes`, `candidatedislikes`, `candidatezodiachormony`, `candidatefoodhabits`, `candidateeducation`, `candidateoccupation`, `candidaterelocate`, `candidatereligion`, `candidatebornreverted`, `candidatereligiousvalues`, `candidateattendreligiousservices`, `candidatemothertongue`, `candidateethnicity`, `candidatecast`, `candidatenationality`, `candidateplaceofbirth`, `candidatelanguagesspoken`, `candidateambition`, `candidatehobbies`, `candidatedreams`, `candidategetmarried`, `candidatewantmorechildrens`, `candidatedowry`, `candidatecnicnumber`, `candidatecnicimage`) VALUES
+(1, '127.0.0.1', 0, 'test_self1', 'test_self1@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -869,7 +983,7 @@ CREATE TABLE IF NOT EXISTS `pairness_family` (
   `familycnicnumber` int(20) NOT NULL,
   `familycnicimage` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Dumping data for table `pairness_family`
@@ -884,7 +998,11 @@ INSERT INTO `pairness_family` (`id`, `ip`, `familyid`, `familyfullname`, `family
 (10, '127.0.0.1', 0, 'hgjhg', 'dgcd', 'jhg', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
 (11, '127.0.0.1', 0, 'alskdjsa', 'rahber50@gmail.com', 'asdas;ld', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
 (12, '0000000000000', 0, 'ali_baba', 'muhammadzubair107@gmail.com', 'abcxyzz7', 'male', 'female', '1989-06-26', 'Select Country', 'Punjab', 'Rawlpindi', 'Enter some text about Family Terms...', 'Muhammad', 'Zubair', 514479815, 346598174, '', '0000-00-00 00:00:00', '11:20:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(13, '127.0.0.1', 0, 'ali123', 'ali@yahoo.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '');
+(13, '127.0.0.1', 0, 'ali123', 'ali@yahoo.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(14, '', 0, 'mtariq', 'coz.test4@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(15, '', 0, 'testself', 'test_self@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(18, '127.0.0.1', 18, 'test_guard3', 'test_guard3@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(19, '127.0.0.1', 19, 'test_guard4', 'test_guard4@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -1802,7 +1920,14 @@ CREATE TABLE IF NOT EXISTS `session` (
   `ais` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ais`),
   FULLTEXT KEY `sessionid` (`sessionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=58 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=88 ;
+
+--
+-- Dumping data for table `session`
+--
+
+INSERT INTO `session` (`sessionid`, `uid`, `t`, `ip`, `ip2`, `ais`) VALUES
+('5sctt3aa4g05j9erutp4r1f5k0', 26, 1378360531, '127.0.0.1', '', 87);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
