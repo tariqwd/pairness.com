@@ -185,9 +185,23 @@ else
 				
 				
 				if($finfo==1){
+					
+					//echo $gender . " :Gender";
+					//echo $seeking_gender . "  :Seeking Gender";	
 				$q_family = "UPDATE pairness_family SET id = '$id', ip = '$ip', familyid = '$parientid', familyfullname = '$username', familyemailaddress = '$email', familypassword = '$password', familygender = '$gender', familyseekinggender = '$seeking_gender', familydateofbirth = '$dateofbirth', familycountry = '$country', familystate = '$state', familycity = '$city', familyterms = '$terms', familyfirstname = '$first_name', familylastname = '$last_name', familyphone = '$phone', familycell = '$mobile', familyprofileimage = '$profile_picture', familyprofiledate = '$profile_date', familyprofiletime = '$profile_time', familyhaircolor = '$haircolor', familyhairtype = '$hairtype', familyeyecolor = '$eyecolor', familyeyewear = '$eyewear', familyheight = '$height', familyweight = '$weight', familybodytype = '$bodytype', familyappearance = '$appearance', familyfacialhair = '$facialhair', familyphysicalstatus = '$physicalstatus', familymaritalstatus = '$maritalstatus', familyhavechildrens = '$children', familyvalues = '$familyvalues', familylivingsituation = '$livingsituation', familylikes = '$likes', familydislikes = '$dislikes', familyzodiachormony = '$zodiachormony', familyfoodhabits = '$foodhabits', familyeducation = '$education', familyoccupation = '$occupation', familyrelocate = '$relocate', familyreligion = '$religion', familybornreverted = '$bornreverted', familyreligiousvalues = '$religiousvalues', familyattendreligiousservices = '$religiousservices', familymothertongue = '$mother_language', familyethnicity = '$ethnicity', familycast = '$cast', familynationality = '$nationality', familyplaceofbirth = '$placeofbirth', familylanguagesspoken = '$languagesspoken', familyambition = '$ambition', familyhobbies = '$hobbies', familydreams = '$dreams', familygetmarried = '$getmarried', familywantmorechildrens = '$morechildren', familydowry = '$dowry', familycnicnumber = '$cnic', familycnicimage = '$family_image' WHERE familyemailaddress = '$email';";
+				
+				/*if ($mysqli->query($q_family))
+				{
+				echo "<h4 class='style9'>Guardian Second Step Complete</h4><br>";	
+				}
+				else 
+				{
+					echo "<h4 class='style9'>Query not running</h4><br>";
+					echo $mysqli->error;	
+				}*/
 				$mysqli->query($q_family);
-				echo "<h4 class='style9'>Guardian Second Step Complete</h4><br>";
+				echo "<h4 class='style9'>Guardien Second Step Complete</h4><br>";
+				
 				}else{
 				//Insert Query
 				
@@ -352,7 +366,18 @@ else
 	?>	
 	<form action="" method="post" name="nextstep" id="nextstep" enctype="multipart/form-data">
 	<table width="600" border="0" cellspacing="0" cellpadding="0">
-  
+  	<input hidden="text" name="id" id="id" value="<?php if($finfo==1) echo $id; else echo $candidateid; ?>" />
+    <input hidden="text" name="ip" id="ip" value="<?php echo $ip ?>" />
+    <input hidden="text" name="parientid" id="parientid" value="<?php if($finfo==1) echo $familyid; else $familyid_fk; ?>" />
+    <input type="hidden" name="password" id="password" value="<?php if($finfo==1) echo $familypassword; else  echo $candidatepassword; ?>" />
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  	</tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
   <tr>
     <td>Email:</td>
     <td><input type="text" name="email" readonly="readonly" id="email" value="<?php if($finfo==1) echo $familyemailaddress; else echo $candidateemailaddress; ?>" /></td>
@@ -365,6 +390,7 @@ else
     <td>Full Name:</td>
     <td><input type="text" name="username" readonly="readonly" id="username" value="<?php if($finfo==1) echo $familyfullname; else echo $candidatefullname; ?>" /></td>
   </tr>
+  
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>

@@ -33,8 +33,7 @@ include('../includes/functions.php');
 							$p = "INSERT INTO login (name,ip,isfamily,username,email,password,registertime,mobileverification,emailverification,sc,verificationdate,privacylevel)VALUES ('$name','$ip','$isfamily','$username','$email','$password','$t','0','0','$sc','0','1')";
 							if($isfamily==1){
 								
-							$q = "INSERT INTO pairness_family (ip,familyfullname,familyemailaddress,familypassword,familyprofileimage)VALUES 
-							('$ip','$username','$email','$password','default.png')";
+							$q = "INSERT INTO pairness_family (ip,familyfullname,familyemailaddress,familypassword,familyprofileimage)VALUES('$ip','$username','$email','$password','default.png')";
 							$mysqli->query($q);
 							
 							$insert_id = $mysqli->insert_id; // required for pairness_family table 
