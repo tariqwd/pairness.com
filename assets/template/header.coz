@@ -10,8 +10,8 @@
 	<script>   var ret = "<?php echo  $ret ;  ?>";
 			var baseurl=  "<?php echo $sitepath;  ?>"
 	</script>
-	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>/assets/css/tcal.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>/assets/css/tcal_two.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>./assets/css/tcal.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo $sitepath;  ?>./assets/css/tcal_two.css" />
 
 
 </head>
