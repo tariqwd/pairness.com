@@ -82,9 +82,10 @@ Profile
 <img src="<?php echo user_image(); ?>" width="70" />
 Hello <?php  echo $_SESSION['name'];  ?>
 <div class="txtblue">
-<a href="<?php echo $profilepage; ?>">Edit Profile<br />
-                              <a href="<?php echo $photospage; ?>">Manage Photos</a><br />
-                              <a href="<?php echo $settingspage; ?>">Edit Preferences</a></div></div>
+	<a href="<?php echo $viewprofilepage; ?>">View Profile<br />
+	<?php /*?><a href="<?php echo $editprofilepage; ?>">Edit Profile<br /><?php */?>
+	<a href="<?php echo $photospage; ?>">Manage Photos</a><br />
+	<a href="<?php echo $settingspage; ?>">Edit Preferences</a></div></div>
 </div>
 
 <div class="dpl">

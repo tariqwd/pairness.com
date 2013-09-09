@@ -626,9 +626,36 @@ function fixheight(){ /* To-do: Should add aphostophy to show proper height */
 	return "5'11";
 }
 
+function age($dob) { /*calculate age on the basis of dob*/
+
+    list($y,$m,$d) = explode('-', $dob);
+    
+    if (($m = (date('m') - $m)) < 0) {
+        $y++;
+    } elseif ($m == 0 && date('d') - $d < 0) {
+        $y++;
+    }
+    
+    return date('Y') - $y;
+    
+}
+
+function family_feature($family_val){
+	global $mysqli;
+	$list = $mysqli->query("SELECT name from pairness_features WHERE id = '$family_val'");
+	$list = $list->fetch_object();
+	echo  $list->name;		
+}
+
+function candidate_feature($candidate_val){
+	global $mysqli;
+	$list = $mysqli->query("SELECT name from pairness_features WHERE id = '$candidate_val'");
+	$list = $list->fetch_object();
+	echo $list->name;		
+}
 
 function start_app(){ /* Initialize Different Variables */
-	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage;
+	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage;
 	$mysqli = new mysqli("localhost", "root", "", "pairness");
 	$contactemail = "rahber@cozmuler.com";
 	$sitepath ="http://localhost/pairness.com/";
@@ -646,6 +673,7 @@ function start_app(){ /* Initialize Different Variables */
 	$photospage = "photos.php";
 	$settingspage = "settings.php";
 	$profilepage = "profile.php";
+	$viewprofilepage = "view_profile.php";
 	$membershippage ="membership.php";
 	$candidatepage ="candidate.php";
 	$matchpage = "search.php?action=match";

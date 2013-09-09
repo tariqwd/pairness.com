@@ -199,7 +199,9 @@ else
 					echo "<h4 class='style9'>Query not running</h4><br>";
 					echo $mysqli->error;	
 				}*/
+				
 				$mysqli->query($q_family);
+				//echo $mysqli->error;
 				echo "<h4 class='style9'>Guardien Second Step Complete</h4><br>";
 				
 				}else{
