@@ -13,7 +13,7 @@
 global $mysqli;
 
 
-function startSession($timeout = 600){ /* Start session and session cronning */
+function startSession($timeout = 6000){ /* Start session and session cronning */
 	global $mysqli;
 	session_name('czid');
 	session_set_cookie_params(0);
@@ -486,7 +486,7 @@ function cron_session(){ /* Check if the session that exist in database is older
 	$queryy =  $mysqli->query("Select * from session");
 		while ($row = $queryy->fetch_object()){
 			$op = $row->sessionid;
-			if((($t) - ($row->t)) > 600){
+			if((($t) - ($row->t)) > 6000){
 			$mysqli->query("DELETE FROM session WHERE sessionid='$op'");
 			}
 		}

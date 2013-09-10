@@ -40,6 +40,7 @@ if ($_FILES['profile_picture']['error'] == 0)
 		      if ( ( move_uploaded_file ( $_FILES ['profile_picture']['tmp_name'] , $new_file_name) ) )
 		   {
 		          $profile_picture = $profile_picture;
+				  echo $profile_picture;
 			      //echo 'File data has been Successfully saved as '.$new_file_name;
 		   }
 		      else
@@ -60,7 +61,7 @@ if ($_FILES['profile_picture']['error'] == 0)
 else
 {
 	     //echo "Thank you:No file uploaded<br>";
-	}
+}
 	
 	//-----------image1 uploading code Ends here---------------------------------
 	
@@ -92,6 +93,7 @@ if ($_FILES['family_image']['error'] == 0)
 		      if ( ( move_uploaded_file ( $_FILES ['family_image']['tmp_name'] , $new_file_name) ) )
 		   {
 		          $family_image = $filename_two;
+				  echo $family_image;
 			      //echo 'File data has been Successfully saved as '.$new_file_name;
 		   }
 		      else
@@ -116,11 +118,7 @@ else
 	
 	//-----------image2 uploading code Ends here---------------------------------
 				
-				
-				
-				
-				
-				
+	
 				
 				$id = request_var('id','');
 				$ip = $_SERVER['REMOTE_ADDR'];
