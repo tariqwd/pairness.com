@@ -31,25 +31,12 @@ include('../includes/functions.php');
 						$tp = $mysqli->query("select * from login where username = '$username'");
 						if($tp->num_rows ==0){
 							$p = "INSERT INTO login (name,ip,isfamily,username,email,password,registertime,mobileverification,emailverification,sc,verificationdate,privacylevel)VALUES ('$name','$ip','$isfamily','$username','$email','$password','$t','0','0','$sc','0','1')";
-							if($isfamily==1){
+							
 								
-							$q = "INSERT INTO pairness_family (ip,familyfullname,familyemailaddress,familypassword,familyprofileimage)VALUES('$ip','$username','$email','$password','default.png')";
+							$q = "INSERT INTO pairness_family (ip,familyid,familyfullname,familyemailaddress,familypassword,familyprofileimage)VALUES('$ip','$isfamily','$username','$email','$password','default.png')";
 							$mysqli->query($q);
-							
-							$insert_id = $mysqli->insert_id; // required for pairness_family table 
-							$updateq="update pairness_family set familyid = '$insert_id' where id = '$insert_id';";
-							$mysqli->query($updateq);
-							}
-							
-							if($isfamily==0){
-								
-							$q = "INSERT INTO pairness_candidate (ip,candidatefullname,candidateemailaddress,candidatepassword,candidateprofileimage)VALUES 
-							('$ip','$username','$email','$password','default.png')";
-							$mysqli->query($q);
-							
-							}
-							
-							
+
+
 							if($mysqli->query($p)){
 								$arr = array('s' => 1,'v'=>'Please check your email for further instructions');
 								echo json_encode($arr);

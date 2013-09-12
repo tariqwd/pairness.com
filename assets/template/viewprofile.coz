@@ -4,46 +4,23 @@
 
 if($_SESSION['email'])
 
-{
-	
+{	
 	$em = $_SESSION['email'];
 	$query = $mysqli->query("select * from login where (email='$em')");
-	while ($isfam = $query->fetch_object()){		
-		
-		$isfam_chk = $isfam->isfamily;		
-	}
 }
 
-if ($isfam_chk == 1)
-{
 	$query = $mysqli->query("select * from pairness_family where (familyemailaddress='$em')");
-	
-}
-
-else
-{
-	$query = $mysqli->query("select * from pairness_candidate where (candidateemailaddress='$em')");
-	
-}
 
 if($query){
- //$queryy = $mysqli->query("select * from pairness_family where (id ='$em')");
+ 
  while($tt = $query->fetch_object()){ 
 		
 		//Name and Age Title 
 		$da = age($tt->familydateofbirth); // calculate dateofbirth
 		echo "About "; 
-		if ($isfam_chk == 1) 
-		{
-			echo "<b>" . $tt->familyfullname . "</b>";
-			echo  '(' .$da. ')'; 
-		}
-		else 
-		{
-			echo $tt->candidatefullname;
-			echo '(' .$da. ')';
-		}
-		
+		echo "<b>" . $tt->familyfullname . "</b>";
+		echo  '(' .$da. ')'; 
+
 		
        ?>
 	   <!--- main div starts here -->
@@ -52,7 +29,7 @@ if($query){
 			<div id="space" style="height:15px; width:690px"></div><!--- space div ends here -->
 			
 			<div id="picture" align="left" style="width:155px; height:auto; float:left;"> <!--Picture Div start here -->
-			<img src="upload_images/<?php if ($isfam_chk == 1 && $tt->familyprofileimage) echo $tt->familyprofileimage; elseif($isfam_chk == 0 && $tt->candidateprofileimage) echo $tt->candidateprofileimage; else echo "default.png"; ?>" width="140" height="188" />
+			<img src="upload_images/<?php if ($tt->familyprofileimage) echo $tt->familyprofileimage; else echo "default.png"; ?>" width="140" height="188" />
 			<br>
 			<a class="blink" href="#" style="text-decoration:underline; float:left; margin-left:20px; color:#2f598d; font-size:11px; font-family:Arial, Helvetica, sans-serif; font-style:normal;">Click for large photo </a>
 			
@@ -66,13 +43,13 @@ if($query){
             <div class="maintxtgray12" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>Basic Information</strong></div>
             <!-- basic info div 1 starts here -->
 			<div id="profile_self" style="width:264px; height:auto; float:left; border: 1px solid #CCC;"> 
-			<span class="maintxtgray12" style="float:left;">Name<br>Gender<br>Seeking Gender<br>Cell Number</span> <span class="item id1"><?php if ($isfam_chk == 1 && $tt->familyfirstname && $tt->familylastname) echo $tt->familyfirstname . ' '. $tt->familylastname; elseif($isfam_chk == 0 && $tt->candidatefirstname && $tt->candidatelastname) echo $tt->candidatefirstname . ' ' . $tt->candidatelastname; else echo "No Answer"; ?><br><?php if ($isfam_chk == 1 && $tt->familygender) echo $tt->familygender; elseif($isfam_chk == 0 && $tt->candidategender) echo $tt->candidategender; else echo "No Answer"; ?> <br><?php if ($isfam_chk == 1 && $tt->familyseekinggender) echo $tt->familyseekinggender; elseif($isfam_chk == 0 && $tt->candidateseekinggender) echo $tt->candidateseekinggender; else echo "No Answer"; ?><br><?php if ($isfam_chk == 1 && $tt->familycell) echo $tt->familycell; elseif($isfam_chk == 0 && $tt->candidatecell) echo $tt->candidatecell; else echo "No Answer"; ?><br></span><br><br><br>
+			<span class="maintxtgray12" style="float:left;">Name<br>Gender<br>Seeking Gender<br>Cell Number</span> <span class="item id1"><?php if ($tt->familyfirstname && $tt->familylastname) echo $tt->familyfirstname . ' '. $tt->familylastname; else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familygender) echo $tt->familygender; else echo "<i>No Answer</i>"; ?> <br><?php if ($tt->familyseekinggender) echo $tt->familyseekinggender; else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familycell) echo $tt->familycell; else echo "<i>No Answer</i>"; ?><br></span><br><br><br>
 			</div>
             <!--- basic info div 1 ends here -->
             
 			<!-- basic info div 2 starts here -->
 			<div id="profile_self" style="width:264px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">ID<br>User Name<br>Email<br>Lives in</span><span class="item id4"><?php if ($isfam_chk == 1 && $tt->familyid) echo $tt->familyid; elseif($isfam_chk == 0 && $tt->candidateid) echo $tt->candidateid; else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyfullname) echo $tt->familyfullname; elseif($isfam_chk == 0 && $tt->candidatefullname) echo $tt->candidatefullname; else echo "No Answer"; ?><br><?php if ($isfam_chk == 1 && $tt->familyemailaddress) echo $tt->familyemailaddress; elseif($isfam_chk == 0 && $tt->candidateemailaddress) echo $tt->candidateemailaddress; else echo "No Answer"; ?><br><?php if ($isfam_chk == 1 && $tt->familycity) echo $tt->familycity; elseif($isfam_chk == 0 && $tt->candidatecity) echo $tt->candidatecity; else echo "No Answer"; ?></span><br><br><br>
+			<span class="maintxtgray12" style="float:left;">ID<br>User Name<br>Email<br>Lives in</span><span class="item id4"><?php if ($tt->id) echo $tt->id; else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyfullname) echo $tt->familyfullname; else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyemailaddress) echo $tt->familyemailaddress; else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familycity) echo $tt->familycity; else echo "<i>No Answer</i>"; ?></span><br><br><br>
 			</div>
             <!--- basic info div 2 ends here -->
             
@@ -131,12 +108,12 @@ if($query){
             <!--appearance info div starts here-->
 			<div id="basic_detail" align="justify" style="width:670px; height:auto; float:left; border: 1px solid #CCC;">
 			<div id="basic_self_one" align="justify" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Hair Color<br>Hair Type<br>Eye Color<br>Eye Wear<br>Height</span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familyhaircolor) echo family_feature($tt->familyhaircolor); elseif($isfam_chk == 0 && $tt->candidatehaircolor) echo candidate_feature($tt->candidatehaircolor); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyhairtype) echo family_feature($tt->familyhairtype); elseif($isfam_chk == 0 && $tt->candidatehairtype) echo candidate_feature($tt->candidatehairtype); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyeyecolor) echo family_feature($tt->familyeyecolor); elseif($isfam_chk == 0 && $tt->candidateeyecolor) echo candidate_feature($tt->candidateeyecolor); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyeyewear) echo family_feature($tt->familyeyewear); elseif($isfam_chk == 0 && $tt->candidateeyewear) echo candidate_feature($tt->candidateeyewear); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyheight) echo family_feature($tt->familyheight); elseif($isfam_chk == 0 && $tt->candidateheight) echo candidate_feature($tt->candidateheight); else echo "<i>No Answer</i>"; ?></span><br>
+			<span class="maintxtgray12" style="float:left;">Hair Color<br>Hair Type<br>Eye Color<br>Eye Wear<br>Height</span> <span class="item id7"><?php if ($tt->familyhaircolor) echo family_feature($tt->familyhaircolor); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyhairtype) echo family_feature($tt->familyhairtype); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyeyecolor) echo family_feature($tt->familyeyecolor); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyeyewear) echo family_feature($tt->familyeyewear); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyheight) echo family_feature($tt->familyheight); else echo "<i>No Answer</i>"; ?></span><br>
 			
 			</div>
 			
 			<div id="basic_self_two" style="width:348px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Weight<br>Body Type<br>Appearance<br>Facial Hair<br>Physical Status</span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familyweight) echo family_feature($tt->familyweight); elseif($isfam_chk == 0 && $tt->candidateweight) echo candidate_feature( $tt->candidateweight); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familybodytype) echo family_feature($tt->familybodytype); elseif($isfam_chk == 0 && $tt->candidatebodytype) echo candidate_feature($tt->candidatebodytype); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyappearance) echo  family_feature($tt->familyappearance); elseif($isfam_chk == 0 && $tt->candidateappearance) echo candidate_feature($tt->candidateappearance); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyfacialhair) echo family_feature($tt->familyfacialhair); elseif($isfam_chk == 0 && $tt->candidatefacialhair) echo candidate_feature($tt->candidatefacialhair); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyphysicalstatus) echo family_feature($tt->familyphysicalstatus); elseif($isfam_chk == 0 && $tt->candidatephysicalstatus) echo candidate_feature($tt->candidatephysicalstatus); else echo "<i>No Answer</i>"; ?></span><br>
+			<span class="maintxtgray12" style="float:left;">Weight<br>Body Type<br>Appearance<br>Facial Hair<br>Physical Status</span> <span class="item id7"><?php if ($tt->familyweight) echo family_feature($tt->familyweight); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familybodytype) echo family_feature($tt->familybodytype); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyappearance) echo  family_feature($tt->familyappearance); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyfacialhair) echo family_feature($tt->familyfacialhair); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyphysicalstatus) echo family_feature($tt->familyphysicalstatus); else echo "<i>No Answer</i>"; ?></span><br>
 			</div>
 			</div>
             <!--appearance info div ends here-->
@@ -156,12 +133,12 @@ if($query){
             <!--basic lifestyle info div starts here-->
 			<div id="basic_detail" align="justify" style="width:670px; height:auto; float:left; border: 1px solid #CCC;">
 			<div id="basic_self_one" align="justify" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Marital Status<br>Have Childrens<br>Family Values<br>Living Situation<br>Zodiac Hormony<br>Food Habits</span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familymaritalstatus) echo family_feature($tt->familymaritalstatus); elseif($isfam_chk == 0 && $tt->candidatemaritalstatus) echo candidate_feature($tt->candidatemaritalstatus); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyhavechildrens) echo family_feature($tt->familyhavechildrens); elseif($isfam_chk == 0 && $tt->candidatehavechildrens) echo candidate_feature($tt->candidatehavechildrens); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyvalues) echo family_feature($tt->familyvalues); elseif($isfam_chk == 0 && $tt->candidatefvalues) echo candidate_feature($tt->candidatefvalues); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familylivingsituation) echo family_feature($tt->familylivingsituation); elseif($isfam_chk == 0 && $tt->candidatelivingsituation) echo candidate_feature($tt->candidatelivingsituation); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyzodiachormony) echo $tt->familyzodiachormony; elseif($isfam_chk == 0 && $tt->candidatezodichormony) echo $tt->candidatezodichormony; else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyfoodhabits) echo family_feature($tt->familyfoodhabits); elseif($isfam_chk == 0 && $tt->candidatefoodhabits) echo candidate_feature($tt->candidatefoodhabits); else echo "<i>No Answer</i>"; ?></span><br>
+			<span class="maintxtgray12" style="float:left;">Marital Status<br>Have Childrens<br>Family Values<br>Living Situation<br>Zodiac Hormony<br>Food Habits</span> <span class="item id7"><?php if ($tt->familymaritalstatus) echo family_feature($tt->familymaritalstatus); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyhavechildrens) echo family_feature($tt->familyhavechildrens); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyvalues) echo family_feature($tt->familyvalues); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familylivingsituation) echo family_feature($tt->familylivingsituation); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyzodiachormony) echo $tt->familyzodiachormony; else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyfoodhabits) echo family_feature($tt->familyfoodhabits); else echo "<i>No Answer</i>"; ?></span><br>
 			
 			</div><!--- basic_self_one div ends here -->
 			
 			<div id="basic_self_two" style="width:348px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Likes<br><br><br>Dislikes</span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familylikes) echo $tt->familylikes; elseif($isfam_chk == 0 && $tt->candidatelikes) echo $tt->candidatelikes; else echo "<i>No Answer</i>"; ?><br><br><br><?php if ($isfam_chk == 1 && $tt->familydislikes) echo $tt->familydislikes; elseif($isfam_chk == 0 && $tt->candidatedislikes) echo $tt->candidatedislikes; else echo "<i>No Answer</i>"; ?><br><br><br></span><br>
+			<span class="maintxtgray12" style="float:left;">Likes<br><br><br>Dislikes</span> <span class="item id7"><?php if ($tt->familylikes) echo $tt->familylikes; else echo "<i>No Answer</i>"; ?><br><br><br><?php if ($tt->familydislikes) echo $tt->familydislikes; else echo "<i>No Answer</i>"; ?><br><br><br></span><br>
 			</div><!--- basic_self_two div ends here -->
 			</div>
             <!--basic lifestyle info div ends here-->
@@ -183,7 +160,7 @@ if($query){
             <!--religious info div starts here-->
 			<div id="basic_detail" align="left" style="width:670px; height:auto;  float:left; border: 1px solid #CCC; ">
 			<div id="basic_self_one" align="left" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Education<br>Occupation<br>Relocate</span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familyeducation) echo family_feature($tt->familyeducation); elseif($isfam_chk == 0 && $tt->candidateeducation) echo candidate_feature($tt->candidateeducation); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyoccupation) echo family_feature($tt->familyoccupation); elseif($isfam_chk == 0 && $tt->candidateoccupation) echo candidate_feature($tt->candidateoccupation); else echo "<i>No Answer</i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyrelocate) echo family_feature($tt->familyrelocate); elseif($isfam_chk == 0 && $tt->candidaterelocate) echo candidate_feature($tt->candidaterelocate); else echo "<i> No Answer </i>";  ?></span><br><br><br>
+			<span class="maintxtgray12" style="float:left;">Education<br>Occupation<br>Relocate</span> <span class="item id7"><?php if ($tt->familyeducation) echo family_feature($tt->familyeducation); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyoccupation) echo family_feature($tt->familyoccupation); else echo "<i>No Answer</i>"; ?><br><?php if ($tt->familyrelocate) echo family_feature($tt->familyrelocate); else echo "<i> No Answer </i>";  ?></span><br><br><br>
 			
 			</div><!--- basic_self_one div ends here -->
 			
@@ -205,12 +182,12 @@ if($query){
             <!--family details info div starts here-->
 			<div id="basic_detail" align="justify" style="width:670px;  height:auto; float:left; border: 1px solid #CCC;">
 			<div id="basic_self_one" align="justify" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Religion<br>Born Reverted<br>Religious Values<br>Attend Religious Services</span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familyreligion) echo family_feature($tt->familyreligion); elseif($isfam_chk == 0 && $tt->candidatereligion) echo candidate_feature($tt->candidatereligion); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familybornreverted) echo family_feature($tt->familybornreverted); elseif($isfam_chk == 0 && $tt->candidatebornreverted) echo candidate_feature($tt->candidatebornreverted); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyreligiousvalues) echo family_feature($tt->familyreligiousvalues); elseif($isfam_chk == 0 && $tt->candidatereligiousvalues) echo candidate_feature($tt->candidatereligiousvalues); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyattendreligiousservices) echo family_feature($tt->familyattendreligiousservices); elseif($isfam_chk == 0 && $tt->candidateattendreligiousservices) echo candidate_feature($tt->candidateattendreligiousservices); else echo "<i> No Answer </i>"; ?></span><br>
+			<span class="maintxtgray12" style="float:left;">Religion<br>Born Reverted<br>Religious Values<br>Attend Religious Services</span> <span class="item id7"><?php if ($tt->familyreligion) echo family_feature($tt->familyreligion); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familybornreverted) echo family_feature($tt->familybornreverted); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyreligiousvalues) echo family_feature($tt->familyreligiousvalues); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyattendreligiousservices) echo family_feature($tt->familyattendreligiousservices); else echo "<i> No Answer </i>"; ?></span><br>
 			
 			</div><!--- basic_self_one div ends here -->
 			
 			<div id="basic_self_two" style="width:348px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Mother Tongue<br>Ethnicity<br>Cast<br><br></span> <span class="item id7"><?php if ($isfam_chk == 1 && $tt->familymothertongue) echo family_feature($tt->familymothertongue); elseif($isfam_chk == 0 && $tt->candidatemothertongue) echo candidate_feature($tt->candidatemothertongue); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyethnicity) echo family_feature($tt->familyethnicity); elseif($isfam_chk == 0 && $tt->candidateethnicity) echo candidate_feature($tt->candidateethnicity); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familycast) echo $tt->familycast; elseif($isfam_chk == 0 && $tt->candidatecast) echo $tt->candidatecast; else echo "No Answer"; ?></span><br>
+			<span class="maintxtgray12" style="float:left;">Mother Tongue<br>Ethnicity<br>Cast<br><br></span> <span class="item id7"><?php if ($tt->familymothertongue) echo family_feature($tt->familymothertongue); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyethnicity) echo family_feature($tt->familyethnicity); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familycast) echo $tt->familycast; else echo "No Answer"; ?></span><br>
 			</div><!--- basic_self_two div ends here -->
 			</div>
             <!--family details info div ends here-->
@@ -230,12 +207,12 @@ if($query){
             <!--education and career info div starts here-->
 			<div id="basic_detail" align="left" style="width:670px;  height:auto; float:left; border: 1px solid #CCC;">
 			<div id="basic_self_one" align="left" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Nationality<br>Place of Birth<br>Languages Spoken</span> <span class="item id8"><?php if ($isfam_chk == 1 && $tt->familynationality) echo family_feature($tt->familynationality); elseif($isfam_chk == 0 && $tt->candidatenationality) echo candidate_feature($tt->candidatenationality); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyplaceofbirth) echo family_feature($tt->familyplaceofbirth); elseif($isfam_chk == 0 && $tt->candidateplaceofbirth) echo candidate_feature($tt->candidateplaceofbirth); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familylanguagesspoken) echo family_feature($tt->familylanguagesspoken); elseif($isfam_chk == 0 && $tt->candidatelanguagesspoken) echo candidate_feature($tt->candidatelanguagesspoken); else echo "<i> No Answer </i>"; ?></span><br><br>
+			<span class="maintxtgray12" style="float:left;">Nationality<br>Place of Birth<br>Languages Spoken</span> <span class="item id8"><?php if ($tt->familynationality) echo family_feature($tt->familynationality); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyplaceofbirth) echo family_feature($tt->familyplaceofbirth); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familylanguagesspoken) echo family_feature($tt->familylanguagesspoken); else echo "<i> No Answer </i>"; ?></span><br><br>
 			</div><!--- basic_self_one div ends here -->
 			
 			
 			<div id="basic_self_two" style="width:348px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Get Married<br>Want more Childrens<br>Dowry</span> <span class="item id8"><?php if ($isfam_chk == 1 && $tt->familygetmarried) echo family_feature($tt->familygetmarried); elseif($isfam_chk == 0 && $tt->candidategetmarried) echo candidate_feature($tt->candidategetmarried); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familywantmorechildrens) echo family_feature($tt->familywantmorechildrens); elseif($isfam_chk == 0 && $tt->candidatwantmorechildrens) echo candidate_feature($tt->candidatewantmorechildrens); else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familydowry) echo family_feature($tt->familydowry); elseif($isfam_chk == 0 && $tt->candidatedowry) echo candidate_feature($tt->candidatedowry); else echo "<i> No Answer </i>"; ?></span><br><br>
+			<span class="maintxtgray12" style="float:left;">Get Married<br>Want more Childrens<br>Dowry</span> <span class="item id8"><?php if ($tt->familygetmarried) echo family_feature($tt->familygetmarried); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familywantmorechildrens) echo family_feature($tt->familywantmorechildrens); else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familydowry) echo family_feature($tt->familydowry); else echo "<i> No Answer </i>"; ?></span><br><br>
 			
 			</div><!--- basic_self_two div ends here -->
 			</div>
@@ -256,7 +233,7 @@ if($query){
             <!--partner location info div starts here-->
 			<div id="basic_detail" align="left" style="width:670px; height:auto;  float:left; border: 1px solid #CCC;">
 			<div id="basic_self_one" align="left" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
-			<span class="maintxtgray12" style="float:left;">Ambition<br>Hobbies<br>Dreams</span> <span class="item id8"><?php if ($isfam_chk == 1 && $tt->familyambition) echo $tt->familyambition; elseif($isfam_chk == 0 && $tt->candidateambition) echo $tt->candidateambition; else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyhobbies) echo $tt->familyhobbies; elseif($isfam_chk == 0 && $tt->candidatehobbies) echo $tt->candidatehobbies; else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familydreams) echo $tt->familydreams; elseif($isfam_chk == 0 && $tt->candidatedreams) echo $tt->candidatedreams; else echo "<i> No Answer </i>"; ?></span><br><br><br>
+			<span class="maintxtgray12" style="float:left;">Ambition<br>Hobbies<br>Dreams</span> <span class="item id8"><?php if ($tt->familyambition) echo $tt->familyambition; else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyhobbies) echo $tt->familyhobbies; else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familydreams) echo $tt->familydreams; else echo "<i> No Answer </i>"; ?></span><br><br><br>
 			</div>
 			
 			<!--<div id="basic_self_two" style="width:320px; height:auto; float:left; border: 1px solid #CCC;">
@@ -270,7 +247,7 @@ if($query){
             <!--my contact detail div starts here-->
 		    <div id="basics_heading" style="width:690px; height:auto; float:left;   background-color:#006295; border: 1px solid #CCC;">
 			
-			<div class="regtopheading" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>My CONTACT DETAIL</strong></div>
+			<div class="regtopheading" style="width:500px; height:20px; margin-top:4px; float:left;"><strong>MY CONTACT DETAIL</strong></div>
 			</div>
             <!--my contact detail div ends here-->
 			
@@ -278,7 +255,7 @@ if($query){
 			<div id="basic_detail" align="left" style="width:690px; background-color:#f2f2f2;  height:auto; float:left; border: 1px solid #CCC;">
 			<div id="basic_self_one" align="left" style="width:689px; height:auto; float:left; border: 1px solid #CCC;">
 			<span class="maintxtgray12" style="float:left;"><br>	
-Mobile:<br>Contact Person:<br>Relationship with the member:<br>Convenient Time to Call:<br>Display Option:<br><br></span><br><span class="item id9"><?php if ($isfam_chk == 1 && $tt->familycell) echo $tt->familycell; elseif($isfam_chk == 0 && $tt->candidatecell) echo $tt->candidatecell; else echo "<i> No Answer </i>"; ?><br><?php if ($isfam_chk == 1 && $tt->familyfirstname && $tt->familylastname) echo $tt->familyfirstname . ' '. $tt->familylastname; elseif($isfam_chk == 0 && $tt->candidatefirstname && $tt->candidatelastname) echo $tt->candidatefirstname . ' ' . $tt->candidatelastname; else echo "No Answer"; ?><br>-<br>Go with database<br>You have chosen to display your contact details to all premium members.</span><br><br><br>
+Mobile:<br>Contact Person:<br>Relationship with the member:<br>Convenient Time to Call:<br>Display Option:<br><br></span><br><span class="item id9"><?php if ($tt->familycell) echo $tt->familycell; else echo "<i> No Answer </i>"; ?><br><?php if ($tt->familyfirstname && $tt->familylastname) echo $tt->familyfirstname . ' '. $tt->familylastname; else echo "No Answer"; ?><br>-<br>Go with database<br>You have chosen to display your contact details to all premium members.</span><br><br><br>
 			</div><!--- basic_self_one div ends here -->
 					  
 		  

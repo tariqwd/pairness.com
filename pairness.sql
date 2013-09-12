@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 05, 2013 at 12:35 PM
+-- Generation Time: Sep 10, 2013 at 11:04 AM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `uid` int(11) NOT NULL,
   `logtime` int(11) NOT NULL,
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=717 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=777 ;
 
 --
 -- Dumping data for table `log`
@@ -816,7 +816,67 @@ INSERT INTO `log` (`logid`, `action`, `uid`, `logtime`) VALUES
 (713, 'User has successfully verified the email', 46, 1378376805),
 (714, 'User successfully logged in!', 46, 1378376922),
 (715, 'User has successfully verified the email', 47, 1378377107),
-(716, 'User has successfully verified the email', 48, 1378379302);
+(716, 'User has successfully verified the email', 48, 1378379302),
+(717, 'User has successfully verified the email', 10, 1378453198),
+(718, 'User has successfully verified the email', 49, 1378455561),
+(719, 'User has successfully verified the email', 50, 1378463926),
+(720, 'User has successfully verified the email', 51, 1378464121),
+(721, 'User has successfully verified the email', 52, 1378464463),
+(722, 'User has successfully verified the email', 53, 1378464693),
+(723, 'User has successfully verified the email', 54, 1378469841),
+(724, 'User successfully logged in!', 54, 1378532274),
+(725, 'User successfully logged in!', 54, 1378532680),
+(726, 'User successfully logged in!', 54, 1378535176),
+(727, 'User successfully logged in!', 54, 1378535197),
+(728, 'User successfully logged in!', 54, 1378536032),
+(729, 'User successfully logged in!', 54, 1378536906),
+(730, 'User successfully logged in!', 54, 1378537510),
+(731, 'User successfully logged in!', 54, 1378538225),
+(732, 'User successfully logged in!', 54, 1378540013),
+(733, 'User successfully logged in!', 54, 1378540021),
+(734, 'User successfully logged in!', 54, 1378541956),
+(735, 'User successfully logged in!', 54, 1378542013),
+(736, 'User successfully logged in!', 54, 1378543324),
+(737, 'User has successfully verified the email', 55, 1378543452),
+(738, 'User successfully logged in!', 55, 1378543509),
+(739, 'User successfully logged in!', 55, 1378544831),
+(740, 'User successfully logged in!', 54, 1378549184),
+(741, 'User successfully logged in!', 54, 1378551704),
+(742, 'User successfully logged in!', 54, 1378552788),
+(743, 'User successfully logged in!', 54, 1378553071),
+(744, 'User successfully logged in!', 54, 1378554041),
+(745, 'User successfully logged in!', 54, 1378555026),
+(746, 'User successfully logged in!', 54, 1378556156),
+(747, 'User successfully logged in!', 54, 1378556232),
+(748, 'User successfully logged in!', 54, 1378557590),
+(749, 'User successfully logged in!', 54, 1378558552),
+(750, 'User successfully logged in!', 54, 1378701649),
+(751, 'User successfully logged in!', 54, 1378704218),
+(752, 'User has successfully verified the email', 56, 1378716521),
+(753, 'User has successfully verified the email', 57, 1378717810),
+(754, 'User successfully logged in!', 57, 1378718044),
+(755, 'User has successfully verified the email', 58, 1378722126),
+(756, 'User successfully logged in!', 58, 1378722274),
+(757, 'User successfully logged in!', 57, 1378722495),
+(758, 'User has successfully verified the email', 59, 1378726488),
+(759, 'User successfully logged in!', 59, 1378726839),
+(760, 'User has successfully verified the email', 60, 1378727959),
+(761, 'User has successfully verified the email', 61, 1378728313),
+(762, 'User successfully logged in!', 61, 1378728388),
+(763, 'User successfully logged in!', 61, 1378729612),
+(764, 'User successfully logged in!', 61, 1378729686),
+(765, 'User has successfully verified the email', 62, 1378731158),
+(766, 'User successfully logged in!', 62, 1378731230),
+(767, 'User successfully logged in!', 62, 1378798036),
+(768, 'User successfully logged in!', 62, 1378798986),
+(769, 'User has successfully verified the email', 63, 1378799155),
+(770, 'User successfully logged in!', 63, 1378799451),
+(771, 'User has successfully verified the email', 64, 1378801249),
+(772, 'User successfully logged in!', 64, 1378801486),
+(773, 'User successfully logged in!', 64, 1378801518),
+(774, 'User successfully logged in!', 64, 1378801700),
+(775, 'User successfully logged in!', 64, 1378802166),
+(776, 'User successfully logged in!', 64, 1378811015);
 
 -- --------------------------------------------------------
 
@@ -841,7 +901,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `isfamily` int(11) NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=49 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=65 ;
 
 --
 -- Dumping data for table `login`
@@ -849,22 +909,18 @@ CREATE TABLE IF NOT EXISTS `login` (
 
 INSERT INTO `login` (`uid`, `ip`, `username`, `Name`, `email`, `password`, `registertime`, `mobileverification`, `emailverification`, `sc`, `verificationdate`, `privacylevel`, `lastpage`, `isfamily`) VALUES
 (2, '', 'rahber', '', 'rahber50@gmail.com', '123', 0, 0, 1, 'apple', 1375853558, 4, '/pairness.com/logout.php', 0),
-(3, '192.168.1.4', 'PaPu', 'Papu', 'Papu', 'papu', 1377689138, 0, 1, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '/pairness.com/logout.php', 0),
-(4, '192.168.1.4', 'asd', 'asdasd', 'asdfasd', 'asdas', 1377689180, 0, 0, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '', 1),
-(5, '192.168.1.4', 'asdasasd', 'asd', 'asdfasdasd', 'asdasd', 1377689476, 0, 0, '0pt5k2dqs58rsprsghhnjllrv0', 0, 1, '', 1),
 (6, '127.0.0.1', 'mtariq', 'abc', 'coz.test4@gmail.com', '123', 1378123208, 0, 1, 'mueukm43hto2oueravoig2t0l0', 1, 1, '/pairness.com/logout.php', 0),
 (7, '127.0.0.1', 'test1', 'Muhammad Tariq', 'mtariq_sarwar@yahoo.com', '123', 1378124331, 0, 1, '2p1s7f41lbd5jv97vinajfqrd0', 0, 1, '/pairness.com/home.php', 1),
 (8, '127.0.0.1', 'admin', 'abc111', 'test@gmail.com', '123', 1378124963, 0, 0, '9eehv1ppgjfeobkh65aem7p5g0', 0, 1, '', 1),
 (9, '127.0.0.1', 'test2223', 'abc123', 'tariq@gmail.com', '123', 1378126226, 0, 0, '9eehv1ppgjfeobkh65aem7p5g0', 0, 1, '', 1),
-(10, '127.0.0.1', 'testguard', 'test guardian', 'test_guard@yahoo.com', '123', 1378183200, 0, 0, '1v8l2h6sqre044rujr4ss19o84', 0, 1, '', 1),
+(10, '127.0.0.1', 'testguard', 'test guardian', 'test_guard@yahoo.com', '123', 1378183200, 0, 1, '1v8l2h6sqre044rujr4ss19o84', 1378453198, 1, '', 1),
 (11, '127.0.0.1', 'testself', 'test self', 'test_self@gmail.com', '123', 1378183501, 0, 1, '1v8l2h6sqre044rujr4ss19o84', 0, 1, '/pairness.com/logout.php', 0),
 (12, '127.0.0.1', 'testguard2', 'test guard2', 'test_guard2@gmail.com', '123', 1378185663, 0, 1, '9ne0teqpccta8nfcl7e4a6oo32', 1378376105, 1, '', 1),
-(40, '127.0.0.1', 'test_guard4', 'test_guard4', 'test_guard4@gmail.com', '123', 1378371812, 0, 1, '24cm1gtv2oc7oh11a0ss6qiat0', 1378376233, 1, '', 1),
-(41, '127.0.0.1', 'test_guard5', 'test_guard5', 'test_guard5@gmail.com', '123', 1378372086, 0, 0, 'fioo713ohqee051l429uvf6sk1', 0, 1, '', 1),
-(42, '127.0.0.1', 'test_guard6', 'test_guard6', 'test_guard6@gmail.com', '123', 1378372121, 0, 1, 'fioo713ohqee051l429uvf6sk1', 1378374236, 1, '', 1),
-(46, '127.0.0.1', 'test_guard8', 'test_guard8', 'test_guard8@gmail.com', '123', 1378376729, 0, 1, 'c452taqukutud3guq2ig0artn7', 1378376804, 1, '/pairness.com/logout.php', 1),
-(47, '127.0.0.1', 'test_self3', 'test_self3', 'test_self3@gmail.com', '123', 1378377071, 0, 1, 'o4ao7q52be6se6b93upfcppao2', 1378377107, 1, '', 0),
-(48, '127.0.0.1', 'test_self4', 'test_self4', 'test_self4@gmail.com', '123', 1378379255, 0, 1, 'd095lh8fhj1d7b5umfvv3e6d24', 1378379301, 1, '', 0);
+(54, '127.0.0.1', 'test_guard3', 'test_guard3', 'test_guard3@gmail.com', '123', 1378469812, 0, 1, 'f3ch0fr58l26utl3feklijku34', 1378469841, 1, '/pairness.com/logout.php', 1),
+(55, '127.0.0.1', 'test_self6', 'test_self6', 'test_self6@gmail.com', '123', 1378543424, 0, 1, '22lbn3h11jt0jjrqo4bc1eeo37', 1378543452, 1, '/pairness.com/view_profile.php', 0),
+(62, '127.0.0.1', 'test_guard4', 'test_guard4', 'test_guard4@gmail.com', '123', 1378731134, 0, 1, 'h14cc0m9lg2oe3srl85thk0c70', 1378731158, 1, '/pairness.com/logout.php', 1),
+(63, '127.0.0.1', 'test_guard5', 'test_guard5', 'test_guard5@gmail.com', '123', 1378799124, 0, 1, '8jq1ae4h6qji2jcd9dfiklm6r2', 1378799155, 1, '/pairness.com/logout.php', 1),
+(64, '127.0.0.1', 'test_guard6', 'test_guard6', 'test_guard6@gmail.com', '123', 1378801217, 0, 1, '4c6nrv263msnoc28t7q9aqgpj0', 1378801249, 1, '/pairness.com/view_profile.php', 1);
 
 -- --------------------------------------------------------
 
@@ -888,8 +944,8 @@ CREATE TABLE IF NOT EXISTS `pairness_candidate` (
   `candidateterms` varchar(255) NOT NULL,
   `candidatefirstname` varchar(50) NOT NULL,
   `candidatelastname` varchar(50) NOT NULL,
-  `candidatephone` int(20) NOT NULL,
-  `candidatecell` int(20) NOT NULL,
+  `candidatephone` varchar(20) NOT NULL,
+  `candidatecell` varchar(20) NOT NULL,
   `candidateprofileimage` varchar(255) NOT NULL,
   `candidateprofiledate` datetime NOT NULL,
   `candidateprofiletime` time NOT NULL,
@@ -933,17 +989,19 @@ CREATE TABLE IF NOT EXISTS `pairness_candidate` (
   `candidatecnicnumber` int(20) NOT NULL,
   `candidatecnicimage` varchar(255) NOT NULL,
   PRIMARY KEY (`candidateid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `pairness_candidate`
 --
 
 INSERT INTO `pairness_candidate` (`candidateid`, `ip`, `familyid_fk`, `candidatefullname`, `candidateemailaddress`, `candidatepassword`, `candidategender`, `candidateseekinggender`, `candidatedateofbirth`, `candidatecountry`, `candidatestate`, `candidatecity`, `candidateterms`, `candidatefirstname`, `candidatelastname`, `candidatephone`, `candidatecell`, `candidateprofileimage`, `candidateprofiledate`, `candidateprofiletime`, `candidatehaircolor`, `candidatehairtype`, `candidateeyecolor`, `candidateeyewear`, `candidateheight`, `candidateweight`, `candidatebodytype`, `candidateappearance`, `candidatefacialhair`, `candidatephysicalstatus`, `candidatemaritalstatus`, `candidatehavechildrens`, `candidatefvalues`, `candidatelivingsituation`, `candidatelikes`, `candidatedislikes`, `candidatezodiachormony`, `candidatefoodhabits`, `candidateeducation`, `candidateoccupation`, `candidaterelocate`, `candidatereligion`, `candidatebornreverted`, `candidatereligiousvalues`, `candidateattendreligiousservices`, `candidatemothertongue`, `candidateethnicity`, `candidatecast`, `candidatenationality`, `candidateplaceofbirth`, `candidatelanguagesspoken`, `candidateambition`, `candidatehobbies`, `candidatedreams`, `candidategetmarried`, `candidatewantmorechildrens`, `candidatedowry`, `candidatecnicnumber`, `candidatecnicimage`) VALUES
-(1, '127.0.0.1', 0, 'test_self1', 'test_self1@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(2, '127.0.0.1', 0, 'test_self2', 'test_self2@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(3, '127.0.0.1', 0, 'test_self3', 'test_self3@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(4, '127.0.0.1', 0, 'test_self4', 'test_self4@gmail.com', '123', 'male', 'female', '2010-08-29', 'Pakistan', 'punjab', 'rawalpinid', 'Enter some text about Family Terms...', '', '', 0, 0, '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 169, 169, 0, '', '', '', 0, 0, 0, 0, '');
+(0, '127.0.0.1', 0, 'test_self5', 'test_self5@gmail.com', '', 'male', 'female', '2011-08-29', '1240', 'punjab', 'rawalpinid', '', '', '', '0', '0', '26e60a9.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(1, '127.0.0.1', 0, 'test_self1', 'test_self1@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(2, '127.0.0.1', 0, 'test_self2', 'test_self2@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(3, '127.0.0.1', 0, 'test_self3', 'test_self3@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(4, '127.0.0.1', 0, 'test_self4', 'test_self4@gmail.com', '123', 'male', 'female', '2010-08-29', 'Pakistan', 'punjab', 'rawalpinid', 'Enter some text about Family Terms...', '', '', '0', '0', '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 169, 169, 0, '', '', '', 0, 0, 0, 0, ''),
+(5, '127.0.0.1', 0, 'test_self6', 'test_self6@gmail.com', '123', 'male', 'female', '2007-08-27', '1405', 'punjab', 'rawalpinid', '', 'Muhammad', 'Tariq', '518889991', '2147483647', 'employee_card_tariq.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '');
 
 -- --------------------------------------------------------
 
@@ -967,8 +1025,8 @@ CREATE TABLE IF NOT EXISTS `pairness_family` (
   `familyterms` varchar(255) NOT NULL,
   `familyfirstname` varchar(50) NOT NULL,
   `familylastname` varchar(50) NOT NULL,
-  `familyphone` int(20) NOT NULL,
-  `familycell` int(20) NOT NULL,
+  `familyphone` varchar(20) NOT NULL,
+  `familycell` varchar(20) NOT NULL,
   `familyprofileimage` varchar(255) NOT NULL,
   `familyprofiledate` datetime NOT NULL,
   `familyprofiletime` time NOT NULL,
@@ -1012,26 +1070,16 @@ CREATE TABLE IF NOT EXISTS `pairness_family` (
   `familycnicnumber` int(20) NOT NULL,
   `familycnicimage` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `pairness_family`
 --
 
 INSERT INTO `pairness_family` (`id`, `ip`, `familyid`, `familyfullname`, `familyemailaddress`, `familypassword`, `familygender`, `familyseekinggender`, `familydateofbirth`, `familycountry`, `familystate`, `familycity`, `familyterms`, `familyfirstname`, `familylastname`, `familyphone`, `familycell`, `familyprofileimage`, `familyprofiledate`, `familyprofiletime`, `familyhaircolor`, `familyhairtype`, `familyeyecolor`, `familyeyewear`, `familyheight`, `familyweight`, `familybodytype`, `familyappearance`, `familyfacialhair`, `familyphysicalstatus`, `familymaritalstatus`, `familyhavechildrens`, `familyvalues`, `familylivingsituation`, `familylikes`, `familydislikes`, `familyzodiachormony`, `familyfoodhabits`, `familyeducation`, `familyoccupation`, `familyrelocate`, `familyreligion`, `familybornreverted`, `familyreligiousvalues`, `familyattendreligiousservices`, `familymothertongue`, `familyethnicity`, `familycast`, `familynationality`, `familyplaceofbirth`, `familylanguagesspoken`, `familyambition`, `familyhobbies`, `familydreams`, `familygetmarried`, `familywantmorechildrens`, `familydowry`, `familycnicnumber`, `familycnicimage`) VALUES
-(1, '127.0.0.1', 0, 'hdfgsdfg', 'dfgjksdgq', 'kjhkhgdfg', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(2, '127.0.0.1', 0, 'jkgjkgjkg', 'gfjsg', 'kjgkh', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(3, '127.0.0.1', 0, 'jkhjklh', 'tyjhgh', 'jkhjkhkj', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(4, '127.0.0.1', 0, 'ozil11', 'gmailozil', 'hghjkgh', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(5, '127.0.0.1', 0, 'ghjhgjhg', 'fgsdjg', 'hjgjhgj', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(10, '127.0.0.1', 0, 'hgjhg', 'dgcd', 'jhg', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(11, '127.0.0.1', 0, 'alskdjsa', 'rahber50@gmail.com', 'asdas;ld', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(12, '0000000000000', 0, 'ali_baba', 'muhammadzubair107@gmail.com', 'abcxyzz7', 'male', 'female', '1989-06-26', 'Select Country', 'Punjab', 'Rawlpindi', 'Enter some text about Family Terms...', 'Muhammad', 'Zubair', 514479815, 346598174, '', '0000-00-00 00:00:00', '11:20:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(13, '127.0.0.1', 0, 'ali123', 'ali@yahoo.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(14, '', 0, 'mtariq', 'coz.test4@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(15, '', 0, 'testself', 'test_self@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', 0, 0, '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(25, '127.0.0.1', 25, 'test_guard3', 'test_guard3@gmail.com', '123', 'male', 'female', '2013-09-02', 'Pakistan', 'punjab', 'rawalpinid', 'Enter some text about Family Terms...', '', '', 0, 0, '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 169, 169, 0, '', '', '', 0, 0, 0, 0, ''),
-(37, '127.0.0.1', 37, 'test_guard8', 'test_guard8@gmail.com', '123', 'male', 'female', '2005-09-06', 'Pakistan', 'punjab', 'rawalpinid', 'Enter some text about Family Terms...', '', '', 0, 0, '26e60a9.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 169, 169, 0, '', '', '', 0, 0, 0, 0, '');
+(2, '127.0.0.1', 2, 'test_guard4', 'test_guard4@gmail.com', '123', 'male', 'female', '2009-09-07', '1240', 'punjab', 'rawalpinid', 'sdfsdfsdfsdfdsfdsaf', 'Muhammad', 'Tariq', '518889991', '2147483647', 'vegeLife.jpg', '0000-00-00 00:00:00', '00:00:00', 2000, 1990, 1983, 1978, 1965, 1924, 1762, 1757, 1752, 1744, 1738, 1732, 1629, 1626, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
+(3, '127.0.0.1', 3, 'test_guard5', 'test_guard5@gmail.com', '123', 'male', 'female', '1998-06-24', '1240', 'Sindh', 'Karachi', 'i have some specific family terms, so please dont discuss it with me.', 'Daniyal', 'Qayyum', '518889991', '2147483647', '', '2013-09-10 00:00:00', '00:00:00', 1995, 1989, 1981, 1979, 1953, 1894, 1758, 1753, 1751, 1743, 1735, 1732, 1628, 1620, 'i have list of likeness', 'i have list of dislikeness', 'libra', 1617, 1610, 1597, 1575, 1573, 1566, 1563, 1560, 1549, 1410, 'Butt', 1240, 1240, 1077, 'i have list of ambitions', 'i have list of hobbies', 'i have list of dreams', 1070, 1066, 1063, 37405, 'employee_card_tariq.jpg'),
+(4, '127.0.0.1', 4, 'test_guard6', 'test_guard6@gmail.com', '123', 'male', 'female', '2008-09-01', '1240', 'Sindh', 'Karachi', 'list of family terms', 'Daniyal', 'Qayyum', '051-1122335', '0333-5165636', '26e60a9.jpg', '2013-09-10 00:00:00', '00:00:00', 1999, 1988, 1982, 1978, 1960, 1924, 1760, 1753, 1750, 1742, 1735, 1732, 1628, 1625, 'list of likeness', 'list of dislikeness', 'libra', 1617, 1615, 1597, 1576, 1573, 1566, 1562, 1560, 1549, 1410, 'Raja', 1240, 1240, 1077, 'i have list of ambitions', 'i have list of hobbies', 'i have list of dreams', 1071, 1066, 1063, 37405, 'employee_card_tariq.jpg');
 
 -- --------------------------------------------------------
 
@@ -1905,7 +1953,14 @@ CREATE TABLE IF NOT EXISTS `session` (
   `ais` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ais`),
   FULLTEXT KEY `sessionid` (`sessionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=95 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=138 ;
+
+--
+-- Dumping data for table `session`
+--
+
+INSERT INTO `session` (`sessionid`, `uid`, `t`, `ip`, `ip2`, `ais`) VALUES
+('0nq18dgnmg24bibd563n6b3lv6', 64, 1378811020, '127.0.0.1', '', 137);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

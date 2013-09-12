@@ -640,22 +640,49 @@ function age($dob) { /*calculate age on the basis of dob*/
     
 }
 
-function family_feature($family_val){
+function family_feature($family_val){ // select features name for drop down list
 	global $mysqli;
 	$list = $mysqli->query("SELECT name from pairness_features WHERE id = '$family_val'");
 	$list = $list->fetch_object();
 	echo  $list->name;		
 }
 
-function candidate_feature($candidate_val){
+/*function candidate_feature($candidate_val){ // select features name for drop down list
 	global $mysqli;
 	$list = $mysqli->query("SELECT name from pairness_features WHERE id = '$candidate_val'");
 	$list = $list->fetch_object();
 	echo $list->name;		
+}*/
+
+function family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg){ //search query
+	
+	global $mysqli;
+	$search_query = "";
+		$search_query.= "SELECT * FROM pairness_family WHERE ";
+		if($seekingcountry > 0)
+		{
+			$search_query.= "familycountry LIKE '$seekingcountry' AND "; 	
+		}
+		if($seekingminage > 0 && $seekingmaxage > 0)
+		{
+			$search_query.= "familyage BETWEEN '$seekingminage' and '$seekingmaxage' AND ";
+		}
+		if($seekingimg > 0)
+		{
+			$search_query.= "familyprofileimage > '' and familyprofileimage !='default.png' AND ";
+		}
+		
+		$search_query.="familyseekinggender LIKE '$seekinggender';";
+	
+		//echo $search_query;
+		$q = $mysqli->query($search_query);	
+		return $q;
+	
 }
 
+
 function start_app(){ /* Initialize Different Variables */
-	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage;
+	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage, $editpreferencespage;
 	$mysqli = new mysqli("localhost", "root", "", "pairness");
 	$contactemail = "rahber@cozmuler.com";
 	$sitepath ="http://localhost/pairness.com/";
@@ -674,6 +701,7 @@ function start_app(){ /* Initialize Different Variables */
 	$settingspage = "settings.php";
 	$profilepage = "profile.php";
 	$viewprofilepage = "view_profile.php";
+	$editpreferencespage =  "editpreferences.php";
 	$membershippage ="membership.php";
 	$candidatepage ="candidate.php";
 	$matchpage = "search.php?action=match";

@@ -1,4 +1,9 @@
-<h1>Search</h1>
+
+<div style="width:584px;">
+<span class="searchhdg"><p style="width:100px; float:left;">Search</p><p style="width:300px; float:right;"><a href="/search.php?search=advanced">Advanced Search &raquo;</a></p></span>
+
+</div>
+
 
 <div class="search-body">
 
@@ -10,11 +15,28 @@
 	$column = request_var('search_query','familyfullname');
 	$value = request_var('search_text','');
 	$gender= request_var('gender','');
+	
+	$seekinggender = request_var('seekgender','');
+	$seekingminage = request_var('age_min','');
+	$seekingmaxage = request_var('age_max','');
+	$seekingcountry = request_var('seekcountry','');
+	$seekingimg = request_var('seekimg','');
+	
+	//echo $column;
+	//echo $seekinggender . '/' . $seekingminage . '/' . $seekingmaxage . '/' . $seekingcountry . '/' . $seekingimg ;
+	
 
 switch ($action) {
     case "main":
-        $p = $mysqli->query("SELECT * FROM pairness_family WHERE $column LIKE '%$value%'");
+	
+        $q_main = $mysqli->query("SELECT * FROM pairness_family WHERE pairness_family.$column LIKE '%$value%';");
         break;
+		
+	case "mainsearch":
+		
+		$q_mainsearch = family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg);			
+		break;
+		
     case "explore":
        echo $d = '<div class="gsl"><select onchange="changegender(this.options[this.selectedIndex].value)">
 	<option>Select Preference</option>   
@@ -27,7 +49,7 @@ switch ($action) {
 		$p = $mysqli->query("SELECT * FROM pairness_family WHERE familygender ='$gender'");
         break;
 	default:
-       ?>
+?>
 	<form action="?action=main" method="post" name="search" id="search">
 	<table width="600" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -95,23 +117,173 @@ switch ($action) {
     <option value="familycnicnumber">CNIC</option>
     </select></td>
   
-  <td><input type="image" src="./assets/css/img/btn_submit.png" name="submit" id="submit" value="Submit" /></td>
+  <td><input type="image" src="./assets/css/img/btn_quick_search.png" name="submit" id="submit" value="Submit" /></td>
   </tr>
-  <tr>
+  </table>
+  </form>
+  
+  
+  
+  <form action="?action=mainsearch" method="post" name="search" id="search">
+	<table width="600" border="0" cellspacing="0" cellpadding="0">
+  	<tr>
+  
     <td>&nbsp;</td>
     <td>&nbsp;</td>
 	 
-  </tr>
+	</tr>
+	
+    <tr>
+    <td>I am:</td>
+    <td>
+     <select name="gender" id="gender">
+     	<option value="female" >Female</option>
+        <option value="male" selected>Male</option>
+     </select>
+    </td>
+	</tr>
+    <tr>
+  
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	 
+	</tr>
+    <tr>
+    <td>Seeking for:</td>
+    <td>
+     <select name="seekgender" id="seekgender">
+     	<option value="female" selected>Female</option>
+        <option value="male" >Male</option>
+     </select>
+    </td>
+	</tr>
+	
+    <tr>
+  
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	 
+	</tr>
+    <tr>
+    <td>Age</td>
+    <td>
+    <select name="age_min" id="age_min">
+    	<option value="-1">-</option>
+        <?php 
+		
+		for($i=1;$i<=100;$i++)
+			{ 
+				if ($i!=19)
+				{
+					echo '<option value="'.$i.'">' . $i . '</option>';
+				}
+				if($i==19)
+				{
+					echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';			
+				}
+			}
+		
+		?> 
+        
+	</select>
+    to 
+    <select name="age_max" id="age_min">
+    	<option value="-1">-</option>
+        <?php 
+		for($i=1;$i<=100;$i++)
+			{
+				if ($i!=30)
+				{
+					echo '<option value="'.$i.'" >' . $i . '</option>';
+				}
+				if($i==30)
+				{
+					echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';			
+				}
+			
+			} 
+		?> 
+	</select>
+    </td>
+    </tr>
+    
+    <tr>
+  
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	 
+	</tr>
 
+    <tr>
+  
+    <td>Country</td>
+    <td>
+    <select name="seekcountry" id="country">
+    <option value="-1">Any</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>        
+    </select>
+    </td> 
+	</tr>
+    
+    <tr>
+  
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+	 
+	</tr>
+    
+    <tr>
+  
+    <td>Photo</td>
+    <td><input type="checkbox" name="seekimg" id="seekimg" value="1" checked="checked"> <label for="hasPhoto">yes, profile with a photo</label></td>
+	 <td><input type="image" src="./assets/css/img/btn_search.png" name="submit" id="submit" value="Search" /></td>
+	</tr>
+       
 </table>
 </form>
-	   <?php
+
+<?php
 }
 
  if($_POST || $_GET){
-	if(($p->num_rows)>0)
+	 
+	 if(($q_mainsearch->num_rows)>0)
+	 {
+		 while($row=$q_mainsearch->fetch_object())
+		 {
+			 $count++;
+			 ?>
+<div class="search-pfl"><div class="search-inner left">
+<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
+<div class="search-bio left">
+<div class="search-name"><?php echo $row->familyfullname;	 ?></div>
+<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().fixheight($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
+<div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
+</div>
+
+
+</div>
+             
+</div>	 
+	  
+<?php
+	
+		}
+				
+		?>
+		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
+		<?php
+	}
+	 
+	if(($q_main->num_rows)>0)
 	{
-		while($row= $p->fetch_object()){	
+		while($row= $q_main->fetch_object()){	
 		$count++;
 ?>	
 
@@ -130,16 +302,16 @@ switch ($action) {
 
 <?php
 		}
-		
+				
 		?>
 		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
 		<?php
-}
+	}
 }
 ?>
 
+
+
 </div>
-
-
 
 
