@@ -13,7 +13,7 @@
 global $mysqli;
 
 
-function startSession($timeout = 6000){ /* Start session and session cronning */
+function startSession($timeout = 100){ /* Start session and session cronning */
 	global $mysqli;
 	session_name('czid');
 	session_set_cookie_params(0);
@@ -37,7 +37,7 @@ function startSession($timeout = 6000){ /* Start session and session cronning */
 
 function update_lastpage($page){ /* Update user last page */
 	global $mysqli;
-	if($page!='logout.php' &&check_login()){
+	if($page!='logout.php' && check_login()){
 	$id = $_SESSION['id'];
 	if($mysqli->query("UPDATE login set lastpage='$page' where uid ='$id'")){
 		return true;
@@ -486,7 +486,7 @@ function cron_session(){ /* Check if the session that exist in database is older
 	$queryy =  $mysqli->query("Select * from session");
 		while ($row = $queryy->fetch_object()){
 			$op = $row->sessionid;
-			if((($t) - ($row->t)) > 6000){
+			if((($t) - ($row->t)) > 100){
 			$mysqli->query("DELETE FROM session WHERE sessionid='$op'");
 			}
 		}
@@ -672,7 +672,7 @@ function family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcoun
 			$search_query.= "familyprofileimage > '' and familyprofileimage !='default.png' AND ";
 		}
 		
-		$search_query.="familyseekinggender LIKE '$seekinggender';";
+		$search_query.="familygender LIKE '$seekinggender';";
 	
 		//echo $search_query;
 		$q = $mysqli->query($search_query);	

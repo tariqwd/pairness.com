@@ -54,7 +54,7 @@ if(pgname()!='index'){
 <?php }else{?>
 <a class="topmenu" href="<?php  echo $indexpage; ?>">Home</a>
 <img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
-<a class="topmenu" href="<?php  echo $searchpage; ?>">Search</a>
+<a class="topmenu" href="<?php  echo $indexpage; ?>">Search</a>
 <img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
 <a class="login-mini topmenu" href="#"> Login</a>
 <img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
@@ -68,7 +68,7 @@ if(pgname()!='index'){
 
 		</section>
 		<section class="layout">
-		<?php if(pgname()!='index' &&pgname()!='candidate' && check_login()){
+		<?php if(pgname()!='index' && pgname()!='candidate' && check_login()){
 		
 		?>
 		

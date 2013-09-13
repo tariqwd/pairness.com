@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 10, 2013 at 11:04 AM
+-- Generation Time: Sep 13, 2013 at 12:09 PM
 -- Server version: 5.5.24-log
 -- PHP Version: 5.3.13
 
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `log` (
   `uid` int(11) NOT NULL,
   `logtime` int(11) NOT NULL,
   PRIMARY KEY (`logid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=777 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=806 ;
 
 --
 -- Dumping data for table `log`
@@ -876,7 +876,36 @@ INSERT INTO `log` (`logid`, `action`, `uid`, `logtime`) VALUES
 (773, 'User successfully logged in!', 64, 1378801518),
 (774, 'User successfully logged in!', 64, 1378801700),
 (775, 'User successfully logged in!', 64, 1378802166),
-(776, 'User successfully logged in!', 64, 1378811015);
+(776, 'User successfully logged in!', 64, 1378811015),
+(777, 'User successfully logged in!', 64, 1378814009),
+(778, 'User successfully logged in!', 64, 1378879402),
+(779, 'User successfully logged in!', 62, 1378885331),
+(780, 'User successfully logged in!', 64, 1378898646),
+(781, 'User successfully logged in!', 64, 1378960791),
+(782, 'User has successfully verified the email', 66, 1378970820),
+(783, 'User successfully logged in!', 66, 1378971383),
+(784, 'User has successfully verified the email', 67, 1378973685),
+(785, 'User successfully logged in!', 67, 1378973985),
+(786, 'User successfully logged in!', 66, 1378975601),
+(787, 'User successfully logged in!', 66, 1378978635),
+(788, 'User has successfully verified the email', 68, 1378981021),
+(789, 'User successfully logged in!', 66, 1378981207),
+(790, 'User successfully logged in!', 64, 1379050019),
+(791, 'User successfully logged in!', 68, 1379052291),
+(792, 'User successfully logged in!', 68, 1379056552),
+(793, 'User has successfully verified the email', 69, 1379058610),
+(794, 'User successfully logged in!', 69, 1379058918),
+(795, 'User has successfully verified the email', 70, 1379059647),
+(796, 'User successfully logged in!', 70, 1379059943),
+(797, 'User successfully logged in!', 70, 1379065055),
+(798, 'User successfully logged in!', 70, 1379067288),
+(799, 'User successfully logged in!', 70, 1379068818),
+(800, 'User successfully logged in!', 70, 1379069950),
+(801, 'User successfully logged in!', 70, 1379071494),
+(802, 'User successfully logged in!', 70, 1379072712),
+(803, 'User successfully logged in!', 70, 1379072947),
+(804, 'User successfully logged in!', 70, 1379073150),
+(805, 'User successfully logged in!', 70, 1379073622);
 
 -- --------------------------------------------------------
 
@@ -901,7 +930,7 @@ CREATE TABLE IF NOT EXISTS `login` (
   `isfamily` int(11) NOT NULL,
   PRIMARY KEY (`uid`),
   UNIQUE KEY `uid` (`uid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=65 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=71 ;
 
 --
 -- Dumping data for table `login`
@@ -910,17 +939,8 @@ CREATE TABLE IF NOT EXISTS `login` (
 INSERT INTO `login` (`uid`, `ip`, `username`, `Name`, `email`, `password`, `registertime`, `mobileverification`, `emailverification`, `sc`, `verificationdate`, `privacylevel`, `lastpage`, `isfamily`) VALUES
 (2, '', 'rahber', '', 'rahber50@gmail.com', '123', 0, 0, 1, 'apple', 1375853558, 4, '/pairness.com/logout.php', 0),
 (6, '127.0.0.1', 'mtariq', 'abc', 'coz.test4@gmail.com', '123', 1378123208, 0, 1, 'mueukm43hto2oueravoig2t0l0', 1, 1, '/pairness.com/logout.php', 0),
-(7, '127.0.0.1', 'test1', 'Muhammad Tariq', 'mtariq_sarwar@yahoo.com', '123', 1378124331, 0, 1, '2p1s7f41lbd5jv97vinajfqrd0', 0, 1, '/pairness.com/home.php', 1),
-(8, '127.0.0.1', 'admin', 'abc111', 'test@gmail.com', '123', 1378124963, 0, 0, '9eehv1ppgjfeobkh65aem7p5g0', 0, 1, '', 1),
-(9, '127.0.0.1', 'test2223', 'abc123', 'tariq@gmail.com', '123', 1378126226, 0, 0, '9eehv1ppgjfeobkh65aem7p5g0', 0, 1, '', 1),
-(10, '127.0.0.1', 'testguard', 'test guardian', 'test_guard@yahoo.com', '123', 1378183200, 0, 1, '1v8l2h6sqre044rujr4ss19o84', 1378453198, 1, '', 1),
-(11, '127.0.0.1', 'testself', 'test self', 'test_self@gmail.com', '123', 1378183501, 0, 1, '1v8l2h6sqre044rujr4ss19o84', 0, 1, '/pairness.com/logout.php', 0),
-(12, '127.0.0.1', 'testguard2', 'test guard2', 'test_guard2@gmail.com', '123', 1378185663, 0, 1, '9ne0teqpccta8nfcl7e4a6oo32', 1378376105, 1, '', 1),
-(54, '127.0.0.1', 'test_guard3', 'test_guard3', 'test_guard3@gmail.com', '123', 1378469812, 0, 1, 'f3ch0fr58l26utl3feklijku34', 1378469841, 1, '/pairness.com/logout.php', 1),
-(55, '127.0.0.1', 'test_self6', 'test_self6', 'test_self6@gmail.com', '123', 1378543424, 0, 1, '22lbn3h11jt0jjrqo4bc1eeo37', 1378543452, 1, '/pairness.com/view_profile.php', 0),
-(62, '127.0.0.1', 'test_guard4', 'test_guard4', 'test_guard4@gmail.com', '123', 1378731134, 0, 1, 'h14cc0m9lg2oe3srl85thk0c70', 1378731158, 1, '/pairness.com/logout.php', 1),
-(63, '127.0.0.1', 'test_guard5', 'test_guard5', 'test_guard5@gmail.com', '123', 1378799124, 0, 1, '8jq1ae4h6qji2jcd9dfiklm6r2', 1378799155, 1, '/pairness.com/logout.php', 1),
-(64, '127.0.0.1', 'test_guard6', 'test_guard6', 'test_guard6@gmail.com', '123', 1378801217, 0, 1, '4c6nrv263msnoc28t7q9aqgpj0', 1378801249, 1, '/pairness.com/view_profile.php', 1);
+(69, '127.0.0.1', 'mtariq_sarwar', 'Muhammad Tariq', 'mtariq_sarwar@yahoo.com', '123', 1379058565, 0, 1, 'v4msq3q8i55lvbp899ua71ijr0', 1379058609, 1, '/pairness.com/logout.php', 1),
+(70, '127.0.0.1', 'hinaz', 'hina zahid', 'hina@gmail.com', '123', 1379059593, 0, 1, '1n0jhl0d7650tqk0n21m2m84o6', 1379059647, 1, '/pairness.com/home.php', 1);
 
 -- --------------------------------------------------------
 
@@ -988,6 +1008,7 @@ CREATE TABLE IF NOT EXISTS `pairness_candidate` (
   `candidatedowry` int(10) NOT NULL,
   `candidatecnicnumber` int(20) NOT NULL,
   `candidatecnicimage` varchar(255) NOT NULL,
+  `candidateage` int(10) NOT NULL,
   PRIMARY KEY (`candidateid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
@@ -995,13 +1016,13 @@ CREATE TABLE IF NOT EXISTS `pairness_candidate` (
 -- Dumping data for table `pairness_candidate`
 --
 
-INSERT INTO `pairness_candidate` (`candidateid`, `ip`, `familyid_fk`, `candidatefullname`, `candidateemailaddress`, `candidatepassword`, `candidategender`, `candidateseekinggender`, `candidatedateofbirth`, `candidatecountry`, `candidatestate`, `candidatecity`, `candidateterms`, `candidatefirstname`, `candidatelastname`, `candidatephone`, `candidatecell`, `candidateprofileimage`, `candidateprofiledate`, `candidateprofiletime`, `candidatehaircolor`, `candidatehairtype`, `candidateeyecolor`, `candidateeyewear`, `candidateheight`, `candidateweight`, `candidatebodytype`, `candidateappearance`, `candidatefacialhair`, `candidatephysicalstatus`, `candidatemaritalstatus`, `candidatehavechildrens`, `candidatefvalues`, `candidatelivingsituation`, `candidatelikes`, `candidatedislikes`, `candidatezodiachormony`, `candidatefoodhabits`, `candidateeducation`, `candidateoccupation`, `candidaterelocate`, `candidatereligion`, `candidatebornreverted`, `candidatereligiousvalues`, `candidateattendreligiousservices`, `candidatemothertongue`, `candidateethnicity`, `candidatecast`, `candidatenationality`, `candidateplaceofbirth`, `candidatelanguagesspoken`, `candidateambition`, `candidatehobbies`, `candidatedreams`, `candidategetmarried`, `candidatewantmorechildrens`, `candidatedowry`, `candidatecnicnumber`, `candidatecnicimage`) VALUES
-(0, '127.0.0.1', 0, 'test_self5', 'test_self5@gmail.com', '', 'male', 'female', '2011-08-29', '1240', 'punjab', 'rawalpinid', '', '', '', '0', '0', '26e60a9.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(1, '127.0.0.1', 0, 'test_self1', 'test_self1@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(2, '127.0.0.1', 0, 'test_self2', 'test_self2@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(3, '127.0.0.1', 0, 'test_self3', 'test_self3@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(4, '127.0.0.1', 0, 'test_self4', 'test_self4@gmail.com', '123', 'male', 'female', '2010-08-29', 'Pakistan', 'punjab', 'rawalpinid', 'Enter some text about Family Terms...', '', '', '0', '0', '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 169, 169, 0, '', '', '', 0, 0, 0, 0, ''),
-(5, '127.0.0.1', 0, 'test_self6', 'test_self6@gmail.com', '123', 'male', 'female', '2007-08-27', '1405', 'punjab', 'rawalpinid', '', 'Muhammad', 'Tariq', '518889991', '2147483647', 'employee_card_tariq.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '');
+INSERT INTO `pairness_candidate` (`candidateid`, `ip`, `familyid_fk`, `candidatefullname`, `candidateemailaddress`, `candidatepassword`, `candidategender`, `candidateseekinggender`, `candidatedateofbirth`, `candidatecountry`, `candidatestate`, `candidatecity`, `candidateterms`, `candidatefirstname`, `candidatelastname`, `candidatephone`, `candidatecell`, `candidateprofileimage`, `candidateprofiledate`, `candidateprofiletime`, `candidatehaircolor`, `candidatehairtype`, `candidateeyecolor`, `candidateeyewear`, `candidateheight`, `candidateweight`, `candidatebodytype`, `candidateappearance`, `candidatefacialhair`, `candidatephysicalstatus`, `candidatemaritalstatus`, `candidatehavechildrens`, `candidatefvalues`, `candidatelivingsituation`, `candidatelikes`, `candidatedislikes`, `candidatezodiachormony`, `candidatefoodhabits`, `candidateeducation`, `candidateoccupation`, `candidaterelocate`, `candidatereligion`, `candidatebornreverted`, `candidatereligiousvalues`, `candidateattendreligiousservices`, `candidatemothertongue`, `candidateethnicity`, `candidatecast`, `candidatenationality`, `candidateplaceofbirth`, `candidatelanguagesspoken`, `candidateambition`, `candidatehobbies`, `candidatedreams`, `candidategetmarried`, `candidatewantmorechildrens`, `candidatedowry`, `candidatecnicnumber`, `candidatecnicimage`, `candidateage`) VALUES
+(0, '127.0.0.1', 0, 'test_self5', 'test_self5@gmail.com', '', 'male', 'female', '2011-08-29', '1240', 'punjab', 'rawalpinid', '', '', '', '0', '0', '26e60a9.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '', 0),
+(1, '127.0.0.1', 0, 'test_self1', 'test_self1@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '', 0),
+(2, '127.0.0.1', 0, 'test_self2', 'test_self2@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '', 0),
+(3, '127.0.0.1', 0, 'test_self3', 'test_self3@gmail.com', '123', '', '', '0000-00-00', '', '', '', '', '', '', '0', '0', 'default.png', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '', 0),
+(4, '127.0.0.1', 0, 'test_self4', 'test_self4@gmail.com', '123', 'male', 'female', '2010-08-29', 'Pakistan', 'punjab', 'rawalpinid', 'Enter some text about Family Terms...', '', '', '0', '0', '', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 'Enter some text about Family Likes...', 'Enter some text about Family Dislikes...', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 169, 169, 0, '', '', '', 0, 0, 0, 0, '', 0),
+(5, '127.0.0.1', 0, 'test_self6', 'test_self6@gmail.com', '123', 'male', 'female', '2007-08-27', '1405', 'punjab', 'rawalpinid', '', 'Muhammad', 'Tariq', '518889991', '2147483647', 'employee_card_tariq.jpg', '0000-00-00 00:00:00', '00:00:00', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -1069,17 +1090,17 @@ CREATE TABLE IF NOT EXISTS `pairness_family` (
   `familydowry` int(10) NOT NULL,
   `familycnicnumber` int(20) NOT NULL,
   `familycnicimage` varchar(255) NOT NULL,
+  `familyage` int(10) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `pairness_family`
 --
 
-INSERT INTO `pairness_family` (`id`, `ip`, `familyid`, `familyfullname`, `familyemailaddress`, `familypassword`, `familygender`, `familyseekinggender`, `familydateofbirth`, `familycountry`, `familystate`, `familycity`, `familyterms`, `familyfirstname`, `familylastname`, `familyphone`, `familycell`, `familyprofileimage`, `familyprofiledate`, `familyprofiletime`, `familyhaircolor`, `familyhairtype`, `familyeyecolor`, `familyeyewear`, `familyheight`, `familyweight`, `familybodytype`, `familyappearance`, `familyfacialhair`, `familyphysicalstatus`, `familymaritalstatus`, `familyhavechildrens`, `familyvalues`, `familylivingsituation`, `familylikes`, `familydislikes`, `familyzodiachormony`, `familyfoodhabits`, `familyeducation`, `familyoccupation`, `familyrelocate`, `familyreligion`, `familybornreverted`, `familyreligiousvalues`, `familyattendreligiousservices`, `familymothertongue`, `familyethnicity`, `familycast`, `familynationality`, `familyplaceofbirth`, `familylanguagesspoken`, `familyambition`, `familyhobbies`, `familydreams`, `familygetmarried`, `familywantmorechildrens`, `familydowry`, `familycnicnumber`, `familycnicimage`) VALUES
-(2, '127.0.0.1', 2, 'test_guard4', 'test_guard4@gmail.com', '123', 'male', 'female', '2009-09-07', '1240', 'punjab', 'rawalpinid', 'sdfsdfsdfsdfdsfdsaf', 'Muhammad', 'Tariq', '518889991', '2147483647', 'vegeLife.jpg', '0000-00-00 00:00:00', '00:00:00', 2000, 1990, 1983, 1978, 1965, 1924, 1762, 1757, 1752, 1744, 1738, 1732, 1629, 1626, '', '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0, '', '', '', 0, 0, 0, 0, ''),
-(3, '127.0.0.1', 3, 'test_guard5', 'test_guard5@gmail.com', '123', 'male', 'female', '1998-06-24', '1240', 'Sindh', 'Karachi', 'i have some specific family terms, so please dont discuss it with me.', 'Daniyal', 'Qayyum', '518889991', '2147483647', '', '2013-09-10 00:00:00', '00:00:00', 1995, 1989, 1981, 1979, 1953, 1894, 1758, 1753, 1751, 1743, 1735, 1732, 1628, 1620, 'i have list of likeness', 'i have list of dislikeness', 'libra', 1617, 1610, 1597, 1575, 1573, 1566, 1563, 1560, 1549, 1410, 'Butt', 1240, 1240, 1077, 'i have list of ambitions', 'i have list of hobbies', 'i have list of dreams', 1070, 1066, 1063, 37405, 'employee_card_tariq.jpg'),
-(4, '127.0.0.1', 4, 'test_guard6', 'test_guard6@gmail.com', '123', 'male', 'female', '2008-09-01', '1240', 'Sindh', 'Karachi', 'list of family terms', 'Daniyal', 'Qayyum', '051-1122335', '0333-5165636', '26e60a9.jpg', '2013-09-10 00:00:00', '00:00:00', 1999, 1988, 1982, 1978, 1960, 1924, 1760, 1753, 1750, 1742, 1735, 1732, 1628, 1625, 'list of likeness', 'list of dislikeness', 'libra', 1617, 1615, 1597, 1576, 1573, 1566, 1562, 1560, 1549, 1410, 'Raja', 1240, 1240, 1077, 'i have list of ambitions', 'i have list of hobbies', 'i have list of dreams', 1071, 1066, 1063, 37405, 'employee_card_tariq.jpg');
+INSERT INTO `pairness_family` (`id`, `ip`, `familyid`, `familyfullname`, `familyemailaddress`, `familypassword`, `familygender`, `familyseekinggender`, `familydateofbirth`, `familycountry`, `familystate`, `familycity`, `familyterms`, `familyfirstname`, `familylastname`, `familyphone`, `familycell`, `familyprofileimage`, `familyprofiledate`, `familyprofiletime`, `familyhaircolor`, `familyhairtype`, `familyeyecolor`, `familyeyewear`, `familyheight`, `familyweight`, `familybodytype`, `familyappearance`, `familyfacialhair`, `familyphysicalstatus`, `familymaritalstatus`, `familyhavechildrens`, `familyvalues`, `familylivingsituation`, `familylikes`, `familydislikes`, `familyzodiachormony`, `familyfoodhabits`, `familyeducation`, `familyoccupation`, `familyrelocate`, `familyreligion`, `familybornreverted`, `familyreligiousvalues`, `familyattendreligiousservices`, `familymothertongue`, `familyethnicity`, `familycast`, `familynationality`, `familyplaceofbirth`, `familylanguagesspoken`, `familyambition`, `familyhobbies`, `familydreams`, `familygetmarried`, `familywantmorechildrens`, `familydowry`, `familycnicnumber`, `familycnicimage`, `familyage`) VALUES
+(1, '127.0.0.1', 1, 'mtariq_sarwar', 'mtariq_sarwar@yahoo.com', '123', 'male', 'female', '1984-06-24', '1240', 'punjab', 'islamabad', 'i have list of family terms', 'Muhammad', 'Tariq', '051-1122335', '0333-5165636', 'dont-mess-serie-3-360134-m.jpg', '2013-09-13 00:00:00', '00:00:00', 1998, 1990, 1984, 1977, 1965, 1915, 1761, 1754, 1752, 1744, 1734, 1733, 1629, 1624, 'i have list of likeness', 'i have list of dislikeness', 'cancer', 1619, 1611, 1597, 1577, 1573, 1566, 1562, 1558, 1549, 1410, 'Raja', 1240, 1240, 0, 'i have list of ambitions', 'i have list of hobbies', 'i have list of dreams', 1072, 1066, 1063, 37405, 'employee_card_tariq.jpg', 29),
+(2, '127.0.0.1', 1, 'hinaz', 'hina@gmail.com', '123', 'female', 'male', '1988-09-23', '1240', 'Sindh', 'Karachi', 'i have list of terms', 'Hina', 'Zahid', '051-4564564', '0333-1112233', 'reflection-2-620708-m.jpg', '2013-09-13 00:00:00', '00:00:00', 1998, 1991, 1984, 1977, 1966, 1918, 1763, 1754, 1745, 1744, 1738, 1733, 1628, 1626, 'i have list of likeness', 'i have list of dislikeness', 'libra', 1619, 1612, 1600, 1577, 1573, 1566, 1562, 1560, 1550, 1414, 'dont know', 1179, 1179, 1160, 'i have list of ambitions', 'i have list of hobbies', 'i have list of dreams', 1072, 1066, 1062, 37405, 'reflection-2-620708-m.jpg', 24);
 
 -- --------------------------------------------------------
 
@@ -1941,6 +1962,83 @@ INSERT INTO `pairness_features` (`id`, `category_id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `pairness_image`
+--
+
+CREATE TABLE IF NOT EXISTS `pairness_image` (
+  `pairness_f` int(10) NOT NULL,
+  `pairness_image_name` varchar(200) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `pairness_image`
+--
+
+INSERT INTO `pairness_image` (`pairness_f`, `pairness_image_name`, `id`) VALUES
+(2, 'user21.jpg', 1),
+(2, 'user23.jpg', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pairness_preferences`
+--
+
+CREATE TABLE IF NOT EXISTS `pairness_preferences` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `ip` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `uid_fk` int(10) NOT NULL,
+  `preferencesgender` varchar(10) CHARACTER SET latin1 NOT NULL,
+  `preferencesminage` int(10) NOT NULL,
+  `preferencesmaxage` int(10) NOT NULL,
+  `preferencescountry` varchar(50) COLLATE utf8_bin NOT NULL,
+  `preferencesstate` varchar(50) COLLATE utf8_bin NOT NULL,
+  `preferencescity` varchar(50) COLLATE utf8_bin NOT NULL,
+  `preferenceshaircolor` int(10) NOT NULL,
+  `preferenceshairtype` int(10) NOT NULL,
+  `preferenceseyecolor` int(10) NOT NULL,
+  `preferenceseyewear` int(10) NOT NULL,
+  `preferencesheight` int(10) NOT NULL,
+  `preferencesweight` int(10) NOT NULL,
+  `preferencesbodytype` int(10) NOT NULL,
+  `preferencesappearance` int(10) NOT NULL,
+  `preferencesfacialhair` int(10) NOT NULL,
+  `preferencesphysicalstatus` int(10) NOT NULL,
+  `preferencesmaritalstatus` int(10) NOT NULL,
+  `preferenceshavechildrens` int(10) NOT NULL,
+  `preferencesvalues` int(10) NOT NULL,
+  `preferenceslivingsituation` int(10) NOT NULL,
+  `preferencesfoodhabits` int(10) NOT NULL,
+  `preferenceseducation` int(10) NOT NULL,
+  `preferencesoccupation` int(10) NOT NULL,
+  `preferencesrelocate` int(10) NOT NULL,
+  `preferencesreligion` int(10) NOT NULL,
+  `preferencesbornreverted` int(10) NOT NULL,
+  `preferencesreligiousvalues` int(10) NOT NULL,
+  `preferencesattendreligiousservices` int(10) NOT NULL,
+  `preferencesmothertongue` int(10) NOT NULL,
+  `preferencesethnicity` int(10) NOT NULL,
+  `preferencesnationality` int(10) NOT NULL,
+  `preferencesplaceofbirth` int(10) NOT NULL,
+  `preferenceslanguagesspoken` int(10) NOT NULL,
+  `preferencesgetmarried` int(10) NOT NULL,
+  `preferenceswantmorechildrens` int(10) NOT NULL,
+  `preferencesdowry` int(10) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `pairness_preferences`
+--
+
+INSERT INTO `pairness_preferences` (`id`, `ip`, `uid_fk`, `preferencesgender`, `preferencesminage`, `preferencesmaxage`, `preferencescountry`, `preferencesstate`, `preferencescity`, `preferenceshaircolor`, `preferenceshairtype`, `preferenceseyecolor`, `preferenceseyewear`, `preferencesheight`, `preferencesweight`, `preferencesbodytype`, `preferencesappearance`, `preferencesfacialhair`, `preferencesphysicalstatus`, `preferencesmaritalstatus`, `preferenceshavechildrens`, `preferencesvalues`, `preferenceslivingsituation`, `preferencesfoodhabits`, `preferenceseducation`, `preferencesoccupation`, `preferencesrelocate`, `preferencesreligion`, `preferencesbornreverted`, `preferencesreligiousvalues`, `preferencesattendreligiousservices`, `preferencesmothertongue`, `preferencesethnicity`, `preferencesnationality`, `preferencesplaceofbirth`, `preferenceslanguagesspoken`, `preferencesgetmarried`, `preferenceswantmorechildrens`, `preferencesdowry`) VALUES
+(1, '127.0.0.1', 70, 'male', 19, 30, '1240', 'punjab', 'islamabad', 1998, 1990, 1984, 1977, 1965, 1915, 1761, 1754, 1752, 1744, 1734, 1733, 1629, 1624, 1617, 1611, 1597, 1575, 1573, 1565, 1562, 1560, 1549, 1410, 1240, 1240, 1077, 1072, 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `session`
 --
 
@@ -1953,14 +2051,7 @@ CREATE TABLE IF NOT EXISTS `session` (
   `ais` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`ais`),
   FULLTEXT KEY `sessionid` (`sessionid`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=138 ;
-
---
--- Dumping data for table `session`
---
-
-INSERT INTO `session` (`sessionid`, `uid`, `t`, `ip`, `ip2`, `ais`) VALUES
-('0nq18dgnmg24bibd563n6b3lv6', 64, 1378811020, '127.0.0.1', '', 137);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_bin AUTO_INCREMENT=162 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

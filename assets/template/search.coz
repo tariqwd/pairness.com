@@ -1,3 +1,8 @@
+<?php
+
+auth_check();
+
+?>
 
 <div style="width:584px;">
 <span class="searchhdg"><p style="width:100px; float:left;">Search</p><p style="width:300px; float:right;"><a href="/search.php?search=advanced">Advanced Search &raquo;</a></p></span>
@@ -275,11 +280,18 @@ switch ($action) {
 <?php
 	
 		}
-				
-		?>
+	 }
+		if($count){
+					
+		?>        
 		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
 		<?php
-	}
+		}
+		else{ 
+		?>
+    	<div class="result-search-bar"> No Match Found.</div>
+    	<?php
+		}
 	 
 	if(($q_main->num_rows)>0)
 	{
@@ -302,11 +314,19 @@ switch ($action) {
 
 <?php
 		}
-				
+	}
+		if ($count){
+					
 		?>
 		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
 		<?php
-	}
+		}	
+		else{
+		?>
+    	<div class="result-search-bar"> No Match Found.</div>
+    	<?php
+		}
+	
 }
 ?>
 
