@@ -13,7 +13,7 @@
 global $mysqli;
 
 
-function startSession($timeout = 100){ /* Start session and session cronning */
+function startSession($timeout = 6000){ /* Start session and session cronning */
 	global $mysqli;
 	session_name('czid');
 	session_set_cookie_params(0);
@@ -486,7 +486,7 @@ function cron_session(){ /* Check if the session that exist in database is older
 	$queryy =  $mysqli->query("Select * from session");
 		while ($row = $queryy->fetch_object()){
 			$op = $row->sessionid;
-			if((($t) - ($row->t)) > 100){
+			if((($t) - ($row->t)) > 6000){
 			$mysqli->query("DELETE FROM session WHERE sessionid='$op'");
 			}
 		}
@@ -680,6 +680,159 @@ function family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcoun
 	
 }
 
+
+function match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry){
+	global $mysqli;
+	$search_query = "";
+	$search_query.= "SELECT * FROM pairness_family WHERE ";
+	if($pcountry > 0)
+	{
+		$search_query.= "familycountry LIKE '$pcountry' AND "; 	
+	}
+	if($pminage > 0 && $pmaxage > 0)
+	{
+		$search_query.= "familyage BETWEEN '$pminage' and '$pmaxage' AND ";
+	}
+	if($pstate > 0)
+	{
+		$search_query.= "familystate LIKE '$pstate' AND ";
+	}
+	if($pcity>0)
+	{
+		$search_query.= "familycity LIKE '$pcity' AND ";	
+	}
+	if($phaircolor>0)
+	{
+		$search_query.= "familyhaircolor LIKE '$phaircolor' AND ";	
+	}
+	if($phairtype>0)
+	{
+		$search_query.= "familyhairtype LIKE '$phairtype' AND ";	
+	}
+	if($phaircolor>0)
+	{
+		$search_query.= "familyhaircolor LIKE '$phaircolor' AND ";	
+	}
+	if($peyecolor>0)
+	{
+		$search_query.= "familyeyecolor LIKE '$peyecolor' AND ";	
+	}
+	if($peyewear>0)
+	{
+		$search_query.= "familyeyewear LIKE '$peyewear' AND ";	
+	}
+	if($pheight>0)
+	{
+		$search_query.= "familyheight LIKE '$pheight' AND ";	
+	}
+	if($pweight>0)
+	{
+		$search_query.= "familyweight LIKE '$pweight' AND ";	
+	}
+	if($pbodytype>0)
+	{
+		$search_query.= "familybodytype LIKE '$pbodytype' AND ";	
+	}
+	if($pappearance>0)
+	{
+		$search_query.= "familyappearance LIKE '$pappearance' AND ";	
+	}
+	if($pfacialhair>0)
+	{
+		$search_query.= "familyfacialhair LIKE '$pfacialhair' AND ";	
+	}
+	if($pphysicalstatus>0)
+	{
+		$search_query.= "familyphysicalstatus LIKE '$pphysicalstatus' AND ";	
+	}
+	if($pmaritalstatus>0)
+	{
+		$search_query.= "familymaritalstatus LIKE '$pmaritalstatus' AND ";	
+	}
+	if($phavechildrens>0)
+	{
+		$search_query.= "familyhavechildrens LIKE '$phavechildrens' AND ";	
+	}
+	if($pvalues>0)
+	{
+		$search_query.= "familyvalues LIKE '$pvalues' AND ";	
+	}
+	if($plivingsituation>0)
+	{
+		$search_query.= "familylivingsituation LIKE '$plivingsituation' AND ";	
+	}
+	if($pfoodhabits>0)
+	{
+		$search_query.= "familyfoodhabits LIKE '$pfoodhabits' AND ";	
+	}
+	if($peducation>0)
+	{
+		$search_query.= "familyeducation LIKE '$peducation' AND ";	
+	}
+	if($poccupation>0)
+	{
+		$search_query.= "familyoccupation LIKE '$poccupation' AND ";	
+	}
+	if($prelocate>0)
+	{
+		$search_query.= "familyrelocate LIKE '$prelocate' AND ";	
+	}
+	if($preligion>0)
+	{
+		$search_query.= "familyreligion LIKE '$preligion' AND ";	
+	}
+	if($pbornreverted>0)
+	{
+		$search_query.= "familybornreverted LIKE '$pbornreverted' AND ";	
+	}
+	if($preligiousvalues>0)
+	{
+		$search_query.= "familyreligiousvalues LIKE '$preligiousvalues' AND ";	
+	}
+	if($pattendreligiousservices>0)
+	{
+		$search_query.= "familyattendreligiousservices LIKE '$pattendreligiousservices' AND ";	
+	}
+	if($pmothertongue>0)
+	{
+		$search_query.= "familymothertongue LIKE '$pmothertongue' AND ";	
+	}
+	if($pethnicity>0)
+	{
+		$search_query.= "familyethnicity LIKE '$pethnicity' AND ";	
+	}
+	if($pnationality>0)
+	{
+		$search_query.= "familynationality LIKE '$pnationality' AND ";	
+	}
+	if($pplaceofbirth>0)
+	{
+		$search_query.= "familyplaceofbirth LIKE '$pplaceofbirth' AND ";	
+	}
+	if($planguagesspoken>0)
+	{
+		$search_query.= "familylanguagesspoken LIKE '$planguagesspoken' AND ";	
+	}
+	if($pgetmarried>0)
+	{
+		$search_query.= "familygetmarried LIKE '$pgetmarried' AND ";	
+	}
+	if($pwantmorechildrens>0)
+	{
+		$search_query.= "familywantmorechildrens LIKE '$pwantmorechildrens' AND ";	
+	}
+	if($pdowry>0)
+	{
+		$search_query.= "familydowry LIKE '$pdowry' AND ";	
+	}
+	$search_query.="familygender LIKE '$pgender';";
+
+	//echo $search_query;
+	$q = $mysqli->query($search_query);	
+	return $q;
+	
+	
+}
 
 function start_app(){ /* Initialize Different Variables */
 	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage, $editpreferencespage;

@@ -1,0 +1,262 @@
+<style type="text/css">
+
+#imagedisplaybox
+{
+	text-align:center;
+	background-color:#eef9e3;
+	float: left;
+	margin-right: 10%;
+	margin-left: 10%;
+	margin-top: 30px;
+	border-width:1px solid;
+	padding:8px;
+	border-radius:5px;
+	border-color:eef9e7;
+	width: 215px;
+	height: 215px;
+	
+	}
+.deleteButton
+{
+	font-family:"Comic Sans MS", cursive;
+	margin-top:10px;
+	height:25px;
+	width: 55px;
+	background-color:#4194bf;
+	color:#FFF;
+	border-color:#060;
+	border: 2px ridge;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	-ms-border-radius: 7px;
+	-webkit-border-radius: 7px;
+}
+
+</style>
+
+<section class="content">
+
+<h3>Profile Pictures</h3>
+</section><?php
+
+$isfamily = $_SESSION['isfamily'];
+$familyid = $_SESSION['familyid'];
+$id = $_SESSION['id'];
+$path = "upload_images/";
+
+//echo $path . '/' . $id;
+
+if(isset($_POST['delimage'])) {
+	
+$imgname = request_var('imgname','');
+
+$delete="DELETE FROM pairness_image WHERE pairness_f='$id' AND pairness_image_name = '$imgname'";
+
+$resultabc=$mysqli->query($delete);
+echo $mysqli->error;
+if($resultabc)
+ {
+  unlink($path.'/'.$imgname);
+  echo "Entry delete success";
+    
+
+ }
+else
+ {
+  echo "Entry delete failed";
+  
+  
+ }
+
+}
+/*
+$a = $mysqli->query("SELECT * FROM `pairness_image` WHERE pairness_f = '$id'");
+$a = $mysqli->query($a);*/
+$query = "SELECT COUNT(*) FROM pairness_image WHERE pairness_f = '$id'";
+$result = mysqli_query($mysqli,$query);
+$rows = mysqli_fetch_row($result);
+   $limitreach = $rows[0];
+   
+   if($limitreach == 5)
+   {
+	   echo 'You cannot upload more pictures';  
+	}
+	elseif($limitreach < 5)
+	{
+?>
+
+<form action="" method="post" enctype="multipart/form-data">
+        <input type="file" name="uploaded_file"><br><br>
+        <input type="submit" name="submit" value="Upload file">
+    </form><br>
+
+
+
+<?php
+
+	
+/*	$result_one = ("SELECT * FROM `pairness_image` WHERE id = '5' AND pairness_f = '$id' ORDER BY id ASC");
+	$result_one = $mysqli->query($result_one);
+	
+	//SELECT COUNT(*)
+	
+    $img_count = count($_FILES['uploaded_file'][$i]);
+    
+	echo "Total : ".$img_count."<br>";
+	if($img_count>=5)
+	{
+		echo'you have reached your maximum uploading images';
+		
+	}
+	
+	else { */
+
+		
+// Check if a file has been uploaded
+if(isset($_FILES['uploaded_file'])) {
+	
+    // Make sure the file was sent without errors
+    if($_FILES['uploaded_file']['error'] == 0) {
+	
+		
+		
+        // Connect to the database
+       /* $dbLink = new mysqli('localhost', 'root', 'root', 'pairness');
+        if(mysqli_connect_errno()) {
+            die("MySQL connection failed: ". mysqli_connect_error());
+        }*/
+		if(($_FILES['uploaded_file']['type'] == "image/gif")
+        || ($_FILES['uploaded_file']['type'] == "image/jpeg")
+        || ($_FILES['uploaded_file']['type'] == "image/pjpeg")
+		|| ($_FILES['uploaded_file']['type'] == "image/png")
+		|| ($_FILES['uploaded_file']['type'] == "image/jpg")
+		|| ($_FILES['uploaded_file']['type'] == "image/bmp"))
+
+  {
+	  
+  
+		  $filename = $_FILES['uploaded_file']['name'];
+		  
+		
+		//echo "<br>" . $filename;
+		
+		$idx = strrpos($filename,'.');
+		
+		//echo "<br>" . $idx;
+		
+		$ext = substr($filename,$idx);
+		
+		//echo "<br>" . $ext . "<br> <br>";
+ 
+		$maxid = $mysqli->query("select id from pairness_image order by id DESC limit 1");
+		$maxid = $maxid->fetch_object();
+		//echo " <br> Value: " . $maxid->id;
+		$maxid = $maxid->id + 1;
+		$newfilename = "user" . $id . $maxid . $ext;
+		//echo $newfilename;
+		$path = "upload_images/".$newfilename;
+		
+		if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path))
+		{
+			
+			//echo "in loop";
+			$q = $mysqli->query("insert into pairness_image (pairness_f,pairness_image_name) Values ('$id','$newfilename');");
+			 							
+				//echo 'abcdefg';
+				$result = ("SELECT * FROM `pairness_image` WHERE pairness_f = '$id' ORDER BY id DESC");
+ $result = $mysqli->query($result);
+ //echo $mysqli->error;
+				
+				echo '<table border="1" width="auto" height="auto" cellspacing="0" cellpadding="0" > 
+   
+         <td>'; 
+				
+				while($row= $result->fetch_object())
+				{
+					
+				$id = $row->id;
+				$pairness_f = $row->pairness_f;
+				$pairness_image_name = $row->pairness_image_name;
+												
+				echo "<div id='imagedisplaybox' >
+<img src='upload_images/".$pairness_image_name."' width='200' height='200'/><br>
+<form action='' method='post'>
+<input type='hidden' name='imgname' value='".$pairness_image_name."' />
+<input class='deleteButton' type='submit' name='delimage' value='Delete' /></form><br><br>
+
+</div>";
+
+		
+
+				}	// while ends here
+				
+				echo'<br><br></td> 
+    <br><br>
+</table>';
+		}
+	 
+			
+	 	
+		
+		
+        // Gather all required data
+       /* $name = $dbLink->real_escape_string($_FILES['uploaded_file']['name'].$mime);
+        $mime = $dbLink->real_escape_string($_FILES['uploaded_file']['type']);
+        $data = $dbLink->real_escape_string(file_get_contents($_FILES  ['uploaded_file']['tmp_name']));
+        $size = intval($_FILES['uploaded_file']['size']);
+		
+		$extension = end(explode('.', $_FILES['uploaded_file']['name']));
+		echo $extension;
+				
+		$str = $name.$id;
+
+	
+		
+							$tmp = $_FILES['uploaded_file']['tmp_name'];
+							if(move_uploaded_file($tmp, $path.$name))
+								{
+								$query = "
+            INSERT INTO `pairness_image` (`id`,`pairness_f`, `pairness_image_name`)
+            VALUES ('{$p_id}', '{$id}', md5('{$str}'))";
+ 
+        // Execute the query
+        $result = $dbLink->query($query);
+									
+									echo "<img src='upload_images/".$name."'  class='preview'>";
+								}
+							else
+								echo "Fail upload folder with read access.";*/
+						
+
+ 
+		
+		
+ 
+        // Check if it was successfull
+       /* if($result) {
+			
+            echo 'Success! Your file was successfully added!';
+        }
+        else {
+            echo 'Error! Failed to insert the file'
+               . "<pre>{$dbLink->error}</pre>";
+        }*/
+    }
+    else {
+        echo 'An error accured while the file was being uploaded. '
+           . 'Error code: '. intval($_FILES['uploaded_file']['error']);
+    }
+ 
+    // Close the mysql connection
+    $dbLink->close();
+}
+else {
+    echo 'Error! A file was not sent!';
+}
+ }
+ else {
+	 /////
+	 }
+	}
+?>

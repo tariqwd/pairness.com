@@ -38,6 +38,7 @@ $( ".login-mini" ).click(function(e) {
 
 });
 
+
 $(".image-submit").click(function(e){
 	e.preventDefault();
 	if($(".op1").val()!='' && $(".op1").val()!=''){

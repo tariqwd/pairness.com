@@ -15,6 +15,7 @@ auth_check();
 
 <?php
 
+	$uid = $_SESSION['id'];
 	$action = request_var('action','');
 	$count = 0;
 	$column = request_var('search_query','familyfullname');
@@ -35,12 +36,68 @@ switch ($action) {
     case "main":
 	
         $q_main = $mysqli->query("SELECT * FROM pairness_family WHERE pairness_family.$column LIKE '%$value%';");
-        break;
+		
+    break;
 		
 	case "mainsearch":
 		
 		$q_mainsearch = family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg);			
-		break;
+		
+	break;
+	
+	case "match":
+	
+		$p = $mysqli->query("SELECT * from pairness_preferences WHERE uid_fk = '$uid'");
+		
+				  while($row= $p->fetch_object())
+				{
+					
+				//$id 	= $row->id;
+				//$ip 	= $row->ip;
+				//$uid_fk = $row->uid_fk;
+				//$preferencesemail					= $row->preferencesemail;
+				$pgender 					= $row->preferencesgender;				
+				$pminage 					= $row->preferencesminage;		
+				$pmaxage 					= $row->preferencesmaxage;	
+				$pcountry				 	= $row->preferencescountry;
+				$pstate 					= $row->preferencesstate;
+				$pcity 					= $row->preferencescity;
+				$phaircolor 				= $row->preferenceshaircolor;
+				$phairtype 				= $row->preferenceshairtype;
+				//echo $pgender . '/' . $pminage . '/' .$pmaxage . '/' . $pcountry . '/' .$phaircolor ;
+				$peyecolor 				= $row->preferenceseyecolor;
+				$peyewear 				= $row->preferenceseyewear;
+				$pheight 					= $row->preferencesheight;
+				$pweight 					= $row->preferencesweight;
+				$pbodytype 				= $row->preferencesbodytype;
+				$pappearance 				= $row->preferencesappearance;
+				$pfacialhair 				= $row->preferencesfacialhair;
+				$pphysicalstatus 			= $row->preferencesphysicalstatus;
+				$pmaritalstatus			= $row->preferencesmaritalstatus;
+				$phavechildrens 			= $row->preferenceshavechildrens;
+				$pvalues 					= $row->preferencesvalues;
+				$plivingsituation 		= $row->preferenceslivingsituation;
+				$pfoodhabits 				= $row->preferencesfoodhabits;
+				$peducation 				= $row->preferenceseducation;
+				$poccupation 				= $row->preferencesoccupation;
+				$prelocate 				= $row->preferencesrelocate;
+				$preligion 				= $row->preferencesreligion;
+				$pbornreverted 			= $row->preferencesbornreverted;
+				$preligiousvalues 		= $row->preferencesreligiousvalues;
+				$pattendreligiousservices = $row->preferencesattendreligiousservices;
+				$pmothertongue 			= $row->preferencesmothertongue;
+				$pethnicity 				= $row->preferencesethnicity;
+				$pnationality			 	= $row->preferencesnationality;
+				$pplaceofbirth		 	= $row->preferencesplaceofbirth;
+				$planguagesspoken 		= $row->preferenceslanguagesspoken;
+				$pgetmarried 				= $row->preferencesgetmarried;
+				$pwantmorechildrens 		= $row->preferenceswantmorechildrens;
+				$pdowry 					= $row->preferencesdowry;
+				}
+	
+		$q_matchsearch = match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry);
+		
+	break; 
 		
     case "explore":
        echo $d = '<div class="gsl"><select onchange="changegender(this.options[this.selectedIndex].value)">
@@ -52,7 +109,7 @@ switch ($action) {
 		$gender = 'female';
 	}
 		$p = $mysqli->query("SELECT * FROM pairness_family WHERE familygender ='$gender'");
-        break;
+    break;
 	default:
 ?>
 	<form action="?action=main" method="post" name="search" id="search">
@@ -258,6 +315,41 @@ switch ($action) {
 
  if($_POST || $_GET){
 	 
+	 if(($q_matchsearch->num_rows)>0)
+	 {
+		 while($row=$q_matchsearch->fetch_object())
+		 {
+			 $count++;
+			 ?>
+<div class="search-pfl"><div class="search-inner left">
+<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
+<div class="search-bio left">
+<div class="search-name"><?php echo $row->familyfullname;	 ?></div>
+<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().fixheight($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
+<div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
+</div>
+
+
+</div>
+             
+</div>	 
+	  
+<?php
+	
+		}
+	 }
+		if($count){
+					
+		?>        
+		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
+		<?php
+		}
+		else{ 
+		?>
+    	<div class="result-search-bar"> No Match Found.</div>
+    	<?php
+		}
+
 	 if(($q_mainsearch->num_rows)>0)
 	 {
 		 while($row=$q_mainsearch->fetch_object())
