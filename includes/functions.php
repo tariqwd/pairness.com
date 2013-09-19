@@ -103,6 +103,7 @@ function remove_session(){/* Logout a user */
 }
 
 function get_name($uid){ /* Get current user name */
+	global $mysqli;
 	$result = $mysqli->query("SELECT * FROM login where uid='$uid'");
 	while($row = $result->fetch_object()){
 		return $p = $row->username;
@@ -626,6 +627,8 @@ function fixheight(){ /* To-do: Should add aphostophy to show proper height */
 	return "5'11";
 }
 
+/////////////////////////////////////////////////////////////////////////////////
+
 function age($dob) { /*calculate age on the basis of dob*/
 
     list($y,$m,$d) = explode('-', $dob);
@@ -825,14 +828,30 @@ function match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phair
 	{
 		$search_query.= "familydowry LIKE '$pdowry' AND ";	
 	}
+	if($pgender)
+	{
 	$search_query.="familygender LIKE '$pgender';";
-
+	}
 	//echo $search_query;
 	$q = $mysqli->query($search_query);	
-	return $q;
-	
+	return $q;	
 	
 }
+
+function getfeatures($featureid){
+
+	global $mysqli;
+	$p = $mysqli->query("SELECT * from pairness_features WHERE id = '$featureid'");
+	
+            	while($row = $p->fetch_object()){
+					$val = $row->name;
+                //echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}	
+	
+	return $val;
+}
+
+/////////////////////////////////////////////
 
 function start_app(){ /* Initialize Different Variables */
 	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage, $editpreferencespage;

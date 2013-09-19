@@ -191,7 +191,7 @@ else
 				
 				$mysqli->query($q_family);
 				//echo $mysqli->error;
-				echo "<h4 class='style9'>Guardien Second Step Complete</h4><br>";
+				echo "<h4 class='style9'>Second Step Complete</h4><br>";
 				
 				}
 				

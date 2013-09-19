@@ -658,7 +658,10 @@ textarea:focus, select:focus, input:focus{
 	color:red;
 	font-size:10px;
 	text-decoration:none;
+	/*border: 1px solid #0000FF;*/
 }
+
+
 
 .search-pic img{
 	border:1px solid white;
@@ -689,6 +692,7 @@ textarea:focus, select:focus, input:focus{
 	width:100%;
 	float:left;
 }
+
 
 select {
 	width: 240px;

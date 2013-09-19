@@ -9,9 +9,7 @@
 *********************************************/
 include('./includes/functions.php');
 include('./assets/template/header.coz');
-include('./assets/template/home.coz');
+include('./assets/template/inbox.coz');
 include('./assets/template/footer.coz');
-
-
 
 ?>

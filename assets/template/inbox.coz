@@ -1,0 +1,11 @@
+
+<?php
+
+//We count the number of new messages the user has
+$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
+//The number of new messages is in the variable $nb_new_pm
+$nb_new_pm = $nb_new_pm['nb_new_pm'];
+//We display the links
+?>
+
+<a href="list_pm.php">My personnal messages(<?php echo $nb_new_pm; ?> unread)</a><br />

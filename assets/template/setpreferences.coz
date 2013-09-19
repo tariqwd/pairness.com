@@ -259,7 +259,7 @@ if($_POST){    // if post start
   <tr>
     <td>Living in:</td>
     <td><select name="country" id="country">
-    <option >Select Country</option>
+    <option value="-1" >Select Country</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
 	

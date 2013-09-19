@@ -16,11 +16,18 @@ if($query){
  while($tt = $query->fetch_object()){ 
 		
 		//Name and Age Title 
+		if(strtotime($tt->familydateofbirth)!='0000-00-00'){
 		$da = age($tt->familydateofbirth); // calculate dateofbirth
+		}
 		echo "About "; 
 		echo "<b>" . $tt->familyfullname . "</b>";
+		//echo $tt->familydateofbirth;
+		if ($da){
 		echo  '(' .$da. ')'; 
-
+		}
+		else{ 
+		echo '<i>(No Answer)</i>';
+		}
 		
        ?>
 	   <!--- main div starts here -->

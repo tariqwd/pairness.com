@@ -50,46 +50,40 @@ switch ($action) {
 		$p = $mysqli->query("SELECT * from pairness_preferences WHERE uid_fk = '$uid'");
 		
 				  while($row= $p->fetch_object())
-				{
-					
-				//$id 	= $row->id;
-				//$ip 	= $row->ip;
-				//$uid_fk = $row->uid_fk;
-				//$preferencesemail					= $row->preferencesemail;
+				{	
 				$pgender 					= $row->preferencesgender;				
 				$pminage 					= $row->preferencesminage;		
 				$pmaxage 					= $row->preferencesmaxage;	
 				$pcountry				 	= $row->preferencescountry;
 				$pstate 					= $row->preferencesstate;
-				$pcity 					= $row->preferencescity;
+				$pcity 						= $row->preferencescity;
 				$phaircolor 				= $row->preferenceshaircolor;
-				$phairtype 				= $row->preferenceshairtype;
-				//echo $pgender . '/' . $pminage . '/' .$pmaxage . '/' . $pcountry . '/' .$phaircolor ;
-				$peyecolor 				= $row->preferenceseyecolor;
-				$peyewear 				= $row->preferenceseyewear;
+				$phairtype 					= $row->preferenceshairtype;
+				$peyecolor 					= $row->preferenceseyecolor;
+				$peyewear 					= $row->preferenceseyewear;
 				$pheight 					= $row->preferencesheight;
 				$pweight 					= $row->preferencesweight;
-				$pbodytype 				= $row->preferencesbodytype;
+				$pbodytype 					= $row->preferencesbodytype;
 				$pappearance 				= $row->preferencesappearance;
 				$pfacialhair 				= $row->preferencesfacialhair;
 				$pphysicalstatus 			= $row->preferencesphysicalstatus;
-				$pmaritalstatus			= $row->preferencesmaritalstatus;
+				$pmaritalstatus				= $row->preferencesmaritalstatus;
 				$phavechildrens 			= $row->preferenceshavechildrens;
 				$pvalues 					= $row->preferencesvalues;
-				$plivingsituation 		= $row->preferenceslivingsituation;
+				$plivingsituation 			= $row->preferenceslivingsituation;
 				$pfoodhabits 				= $row->preferencesfoodhabits;
 				$peducation 				= $row->preferenceseducation;
 				$poccupation 				= $row->preferencesoccupation;
-				$prelocate 				= $row->preferencesrelocate;
-				$preligion 				= $row->preferencesreligion;
-				$pbornreverted 			= $row->preferencesbornreverted;
-				$preligiousvalues 		= $row->preferencesreligiousvalues;
-				$pattendreligiousservices = $row->preferencesattendreligiousservices;
-				$pmothertongue 			= $row->preferencesmothertongue;
+				$prelocate 					= $row->preferencesrelocate;
+				$preligion 					= $row->preferencesreligion;
+				$pbornreverted 				= $row->preferencesbornreverted;
+				$preligiousvalues 			= $row->preferencesreligiousvalues;
+				$pattendreligiousservices 	= $row->preferencesattendreligiousservices;
+				$pmothertongue 				= $row->preferencesmothertongue;
 				$pethnicity 				= $row->preferencesethnicity;
 				$pnationality			 	= $row->preferencesnationality;
-				$pplaceofbirth		 	= $row->preferencesplaceofbirth;
-				$planguagesspoken 		= $row->preferenceslanguagesspoken;
+				$pplaceofbirth		 		= $row->preferencesplaceofbirth;
+				$planguagesspoken 			= $row->preferenceslanguagesspoken;
 				$pgetmarried 				= $row->preferencesgetmarried;
 				$pwantmorechildrens 		= $row->preferenceswantmorechildrens;
 				$pdowry 					= $row->preferencesdowry;
@@ -324,9 +318,17 @@ switch ($action) {
 <div class="search-pfl"><div class="search-inner left">
 <div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
 <div class="search-bio left">
-<div class="search-name"><?php echo $row->familyfullname;	 ?></div>
-<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().fixheight($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
-<div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
+<div class="search-name"><?php echo $row->familyfullname .adddash(). getage($row->familydateofbirth);?></div>
+<div class="search-details"><?php echo getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
+<div class="search-go-profile">
+
+	<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
+
+	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+
+
+</div>
+
 </div>
 
 
@@ -360,7 +362,7 @@ switch ($action) {
 <div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
 <div class="search-bio left">
 <div class="search-name"><?php echo $row->familyfullname;	 ?></div>
-<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().fixheight($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
+<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
 <div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
 </div>
 
@@ -395,8 +397,8 @@ switch ($action) {
 <div class="search-pfl"><div class="search-inner left">
 <div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
 <div class="search-bio left">
-<div class="search-name"><?php echo $row->familyfullname;	 ?></div>
-<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().fixheight($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
+<div class="search-name"><?php echo $row->familyfullname;?></div>
+<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
 <div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
 </div>
 

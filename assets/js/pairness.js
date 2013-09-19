@@ -117,10 +117,11 @@ $("body").on("click", ".register-submit", function (e) {
 					type: 'success',
 					styling: 'bootstrap',
 					title: 'Success',
-					hide: false,
-					width: "50%",
+					hide: true,
+					width: "31%",
 					text: data.v
-					}); 
+					});
+				centerdiv( $('.not-wrapper').css("display","none") ); 
 				$("input[type=image]").attr("disabled", "disabled");					
 				}else{
 					$.pnotify({
@@ -177,19 +178,47 @@ $("body").on("click", ".login-submit", function (e) {
  
 });
 
-
-
-
+$("body").on("click", ".email-submit", function (e) {
+	e.preventDefault();
+	
+	var datastring = $("#email-form").serialize();
+	$.ajax({
+		type: "POST",
+		url: "./ajax/do-email.php",
+        data: datastring,
+        dataType: "json"
+        }) .always(function(data) { 
+				if(data.s==1){
+					$.pnotify({
+					type: 'success',
+					styling: 'bootstrap',
+					title: 'Success',
+					hide: true,
+					width: "31%",
+					text: data.v
+					});	
+				centerdiv( $('.not-wrapper').css("display","none") );
+				$("input[type=image]").attr("disabled", "disabled");					
+				}else{
+					$.pnotify({
+					styling: 'bootstrap',		
+					type: 'error',
+					title: 'Failed!',
+					text: data.e
+					});
+					
+				}
+		});
+});	
 
 $("body").on("click", ".s-register", function (e)  {
 	$(".not-wrapper").css("display","none");	
 	$(".not-wrapper").css("display","block");
 	e.preventDefault();
+	location.hash = 'self-registrations';
 	$('.not-wrapper').load('./assets/template/sub/s-register.html');
 	centerdiv( $('.not-wrapper') );
 	$(document).attr('title', 'Regsiter Now!');
-	location.hash = 'self-registrations';
-	centerdiv( $('.not-wrapper') );
 });
 
 $("body").on("click", ".g-register", function (e) {
@@ -202,7 +231,18 @@ $("body").on("click", ".g-register", function (e) {
 	$(document).attr('title', 'Regsiter Now!');
 });
 
-
+$("body").on("click", ".email", function (e) {
+	$(".not-wrapper").css("display","none");	
+	$(".not-wrapper").css("display","block");
+	e.preventDefault();
+	location.hash = 'send-email';
+	var userid = document.getElementsByName('forid');
+	var uid= userid[0];
+	var id = uid.getAttribute('value'); 
+	$('.not-wrapper').load('./email.php?id='+id);
+	centerdiv( $('.not-wrapper') );
+	$(document).attr('title', 'Send Email!');
+});
 
 $(function () {
     'use strict';

@@ -2,4 +2,5 @@ pairness.com
 
 1. ajax-> do-candidate.php?
 2. ajax-> next_step.php?
-3. 
+3. cache not creating.
+4. 
