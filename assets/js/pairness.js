@@ -236,9 +236,12 @@ $("body").on("click", ".email", function (e) {
 	$(".not-wrapper").css("display","block");
 	e.preventDefault();
 	location.hash = 'send-email';
+	//var tltrcd = document.getElementsByName('forid').length;
+	var recordid = $(this).attr("id");
 	var userid = document.getElementsByName('forid');
-	var uid= userid[0];
+	var uid= userid[recordid];
 	var id = uid.getAttribute('value'); 
+	//alert(id);
 	$('.not-wrapper').load('./email.php?id='+id);
 	centerdiv( $('.not-wrapper') );
 	$(document).attr('title', 'Send Email!');

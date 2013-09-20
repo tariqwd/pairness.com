@@ -313,7 +313,7 @@ switch ($action) {
 	 {
 		 while($row=$q_matchsearch->fetch_object())
 		 {
-			 $count++;
+			 
 			 ?>
 <div class="search-pfl"><div class="search-inner left">
 <div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
@@ -324,7 +324,7 @@ switch ($action) {
 
 	<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
 
-	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
 
 
 </div>
@@ -337,7 +337,7 @@ switch ($action) {
 </div>	 
 	  
 <?php
-	
+		$count++;
 		}
 	 }
 		if($count){
@@ -356,14 +356,19 @@ switch ($action) {
 	 {
 		 while($row=$q_mainsearch->fetch_object())
 		 {
-			 $count++;
+			 
 			 ?>
 <div class="search-pfl"><div class="search-inner left">
 <div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
 <div class="search-bio left">
 <div class="search-name"><?php echo $row->familyfullname;	 ?></div>
 <div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
-<div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
+<div class="search-go-profile">
+<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
+
+	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+
+</div>
 </div>
 
 
@@ -372,7 +377,7 @@ switch ($action) {
 </div>	 
 	  
 <?php
-	
+		$count++;
 		}
 	 }
 		if($count){
@@ -390,7 +395,7 @@ switch ($action) {
 	if(($q_main->num_rows)>0)
 	{
 		while($row= $q_main->fetch_object()){	
-		$count++;
+		
 ?>	
 
 
@@ -399,7 +404,13 @@ switch ($action) {
 <div class="search-bio left">
 <div class="search-name"><?php echo $row->familyfullname;?></div>
 <div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
-<div class="search-go-profile"><a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>">view complete profile >></a></div>
+<div class="search-go-profile">
+
+<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
+
+	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+
+</div>
 </div>
 
 
@@ -407,6 +418,7 @@ switch ($action) {
 
 
 <?php
+		$count++;
 		}
 	}
 		if ($count){

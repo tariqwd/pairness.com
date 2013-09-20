@@ -655,7 +655,7 @@ textarea:focus, select:focus, input:focus{
 }
 
 .search-go-profile,.search-go-profile:hover{
-	color:red;
+	/*color:red;*/
 	font-size:10px;
 	text-decoration:none;
 	/*border: 1px solid #0000FF;*/
