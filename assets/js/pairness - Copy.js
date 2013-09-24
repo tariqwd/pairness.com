@@ -38,17 +38,6 @@ $( ".login-mini" ).click(function(e) {
 
 });
 
-$( ".message-mini" ).click(function(e) {
-	centerdiv( $('.not-wrapper') );
-	$(".not-wrapper").css("display","none");	
-	$(".not-wrapper").css("display","block");
-	var recordid = $(this).attr("id");
-	//alert(recordid);
-	$('.not-wrapper').load('./message.php?recordid='+recordid);	
-	centerdiv( $('.not-wrapper') );
-	$(document).attr('title', 'Message Detail');
-});
-
 
 $(".image-submit").click(function(e){
 	e.preventDefault();
@@ -151,17 +140,21 @@ $("body").on("click", ".login-submit", function (e) {
 	e.preventDefault();
 	var datastring = $("#login-form").serialize();
 	datastring= datastring + "&return="+ ret;
+	//alert(datastring);
+	
 	$.ajax({
 		type: "POST",
 		url: "./ajax/do-login.php",
         data: datastring,
         dataType: "json"
-        }) .always(function(data) { 
+        }) .always(function(data) {
+				//alert(data.s); 
 				if(data.s==1){
 					$.pnotify({
 					type: 'success',
 					styling: 'bootstrap',
 					title: 'Success',
+					hide: true,
 					text: 'You have successfully logged in..'
 					});  
 				
@@ -188,49 +181,7 @@ $("body").on("click", ".login-submit", function (e) {
 		});
  
 });
-
-$("body").on("click", ".message-submit", function (e) {
-	e.preventDefault();
-	var datastring = $("#message-form").serialize();
-	datastring= datastring + "&return="+ ret;
-	$.ajax({
-		type: "POST",
-		url: "./ajax/message.php",
-        data: datastring,
-        dataType: "json"
-        }) .always(function(data) { 
-				if(data.s==1){
-					$.pnotify({
-					type: 'success',
-					styling: 'bootstrap',
-					title: 'Success',
-					text: 'You have successfully logged in..'
-					});  
-				
-					if (data.r!=''){
-						window.location = baseurl+data.r+".php";
-					}
-					location.hash = 'home';
-					$(document).attr('title', 'Home');
-					$('.content').load('./assets/template/sub/home.html');
-					$(".box-layout").css("display","none");	
-					$(".tp-nav").css("display","none");	
-					$(".loader").css("display","block");
-					$(".layout").css("opacity","0.4");	
-					window.setTimeout(function(){ window.location = 'home.php'; }, 3000);
-				}else{
-					$.pnotify({
-					styling: 'bootstrap',		
-					type: 'error',
-					title: 'Failed!',
-					text: data.e
-					});
-			
-				}
-		});
- 
-});
-
+/* Peer to Peer Email */
 $("body").on("click", ".email-submit", function (e) {
 	e.preventDefault();
 	
@@ -264,7 +215,6 @@ $("body").on("click", ".email-submit", function (e) {
 		});
 });	
 
-
 $("body").on("click", ".s-register", function (e)  {
 	$(".not-wrapper").css("display","none");	
 	$(".not-wrapper").css("display","block");
@@ -285,6 +235,7 @@ $("body").on("click", ".g-register", function (e) {
 	$(document).attr('title', 'Regsiter Now!');
 });
 
+/* Generate a div for Peer to Peer Email */
 $("body").on("click", ".email", function (e) {
 	$(".not-wrapper").css("display","none");	
 	$(".not-wrapper").css("display","block");
@@ -300,9 +251,6 @@ $("body").on("click", ".email", function (e) {
 	centerdiv( $('.not-wrapper') );
 	$(document).attr('title', 'Send Email!');
 });
-
-
-
 
 $(function () {
     'use strict';

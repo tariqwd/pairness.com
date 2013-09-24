@@ -1,11 +1,143 @@
-
 <?php
+$isfamily = $_SESSION['isfamily'];
+$familyid = $_SESSION['familyid'];
+$id = $_SESSION['id'];
+?>
+Your Inbox Messages:
+ <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="/resources/demos/style.css" />
+<script>
+$(function() {
+$( "#dialog" ).dialog();
+});
+</script>
+<?php
+$chk = request_var('chk','');
+if($chk) {
+	
+$reply_message = request_var('reply_message','');
+$fromid = request_var('fromid','');
+$msgtitle = request_var('msgtitle','');
+$toid = request_var('toid','');
+$touser = request_var('touser','');
+$fromuser = request_var('fromuser','');
 
-//We count the number of new messages the user has
-$nb_new_pm = mysql_fetch_array(mysql_query('select count(*) as nb_new_pm from pm where ((user1="'.$_SESSION['id'].'" and user1read="no") or (user2="'.$_SESSION['id'].'" and user2read="no")) and id2="1"'));
-//The number of new messages is in the variable $nb_new_pm
-$nb_new_pm = $nb_new_pm['nb_new_pm'];
-//We display the links
+
+$insert = $mysqli->query("INSERT INTO pairness_message (fromid,fromuser,toid,touser,messagetitle,messagecontent,messageread) VALUES ('$id','$touser','$fromid','$fromuser','$msgtitle','$reply_message','0')");
+
+if($insert)
+{
+	echo'<div id="dialog" title="Replay Send">
+<p>Reply Send Successfully.</p>
+</div>';
+//echo "Reply Successfully ";
+$p = $mysqli->query("SELECT * from pairness_message WHERE toid = '$id' ORDER BY messageid DESC");
+
+echo '<table border="1" id="message_all" width="500px" height="auto" cellspacing="0" cellpadding="5" >';
+echo '<tr style=" background:#CCC;"><th>Tittle</th><th>Delete</th></tr>';
+					echo'<tr>';
+					
+				  while($row= $p->fetch_object())
+				{
+					
+					
+					$messageid = $row->messageid;
+					$fromid = $row->fromid;
+					$fromuser = $row->fromuser;
+					$touser = $row->touser;
+					$messagetitle = $row->messagetitle;
+					$messagecontent = $row->messagecontent;
+					$messageread = $row->messageread;
+					
+					
+					if ($messageread == 0)
+					{ 					
+					//echo $messageid . '<br>';		
+				
+						
+				echo '<td style="background:#F0F0F0;"><b><a href="#message" class="message-mini" id="'.$row->messageid.'" style="text-decoration:none;"><font color="#000000">',$messagetitle,'</font></a></b></td>
+				<!-- <td style=" background:#F0F0F0;"><b>',$messagecontent,'</b></td> -->
+				<td align="center" style=" background:#F0F0F0; width:50px;"><img src="./assets/css/img/cross.png" name="delete" id="delete" title="Delete Message" alt="Delete Message" /></td>';
+					}
+					else{
+						echo '<td><a href="#message" class="message-mini" id="'.$row->messageid.'" style="text-decoration:none;"><font color="#000000">',$messagetitle,'</font></a></td>
+				<!-- <td>',$messagecontent,'</td> -->
+				<td align="center" style="width:50px;"><img src="./assets/css/img/cross.png" name="delete" id="delete" title="Delete Message" alt="Delete Message" /></td>';
+						
+						}
+					
+				echo '</tr>';
+
+				}	// while ends here
+				
+				echo'<br><br>';
+				 
+   
+echo'</table><br><br>';
+
+
+
+}
+else {
+echo'<div id="dialog" title="Replay Error">
+<p>Reply Can Not Send Error.</p>
+</div>';
+}
+echo $mysqli->error($insert);
+
+
+}
 ?>
 
-<a href="list_pm.php">My personnal messages(<?php echo $nb_new_pm; ?> unread)</a><br />
+
+<?php
+$p = $mysqli->query("SELECT * from pairness_message WHERE toid = '$id' ORDER BY messageid DESC");
+
+echo '<table border="1" id="message_all" width="500px" height="auto" cellspacing="0" cellpadding="5" >';
+echo '<tr style=" background:#CCC;"><th>Tittle</th><th>Delete</th></tr>';
+					echo'<tr>';
+					
+				  while($row= $p->fetch_object())
+				{
+					
+					
+					$messageid = $row->messageid;
+					$fromid = $row->fromid;
+					$fromuser = $row->fromuser;
+					$touser = $row->touser;
+					$messagetitle = $row->messagetitle;
+					$messagecontent = $row->messagecontent;
+					$messageread = $row->messageread;
+					
+					
+					if ($messageread == 0)
+					{ 					
+					//echo $messageid . '<br>';		
+				
+						
+				echo '<td style="background:#F0F0F0;"><b><a href="#message" class="message-mini" id="'.$row->messageid.'" style="text-decoration:none;"><font color="#000000">',$messagetitle,'</font></a></b></td>
+				<!-- <td style=" background:#F0F0F0;"><b>',$messagecontent,'</b></td> -->
+				<td align="center" style=" background:#F0F0F0; width:50px;"><img src="./assets/css/img/cross.png" name="delete" id="delete" title="Delete Message" alt="Delete Message" /></td>';
+					}
+					else{
+						echo '<td><a href="#message" class="message-mini" id="'.$row->messageid.'" style="text-decoration:none;"><font color="#000000">',$messagetitle,'</font></a></td>
+				<!-- <td>',$messagecontent,'</td> -->
+				<td align="center" style="width:50px;"><img src="./assets/css/img/cross.png" name="delete" id="delete" title="Delete Message" alt="Delete Message" /></td>';
+						
+						}
+					
+				echo '</tr>';
+
+				}	// while ends here
+				
+				echo'<br><br>';
+				 
+   
+echo'</table><br><br>';
+
+
+
+?>
+</div>

@@ -80,10 +80,44 @@ $rows = mysqli_fetch_row($result);
    
    if($limitreach == 5)
    {
-	   echo 'You cannot upload more pictures';  
+	   echo 'You cannot upload more pictures';
+	   
+	   $result = ("SELECT * FROM `pairness_image` WHERE pairness_f = '$id' ORDER BY id DESC");
+ $result = $mysqli->query($result);
+ //echo $mysqli->error;
+				
+				echo '<table border="0" width="auto" height="auto" cellspacing="0" cellpadding="0" > 
+   
+         <td>'; 
+				
+				while($row= $result->fetch_object())
+				{
+					
+				$id = $row->id;
+				$pairness_f = $row->pairness_f;
+				$pairness_image_name = $row->pairness_image_name;
+												
+				echo "<div id='imagedisplaybox' >
+<img src='upload_images/".$pairness_image_name."' width='200' height='200'/><br>
+<form action='' method='post'>
+<input type='hidden' name='imgname' value='".$pairness_image_name."' />
+<input class='deleteButton' type='submit' name='delimage' value='Delete' /></form><br><br>
+
+</div>";
+
+		
+
+				}	// while ends here
+				
+				echo'<br><br></td> 
+    <br><br>
+</table><br><br>'; 
+	   
+	    
 	}
 	elseif($limitreach < 5)
 	{
+		
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">
@@ -168,7 +202,7 @@ if(isset($_FILES['uploaded_file'])) {
  $result = $mysqli->query($result);
  //echo $mysqli->error;
 				
-				echo '<table border="1" width="auto" height="auto" cellspacing="0" cellpadding="0" > 
+				echo '<table border="0" width="auto" height="auto" cellspacing="0" cellpadding="0" > 
    
          <td>'; 
 				
@@ -193,7 +227,7 @@ if(isset($_FILES['uploaded_file'])) {
 				
 				echo'<br><br></td> 
     <br><br>
-</table>';
+</table><br><br>';
 		}
 	 
 			

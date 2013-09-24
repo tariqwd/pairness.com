@@ -1,473 +1,237 @@
 <?php
-auth_check();
+	auth_check(); // check if user is loged-in.
+?>
+
+
+<?php 
+//include "dbconnect.php";
+	$page=1;//Default page
+	$limit=2;//Records per page
+	$start=0;//starts displaying records from 0
+	if(isset($_GET['page']) && $_GET['page']!='')
+	{
+		$page=$_GET['page'];
+	}
+	$start=($page-1)*$limit;
+?>
+
+<?php 
+
+
+$uid = $_SESSION['id'];
+$em = getemail($uid);
+//echo $em;
+
+
+
+	$q = $mysqli->query("SELECT familygender FROM pairness_family WHERE familyemailaddress = '$em'");
+		while($row = $q->fetch_object())
+		{	
+			$gender =  $row->familygender;	
+		}
+	
+	//Get total records (you can also use MySQL COUNT function to count records)
+	$query=$mysqli->query("SELECT id FROM pairness_family WHERE familygender!= '$gender'");
+	$rows=$query->num_rows;
+		
+	$p = $mysqli->query("SELECT * FROM pairness_family WHERE familygender!= '$gender' ORDER BY id ASC LIMIT $start, $limit");
 
 ?>
 
+
+
+
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
-
-
-      <tr>
-        <td ><table width="990" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="10px">&nbsp;</td>
-          </tr>
-         
-                  <tr>
-                    <td height="10px"></td>
-                  </tr>
-                  
+      	<tr>
+                <td width="">&nbsp;</td>
+                <td valign="top">
+                	<table width="690" border="0" cellspacing="0" cellpadding="0">
+                      <tr>
+                        <td>
+                        <table width="690" border="0" cellspacing="0" cellpadding="0" height="25px">
+                          <tr>
+                            <td width="25">&nbsp;</td>
+                          </tr>
+                        </table>
+                        </td>
+                      </tr>
                       
-                            <!--<tr>
-                              <td height="25px" align="center" background="images/unlockbar03.png" class="blacktext">Know more / Upgrade now</td>
-                            </tr>-->
-                    </table></td>
-                  </tr>
-                  
-                </table></td>
-                <td width="30">&nbsp;</td>
-                <td valign="top"><table width="690" border="0" cellspacing="0" cellpadding="0">
-                  <tr>
-                    <td><table width="690" border="0" cellspacing="0" cellpadding="0" height="25px">
                       <tr>
-                        <td width="25">&nbsp;</td>
-                        <td width="161" align="center" background="./assets/css/img/preffered_matches_bg.png" class="whitetext"><strong>Preferred Matched (124)</strong></td>
-                        <td>&nbsp;</td>
-                      </tr>
-                    </table></td>
-                  </tr>
-                  <tr>
-                    <td><table width="690" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td bgcolor="#d9d9d9" height="1px"></td>
-                      </tr>
-                      <tr>
-                        <td height="1px"></td>
-                      </tr>
-                      <tr>
-                        <td bgcolor="#fef4ea" height="36px"><table width="690" border="0" cellspacing="0" cellpadding="0">
+                        <td>
+                        <table width="690" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td width="15">&nbsp;</td>
-                            <td class="maintxtgray12">124 Members that match your Partner Preferences</td>
-                            <td>&nbsp;</td>
-                            <td width="130" class="maintxt11"><img src="./assets/css/img/left_aero_red.png" width="16" height="16" align="absmiddle" /> 1  2  3  4  5  6  7  8  ... <img src="./assets/css/img/right_aero_red.png" width="16" height="16" align="absmiddle" /></td>
+                            <td bgcolor="#d9d9d9" height="1px"></td>
                           </tr>
-                        </table></td>
-                      </tr>
-                      <tr>
-                        <td height="1px"></td>
-                      </tr>
-                      <tr>
-                        <td bgcolor="#d9d9d9" height="1px"></td>
-                      </tr>
-                    </table></td>
-                  </tr>
-                  <tr>
-                    <td height="10px"></td>
-                  </tr>
-                  <tr>
-                    <td><table width="690" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td><img src="./assets/css/img/bluebox01.png" width="690" height="5" /></td>
-                      </tr>
-                      <tr>
-                        <td background="images/bluebox02.png"><table width="690" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td width="15">&nbsp;</td>
-                            <td><table width="660" border="0" cellspacing="0" cellpadding="0">
-                              
+                            <td height="1px"></td>
+                          </tr>
+                          <tr>
+                            <td bgcolor="#fef4ea" height="36px"><table width="690" border="0" cellspacing="0" cellpadding="0">
                               <tr>
-                                 <td height="5px"></td>
-                              </tr>
-                              <tr>
-                                <td><table width="660" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td width="150"><table width="150" border="0" cellspacing="0" cellpadding="0">
-                                      <tr>
-                                        <td align="center">&nbsp;</td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center"><img src="./assets/css/img/girl_pic_01.png" width="110" height="138" /></td>
-                                      </tr>
-                                      <tr>
-                                         <td height="10px"></td>
-                                      </tr>
-                                      <tr>
-                                        <td align="center" class="maintxt11"><img src="./assets/css/img/icon_aero_right.png" width="20" height="20" align="absmiddle" />1 of 4 <img src="./assets/css/img/icon_aero_left.png" width="20" height="20" align="absmiddle" /></td>
-                                      </tr>
-                                      
-                                    </table></td>
-                                    <td><table width="510" border="0" cellspacing="0" cellpadding="0">
-                                      
-                                      <tr>
-                                        <td><table width="510" border="0" cellspacing="0" cellpadding="0">
-                                          <tr>
-                                            <td><table width="260" border="0" cellspacing="0" cellpadding="0">
-                                              <tr>
-                                                <td class="textsegoblue">Noor Jehan <img src="./assets/css/img/icon_mobile.png" width="24" height="24" align="absmiddle" /></td>
-                                              </tr>
-                                              <tr>
-                                                <td class="maintxtgray12">Online on Mobile, Click to Chat <img src="./assets/css/img/icon_chat.png" width="24" height="24" align="absmiddle" /></td>
-                                              </tr>
-                                              <tr>
-                                                <td><img src="./assets/css/img/line_sep_small.png" width="200" height="11" /></td>
-                                              </tr>
-                                              <tr>
-                                                <td><table width="260" border="0" cellspacing="1" cellpadding="0">
-                                                  <tr>
-                                                    <td width="144" class="maintxtgray12">Age / Height</td>
-                                                    <td width="116" class="maintxt12">32, 5&rsquo;8&rdquo;</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td class="maintxtgray12">Religion / Community</td>
-                                                    <td class="maintxt12">Muslim, Sunni</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td class="maintxtgray12">Mother Tongue</td>
-                                                    <td class="maintxt12">Urdu</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td class="maintxtgray12">Profession</td>
-                                                    <td class="maintxt12">Not working</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td class="maintxtgray12">Location</td>
-                                                    <td class="maintxt12">Islamabad, Pakistan</td>
-                                                  </tr>
-                                                </table></td>
-                                              </tr>
-                                              
-                                            </table></td>
-                                            <td width="220"><table width="220" border="0" cellspacing="0" cellpadding="0">
-                                              <tr>
-                                                <td>&nbsp;</td>
-                                              </tr>
-                                              <tr>
-                                                <td><table width="220" border="0" cellspacing="0" cellpadding="0">
-                                                  <tr>
-                                                    <td width="40">&nbsp;</td>
-                                                    <td><img src="./assets/css/img/btn_showintrest.png" width="113" height="28" /></td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td align="center"><img src="./assets/css/img/icon_star.png" width="24" height="24" /></td>
-                                                    <td class="maintxtgray12">Shortlist</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td align="center"><img src="./assets/css/img/icon_ignore.png" width="24" height="24" /></td>
-                                                    <td class="maintxtgray12">Ignore</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <td align="center"><img src="./assets/css/img/icon_view.png" width="24" height="24" /></td>
-                                                    <td class="maintxtgray12">View full Profile</td>
-                                                  </tr>
-                                                  
-                                                </table></td>
-                                              </tr>
-                                              
-                                              
-                                              
-                                            </table></td>
-                                          </tr>
-                                        </table></td>
-                                      </tr>
-                                      <tr>
-                                        <td><img src="./assets/css/img/line_sep_large.png" width="508" height="11" /></td>
-                                      </tr>
-                                      <tr>
-                                        <td class="maintxt12">Our daughter is a simple girl with high family values. Religious by nature&amp;extremely beautiful. We are looking for a professional well settled ... <a class="redlink" href="#">Read more...</a><img src="./assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /></td>
-                                      </tr>
-                                    </table></td>
-                                  </tr>
-                                </table></td>
-                              </tr>
-                              
-                              <tr>
-                                <td height="5px"></td>
+                                <td width="15">&nbsp;</td>
+                                <td class="maintxtgray12"><?php echo $rows; ?> Members that match your Partner Preferences</td>
+                                <td>&nbsp;</td>
+                                
                               </tr>
                             </table></td>
-                            <td width="15">&nbsp;</td>
                           </tr>
-                        </table></td>
-                      </tr>
-                      <tr>
-                        <td><img src="./assets/css/img/bluebox03.png" width="690" height="5" /></td>
-                      </tr>
-                    </table></td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td><table width="690" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td><img src="./assets/css/img/greenbox01.png" width="690" height="5" /></td>
-                      </tr>
-                      <tr>
-                        <td background="images/greenbox02.png"><table width="690" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td width="15">&nbsp;</td>
-                            <td><table width="660" border="0" cellspacing="0" cellpadding="0">
-                                <tr>
-                                  <td height="5px"></td>
-                                </tr>
-                                <tr>
-                                  <td><table width="660" border="0" cellspacing="0" cellpadding="0">
-                                      <tr>
-                                        <td width="150"><table width="150" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                              <td align="center">&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                              <td align="center"><img src="./assets/css/img/girl_pic_02.png" width="110" height="138" /></td>
-                                            </tr>
-                                            <tr>
-                                              <td height="10px"></td>
-                                            </tr>
-                                            <tr>
-                                              <td align="center" class="maintxt11"><img src="./assets/css/img/icon_aero_right.png" width="20" height="20" align="absmiddle" />1 of 4 <img src="./assets/css/img/icon_aero_left.png" width="20" height="20" align="absmiddle" /></td>
-                                            </tr>
-                                        </table></td>
-                                        <td><table width="510" border="0" cellspacing="0" cellpadding="0">
-                                            <tr>
-                                              <td><table width="510" border="0" cellspacing="0" cellpadding="0">
-                                                  <tr>
-                                                    <td><table width="260" border="0" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                          <td class="textsegoblue">Salma Naz  <img src="./assets/css/img/icon_mobile.png" width="24" height="24" align="absmiddle" /></td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td class="maintxtgray12">Online on Mobile, Click to Chat <img src="./assets/css/img/icon_chat.png" width="24" height="24" align="absmiddle" /></td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td><img src="./assets/css/img/line_sep_small.png" width="200" height="11" /></td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td><table width="260" border="0" cellspacing="1" cellpadding="0">
-                                                              <tr>
-                                                                <td width="144" class="maintxtgray12">Age / Height</td>
-                                                                <td width="116" class="maintxt12">32, 5&rsquo;8&rdquo;</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td class="maintxtgray12">Religion / Community</td>
-                                                                <td class="maintxt12">Muslim, Sunni</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td class="maintxtgray12">Mother Tongue</td>
-                                                                <td class="maintxt12">Urdu</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td class="maintxtgray12">Profession</td>
-                                                                <td class="maintxt12">Not working</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td class="maintxtgray12">Location</td>
-                                                                <td class="maintxt12">Islamabad, Pakistan</td>
-                                                              </tr>
-                                                          </table></td>
-                                                        </tr>
-                                                    </table></td>
-                                                    <td width="220"><table width="220" border="0" cellspacing="0" cellpadding="0">
-                                                      <tr>
-                                                        <td>&nbsp;</td>
-                                                      </tr>
-                                                      <tr>
-                                                        <td><table width="220" border="0" cellspacing="0" cellpadding="0">
-                                                            <tr>
-                                                              <td width="40">&nbsp;</td>
-                                                              <td><img src="./assets/css/img/btn_showintrest.png" width="113" height="28" /></td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td align="center"><img src="./assets/css/img/icon_star.png" width="24" height="24" /></td>
-                                                              <td class="maintxtgray12">Shortlist</td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td align="center"><img src="./assets/css/img/icon_ignore.png" width="24" height="24" /></td>
-                                                              <td class="maintxtgray12">Ignore</td>
-                                                            </tr>
-                                                            <tr>
-                                                              <td align="center"><img src="./assets/css/img/icon_view.png" width="24" height="24" /></td>
-                                                              <td class="maintxtgray12">View full Profile</td>
-                                                            </tr>
-                                                        </table></td>
-                                                      </tr>
-                                                    </table></td>
-                                                  </tr>
-                                              </table></td>
-                                            </tr>
-                                            <tr>
-                                              <td><img src="./assets/css/img/line_sep_large.png" width="508" height="11" /></td>
-                                            </tr>
-                                            <tr>
-                                              <td class="maintxt12">Our daughter is a simple girl with high family values. Religious by nature&amp;extremely beautiful. We are looking for a professional well settled ... <a class="redlink" href="#">Read more...</a><img src="./assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /></td>
-                                            </tr>
-                                        </table></td>
-                                      </tr>
-                                  </table></td>
-                                </tr>
-                                <tr>
-                                  <td height="5px"></td>
-                                </tr>
-                            </table></td>
-                            <td width="15">&nbsp;</td>
+                            <td height="1px"></td>
                           </tr>
-                        </table></td>
+                          <tr>
+                            <td bgcolor="#d9d9d9" height="1px"></td>
+                          </tr>
+                        </table>
+                        </td>
                       </tr>
+                      
                       <tr>
-                        <td><img src="./assets/css/img/greenbox03.png" width="690" height="5" /></td>
-                      </tr>
-                    </table></td>
-                  </tr>
-                  <tr>
-                    <td>&nbsp;</td>
-                  </tr>
-                  <tr>
-                    <td><table width="690" border="0" cellspacing="0" cellpadding="0">
-                      <tr>
-                        <td><img src="./assets/css/img/bluebox01.png" width="690" height="5" /></td>
-                      </tr>
-                      <tr>
-                        <td background="images/bluebox02.png"><table width="690" border="0" cellspacing="0" cellpadding="0">
-                            <tr>
-                              <td width="15">&nbsp;</td>
-                              <td><table width="660" border="0" cellspacing="0" cellpadding="0">
-                                  <tr>
-                                    <td height="5px"></td>
-                                  </tr>
-                                  <tr>
-                                    <td><table width="660" border="0" cellspacing="0" cellpadding="0">
-                                        <tr>
-                                          <td width="150"><table width="150" border="0" cellspacing="0" cellpadding="0">
-                                              <tr>
-                                                <td align="center">&nbsp;</td>
-                                              </tr>
-                                              <tr>
-                                                <td align="center"><img src="./assets/css/img/girl_pic_03.png" width="110" height="138" /></td>
-                                              </tr>
-                                              <tr>
-                                                <td height="10px"></td>
-                                              </tr>
-                                              <tr>
-                                                <td align="center" class="maintxt11"><img src="./assets/css/img/icon_aero_right.png" width="20" height="20" align="absmiddle" />1 of 4 <img src="./assets/css/img/icon_aero_left.png" width="20" height="20" align="absmiddle" /></td>
-                                              </tr>
-                                          </table></td>
-                                          <td><table width="510" border="0" cellspacing="0" cellpadding="0">
-                                              <tr>
-                                                <td><table width="510" border="0" cellspacing="0" cellpadding="0">
-                                                    <tr>
-                                                      <td><table width="260" border="0" cellspacing="0" cellpadding="0">
-                                                          <tr>
-                                                            <td class="textsegoblue">Mathira Khan <img src="./assets/css/img/icon_mobile.png" width="24" height="24" align="absmiddle" /></td>
-                                                          </tr>
-                                                          <tr>
-                                                            <td class="maintxtgray12">Online on Mobile, Click to Chat <img src="./assets/css/img/icon_chat.png" width="24" height="24" align="absmiddle" /></td>
-                                                          </tr>
-                                                          <tr>
-                                                            <td><img src="./assets/css/img/line_sep_small.png" width="200" height="11" /></td>
-                                                          </tr>
-                                                          <tr>
-                                                            <td><table width="260" border="0" cellspacing="1" cellpadding="0">
-                                                                <tr>
-                                                                  <td width="144" class="maintxtgray12">Age / Height</td>
-                                                                  <td width="116" class="maintxt12">32, 5&rsquo;8&rdquo;</td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td class="maintxtgray12">Religion / Community</td>
-                                                                  <td class="maintxt12">Muslim, Sunni</td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td class="maintxtgray12">Mother Tongue</td>
-                                                                  <td class="maintxt12">Urdu</td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td class="maintxtgray12">Profession</td>
-                                                                  <td class="maintxt12">Not working</td>
-                                                                </tr>
-                                                                <tr>
-                                                                  <td class="maintxtgray12">Location</td>
-                                                                  <td class="maintxt12">Islamabad, Pakistan</td>
-                                                                </tr>
-                                                            </table></td>
-                                                          </tr>
-                                                      </table></td>
-                                                      <td width="220"><table width="220" border="0" cellspacing="0" cellpadding="0">
-                                                        <tr>
-                                                          <td>&nbsp;</td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td><table width="220" border="0" cellspacing="0" cellpadding="0">
-                                                              <tr>
-                                                                <td width="40">&nbsp;</td>
-                                                                <td><img src="./assets/css/img/btn_showintrest.png" width="113" height="28" /></td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td align="center"><img src="./assets/css/img/icon_star.png" width="24" height="24" /></td>
-                                                                <td class="maintxtgray12">Shortlist</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td align="center"><img src="./assets/css/img/icon_ignore.png" width="24" height="24" /></td>
-                                                                <td class="maintxtgray12">Ignore</td>
-                                                              </tr>
-                                                              <tr>
-                                                                <td align="center"><img src="./assets/css/img/icon_view.png" width="24" height="24" /></td>
-                                                                <td class="maintxtgray12">View full Profile</td>
-                                                              </tr>
-                                                          </table></td>
-                                                        </tr>
-                                                      </table></td>
-                                                    </tr>
-                                                </table></td>
-                                              </tr>
-                                              <tr>
-                                                <td><img src="./assets/css/img/line_sep_large.png" width="508" height="11" /></td>
-                                              </tr>
-                                              <tr>
-                                                <td class="maintxt12">Our daughter is a simple girl with high family values. Religious by nature&amp;extremely beautiful. We are looking for a professional well settled ... <a class="redlink" href="#">Read more...</a><img src="./assets/css/img/icon_red_left.png" width="24" height="24" align="absmiddle" /></td>
-                                              </tr>
-                                          </table></td>
-                                        </tr>
-                                    </table></td>
-                                  </tr>
-                                  <tr>
-                                    <td height="5px"></td>
-                                  </tr>
-                              </table></td>
-                              <td width="15">&nbsp;</td>
-                            </tr>
-                        </table></td>
-                      </tr>
-                      <tr>
-                        <td><img src="./assets/css/img/bluebox03.png" width="690" height="5" /></td>
-                      </tr>
-                      <tr>
-                        <td>&nbsp;</td>
-                      </tr>
-                      <tr>
+                      
+                      <?php 
+					  	
+						while($row = $p->fetch_object())
+						{
+							
+					  ?> 
                         <td><table width="690" border="0" cellspacing="0" cellpadding="0">
                           <tr>
-                            <td width="15">&nbsp;</td>
-                            <td class="maintxtgray12">&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td width="130" class="maintxt11"><img src="./assets/css/img/left_aero_red.png" width="16" height="16" align="absmiddle" /> 1  2  3  4  5  6  7  8  ... <img src="./assets/css/img/right_aero_red.png" width="16" height="16" align="absmiddle" /></td>
+                            <td><img src="./assets/css/img/bluebox01.png" width="690" height="5" /></td>
                           </tr>
-                        </table></td>
+                          <tr>
+                            <td background="images/bluebox02.png"><table width="690" border="0" cellspacing="0" cellpadding="0">
+                              <tr>
+                                <td width="15">&nbsp;</td>
+                                <td><table width="660" border="0" cellspacing="0" cellpadding="0">
+                                  
+                                  	<tr>
+                                    <td height="5px"></td>
+                                  	</tr>
+                                 	<tr>
+                                    <td><table width="660" border="0" cellspacing="0" cellpadding="0">
+                                      	<tr>
+                                        <td width="150"><table width="150" border="0" cellspacing="0" cellpadding="0">
+                                        <tr>
+                                        <td align="center">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                        <td align="center"><img src="./upload_images/<?php echo $row->familyprofileimage ?>" width="110" height="138" /></td>
+                                        </tr>
+                                        <tr>
+                                        <td height="10px"></td>
+                                        </tr>
+                                        <tr>
+                                        <td align="center" class="maintxt11"><img src="./assets/css/img/icon_aero_right.png" width="20" height="20" align="absmiddle" />1 of 4 <img src="./assets/css/img/icon_aero_left.png" width="20" height="20" align="absmiddle" /></td>
+                                        </tr>   
+                                        </table>
+                                    </td>
+                                    <td><table width="510" border="0" cellspacing="0" cellpadding="0">
+                                         <tr>
+                                         <td><table width="510" border="0" cellspacing="0" cellpadding="0">
+                                             <tr>
+                                             <td><table width="260" border="0" cellspacing="0" cellpadding="0">
+                                                 <tr>
+                                                 <td class="textsegoblue"><?php echo $row->familyfullname ?> <img src="./assets/css/img/icon_mobile.png" width="24" height="24" align="absmiddle" /></td>
+                                                 </tr>
+                                                 <tr>
+                                                 <td class="maintxtgray12">Online on Mobile, Click to Chat <img src="./assets/css/img/icon_chat.png" width="24" height="24" align="absmiddle" /></td>
+                                                 </tr>
+                                                 <tr>
+                                                 <td><img src="./assets/css/img/line_sep_small.png" width="200" height="11" /></td>
+                                                 </tr>
+                                                 <tr>
+                                                 <td><table width="260" border="0" cellspacing="1" cellpadding="0">
+                                                      <tr>
+                                                      	<td width="144" class="maintxtgray12">Age / Height</td>
+                                                      	<td width="116" class="maintxt12"><?php echo $row->familyage ?> , <?php if($row->familyheight) { echo getfeature($row->familyheight); } else echo "<i> No Answer </i>"; ?> </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td class="maintxtgray12">Religion / Community</td>
+                                                        <td class="maintxt12"><?php if($row->familyreligion) {echo getfeature($row->familyreligion);} else echo "<i> No Answer </i>"; ?> </td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td class="maintxtgray12">Mother Tongue</td>
+                                                        <td class="maintxt12"><?php if($row->familymothertongue) {echo getfeature($row->familymothertongue);} else echo "<i> No Answer </i>"; ?></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td class="maintxtgray12">Profession</td>
+                                                        <td class="maintxt12"><?php if($row->familyoccupation) {echo getfeature($row->familyoccupation);} else echo "<i> No Answer </i>"; ?></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td class="maintxtgray12">Location</td>
+                                                        <td class="maintxt12"><?php if($row->familycity) {echo $row->familycity;} else echo "<i> No Answer </i>"; ?>, <?php if($row->familynationality) {echo getfeature($row->familynationality);} else echo "<i> No Answer </i>"; ?></td>
+                                                      </tr>
+                                                     </table>
+                                                 </td>
+                                                 </tr>
+                                                 </table>
+                                             </td>
+                                             <td width="220"><table width="220" border="0" cellspacing="0" cellpadding="0">
+                                                  <tr>
+                                                    <td>&nbsp;</td>
+                                                  </tr>
+                                                  <tr>
+                                                  <td><table width="220" border="0" cellspacing="0" cellpadding="0">
+                                                      <tr>
+                                                        <td width="40">&nbsp;</td>
+                                                        <td><img src="./assets/css/img/btn_showintrest.png" width="113" height="28" /></td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center"><img src="./assets/css/img/icon_star.png" width="24" height="24" /></td>
+                                                        <td class="maintxtgray12">Shortlist</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center"><img src="./assets/css/img/icon_ignore.png" width="24" height="24" /></td>
+                                                        <td class="maintxtgray12">Ignore</td>
+                                                      </tr>
+                                                      <tr>
+                                                        <td align="center"><img src="./assets/css/img/icon_view.png" width="24" height="24" /></td>
+                                                        <td class="maintxtgray12">View full Profile</td>
+                                                      </tr>
+                                                      </table>
+                                                  </td>
+                                                  </tr>
+                                                  </table>
+                                             </td>
+                                             </tr>
+                                             </table>
+                                         </td>
+                                         </tr>
+                                         <tr>
+                                         <td><img src="./assets/css/img/line_sep_large.png" width="508" height="11" /></td>
+                                         </tr>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                    </table></td>
+                                    </tr>
+                                    <tr>
+                                    <td height="5px"></td>
+                                    </tr>
+                                    </table>
+                                </td>
+                                <td width="15">&nbsp;</td>
+                              </tr>
+                            </table></td>
+                          </tr>
+                          <tr>
+                            <td><img src="./assets/css/img/bluebox03.png" width="690" height="5" /></td>
+                          </tr>
+                        </table>
+                        </td>
+                        
                       </tr>
-                    </table></td>
-                  </tr>
-                  
-                  
-                </table></td>
-                <td width="50">&nbsp;</td>
-              </tr>
-            </table></td>
-          </tr>
-          
-          <tr>
-            <td>&nbsp;</td>
-          </tr>
-        </table></td>
-      </tr>
-     
-      
-    </table></td>
-  </tr>
-
+                	</table>
+                </td>
+        </tr>            
 </table>
+
+<?php } 
+
+if(($p->num_rows)>0)
+{
+	echo pagination($limit,$page,'home.php?page=',$rows); //call function to show pagination for one field search
+}
+
+?>
+
+

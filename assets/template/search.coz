@@ -12,6 +12,16 @@ auth_check();
 
 <div class="search-body">
 
+<?php 
+//include "dbconnect.php";
+$page=1;//Default page
+$limit=1;//Records per page
+$start=0;//starts displaying records from 0
+if(isset($_GET['page']) && $_GET['page']!=''){
+$page=$_GET['page'];
+}
+$start=($page-1)*$limit;
+?>
 
 <?php
 
@@ -34,14 +44,21 @@ auth_check();
 
 switch ($action) {
     case "main":
-	
-        $q_main = $mysqli->query("SELECT * FROM pairness_family WHERE pairness_family.$column LIKE '%$value%';");
+		//Get total records (you can also use MySQL COUNT function to count records)
+		$query=$mysqli->query("SELECT id FROM pairness_family WHERE $column LIKE '$value'");
+		$rows=$query->num_rows;
+		//echo $rows;
+        $q_main = $mysqli->query("SELECT * FROM pairness_family WHERE $column LIKE '$value' ORDER BY id ASC LIMIT $start, $limit");
+		
 		
     break;
 		
 	case "mainsearch":
+	
+
+		$rows = family_search_numofrecords($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg);
 		
-		$q_mainsearch = family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg);			
+		$q_mainsearch = family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg,$start,$limit);			
 		
 	break;
 	
@@ -88,8 +105,10 @@ switch ($action) {
 				$pwantmorechildrens 		= $row->preferenceswantmorechildrens;
 				$pdowry 					= $row->preferencesdowry;
 				}
-	
-		$q_matchsearch = match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry);
+		
+		$rows = match_search_numofrecords($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry);
+
+		$q_matchsearch = match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry,$start,$limit);
 		
 	break; 
 		
@@ -307,130 +326,125 @@ switch ($action) {
 <?php
 }
 
- if($_POST || $_GET){
+if($_POST || $_GET){  // POST or GET  will come here after giving any search criteria 
+
 	 
-	 if(($q_matchsearch->num_rows)>0)
+	 if(($q_matchsearch->num_rows)>0) // only for match search criteria, that is also work for set preference 
 	 {
 		 while($row=$q_matchsearch->fetch_object())
 		 {
-			 
-			 ?>
-<div class="search-pfl"><div class="search-inner left">
-<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
-<div class="search-bio left">
-<div class="search-name"><?php echo $row->familyfullname .adddash(). getage($row->familydateofbirth);?></div>
-<div class="search-details"><?php echo getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
-<div class="search-go-profile">
-
-	<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
-
-	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
-
-
-</div>
-
-</div>
-
-
-</div>
-             
-</div>	 
-	  
-<?php
-		$count++;
-		}
+			?>
+            <div class="search-pfl">
+            	<div class="search-inner left">
+            	<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
+            	<div class="search-bio left">
+            	<div class="search-name"><?php echo $row->familyfullname .adddash(). getage($row->familydateofbirth);?></div>
+            	<div class="search-details"><?php echo getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
+            	<div class="search-go-profile">
+            
+                	<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
+            
+                	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+            
+            
+           		</div>
+            
+            	</div>
+              
+            	</div>
+                         
+            </div>	      
+            <?php
+			$count++;
+		 }
 	 }
-		if($count){
-					
-		?>        
-		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
-		<?php
+		if($count)
+		{					
+			?>        
+			<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
+			<?php
 		}
 		else{ 
-		?>
-    	<div class="result-search-bar"> No Match Found.</div>
-    	<?php
-		}
+			?>
+    		<div class="result-search-bar"> No Match Found.</div>
+    		<?php
+			}
 
-	 if(($q_mainsearch->num_rows)>0)
+	 if(($q_mainsearch->num_rows)>0) // search on the basis of given fields
 	 {
 		 while($row=$q_mainsearch->fetch_object())
 		 {
 			 
-			 ?>
-<div class="search-pfl"><div class="search-inner left">
-<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
-<div class="search-bio left">
-<div class="search-name"><?php echo $row->familyfullname;	 ?></div>
-<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
-<div class="search-go-profile">
-<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
-
-	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
-
-</div>
-</div>
-
-
-</div>
-             
-</div>	 
-	  
-<?php
-		$count++;
-		}
+		 	?>
+            <div class="search-pfl"><div class="search-inner left">
+              <div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
+              <div class="search-bio left">
+              <div class="search-name"><?php echo $row->familyfullname;	 ?></div>
+              <div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().getfeatures($row->familymothertongue).adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().getfeatures($row->familycountry)	 ?></div>
+              <div class="search-go-profile">
+              	<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
+              
+              	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+              
+              </div>
+              </div>  
+              </div>
+                           
+            </div>	 
+	  		<?php
+			$count++;
+		 }
 	 }
-		if($count){
-					
-		?>        
-		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
-		<?php
+		if($count)
+		{			
+			?>        
+			<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
+			<?php
 		}
-		else{ 
-		?>
-    	<div class="result-search-bar"> No Match Found.</div>
-    	<?php
+		else
+		{ 
+			?>
+    		<div class="result-search-bar"> No Match Found.</div>
+    		<?php
 		}
 	 
-	if(($q_main->num_rows)>0)
+	if(($q_main->num_rows)>0) // search on the basis of single field search
 	{
-		while($row= $q_main->fetch_object()){	
-		
-?>	
-
-
-<div class="search-pfl"><div class="search-inner left">
-<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
-<div class="search-bio left">
-<div class="search-name"><?php echo $row->familyfullname;?></div>
-<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
-<div class="search-go-profile">
-
-<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
-
-	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
-
-</div>
-</div>
-
-
-</div></div>
-
-
-<?php
-		$count++;
+		while($row= $q_main->fetch_object())
+		{	
+			?>	
+            <div class="search-pfl"><div class="search-inner left">
+            	<div class="search-pic left"><img src="<?php echo $uploadpath.$row->familyprofileimage; ?>" width="90" height="90"></div>
+            	<div class="search-bio left">
+            	<div class="search-name"><?php echo $row->familyfullname;?></div>
+            	<div class="search-details"><?php echo getage($row->familydateofbirth).adddash().$row->familycast.adddash().$row->familymothertongue.adddash().getfeatures($row->familyheight).addbreak().$row->familycity.adddash().$row->familycountry	 ?></div>
+            	<div class="search-go-profile">
+            
+            		<a href="<?php echo $profilepage; ?>?view=<?php echo urlencode(encrypt_text($row->id)); ?>"> <img src="<?php echo $sitepath . '/assets/css/img/profile.png' ?>" title="view profile <?php echo $row->familyfullname; ?>"  /> </a>
+            
+                	<a class="email" href="#email" name="forid" value="<?php echo $row->id; ?>" id="<?php echo $count ?>"> <img src="<?php echo $sitepath . '/assets/css/img/mail.png' ?>" title="mail to <?php echo $row->familyfullname; ?>"  /> </a>
+            
+            	</div>
+            	</div>
+            
+            
+            	</div>
+            </div>
+			<?php
+			$count++;
 		}
 	}
-		if ($count){
-					
-		?>
-		<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
-		<?php
+		if ($count)
+		{					
+			?>
+			<div class="result-search-bar"><?php echo $count;?> partner(s) were found.</div>
+			<?php
 		}	
-		else{
-		?>
-    	<div class="result-search-bar"> No Match Found.</div>
-    	<?php
+		else
+		{
+			?>
+    		<div class="result-search-bar"> No Match Found.</div>
+    		<?php
 		}
 	
 }
@@ -440,4 +454,20 @@ switch ($action) {
 
 </div>
 
-
+<?php
+/////////////////////////////////////////////// Start Show Pagination //////////////////////////////////////////////
+if(($q_main->num_rows)>0)
+{
+	echo pagination($limit,$page,'search.php?search_text='.$value.'&search_query='.$column.'&action='.$action.'&page=',$rows); //call function to show pagination for one field search
+}
+elseif(($q_mainsearch->num_rows)>0)
+{	
+	echo pagination($limit,$page,'search.php?seekgender='.$seekinggender.'&age_min='.$seekingminage.'&age_max='.$seekingmaxage.'&seekcountry='.$seekingcountry.'&seekimg='.$seekingimg.'&action='.$action.'&page=',$rows);
+	
+}
+elseif(($q_matchsearch->num_rows)>0) 
+{
+	echo pagination($limit,$page,'search.php?action='.$action.'&page=',$rows); //call function to show pagination for multiple field search
+}
+/////////////////////////////////////////////// End Show Pagination //////////////////////////////////////////////
+?>

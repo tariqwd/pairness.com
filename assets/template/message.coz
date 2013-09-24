@@ -1,0 +1,37 @@
+<?php
+$message_id = request_var('message_id','');
+?>
+<div class="close-wrapper"><a href="#"><img src="./assets/css/img/cross.png"></a></div>
+	<div class="inner-login">
+		<?php
+		$p = $mysqli->query("SELECT * from pairness_message WHERE messageid = '$message_id'");
+		
+		echo '<table border="1" width="300px" height="auto" cellspacing="0" cellpadding="5" >';
+echo '<tr style=" background:#CCC;"><th>Tittle</th><th>Detail</th><th>From</th><th>Delete</th></tr>';
+		
+		  while($row= $p->fetch_object())
+				{
+					echo'<tr>';
+					
+					$messageid = $row->messageid;
+					$fromid = $row->fromid;
+					$fromuser = $row->fromuser;
+					$touser = $row->touser;
+					$messagetitle = $row->messagetitle;
+					$messagecontent = $row->messagecontent;
+					$messageread = $row->messageread;
+					
+					echo '<td>',$messagetitle,'</td>
+				<td>',$messagecontent,'</td>
+				<td>',$fromuser,'</td>
+				<td align="center" style=" background:#F0F0F0; width:50px;"><img src="./assets/css/img/cross.png" /></td>';
+					
+				}
+				echo'<br>';
+				echo '</tr>'; 
+   
+echo'</table><br>';
+		
+		?>
+      
+    </div>

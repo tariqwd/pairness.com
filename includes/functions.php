@@ -13,7 +13,7 @@
 global $mysqli;
 
 
-function startSession($timeout = 6000){ /* Start session and session cronning */
+function startSession($timeout = 600){ /* Start session and session cronning */
 	global $mysqli;
 	session_name('czid');
 	session_set_cookie_params(0);
@@ -109,6 +109,11 @@ function get_name($uid){ /* Get current user name */
 		return $p = $row->username;
 	}
 
+}
+
+function get_gender() { /* Get current user gender */
+	
+	
 }
 
 function update_config($name,$data){ /* Update Configurations */
@@ -351,7 +356,7 @@ function do_login($email,$password,$remember,$return){ /*  Do login*/
 	global $mysqli;
 	if($email!='' || $password!=''){
 	$queryy = $mysqli->query("select * from login where ((email='$email' || username='$email' )and password='$password' and emailverification='1')");
-
+			
 		if( ($queryy->num_rows)==1){
 			while ($row = $queryy->fetch_object()){
 				$ds = session_id();
@@ -362,8 +367,8 @@ function do_login($email,$password,$remember,$return){ /*  Do login*/
 				$_SESSION['host'] = $_SERVER['HTTP_HOST'];
 				$_SESSION['true'] = $ds;
 				insert_ses($ds,$row ->uid);
-				$arr = array('uid' => $row ->uid, 'sid' => $ds, 's' => 1,'r'=>$return);
 				add_log($row ->uid,"User successfully logged in!");
+				$arr = array('uid' => $row ->uid, 'sid' => $ds, 's' => 1,'r'=>$return);		
 				return json_encode($arr);
 			}
 		}
@@ -460,7 +465,7 @@ function verify_id($email,$cs){ /* Verification of email*/
 				add_log($finfo['uid'],"User has successfully verified the email");
 				
 				$subject = "Your Email has been succsessfully verified";
-				$body = "Yay this is the bodt of succesfuly verified email";
+				$body = "Yay this is the body of succesfuly verified email";
 				send_email($email,$subject,$body);
 				return "<div class='success'>Successfully Verified. Click <a href='complete_profile.php?finfo=".$fm."&view=".urlencode(encrypt_text($email))."&key=".urlencode(encrypt_text($cs))."'>here</a> for next step</div>";
 		
@@ -487,20 +492,24 @@ function cron_session(){ /* Check if the session that exist in database is older
 	$queryy =  $mysqli->query("Select * from session");
 		while ($row = $queryy->fetch_object()){
 			$op = $row->sessionid;
-			if((($t) - ($row->t)) > 6000){
+			if((($t) - ($row->t)) > 600){
 			$mysqli->query("DELETE FROM session WHERE sessionid='$op'");
 			}
 		}
 }
 
-function send_email($email,$subject,$body,$bccallow=0,$bccemail=''){ /* Send email function*/
+function send_email($email,$subject,$body,$bccallow=0,$bccemail=''){ /* Send email function */
 	global $contactemail;
     $to = $email; 
     $from = $contactemail; 
 
-    $headers = "MIME-Version: 1.0rn"; 
-    $headers .= "Content-type: text/html; charset=iso-8859-1rn"; 
-    $headers  .= "From: $from\r\n"; 
+    //$headers = "MIME-Version: 1.0rn"; 
+    //$headers .= "Content-type: text/html; charset=iso-8859-1rn"; 
+    //$headers  .= "From: $from\r\n"; 
+	
+	$headers = "MIME-Version: 1.0" . "\r\n";
+    $headers .= "Content-type:text/html;charset=iso-8859-1" . "\r\n";
+    $headers .= "From: ".$from. "\r\n";
 
    if($bccallow==1){
     $headers .= "Bcc: $bccemail"; 
@@ -549,7 +558,7 @@ function getage($dob){ /* Should return correct date of birth by calculating yea
 	return 21;
 }
 
-function getemail($id){ /* Get user id on the base of email*/
+function getemail($id){ /* Get current user email*/
 	global $mysqli;
 	$q = $mysqli->query("select * from login where uid = '$id'");
 	while($row= $q->fetch_object()){	
@@ -613,7 +622,7 @@ function adddash(){ /* Add Dash */
 
 function getfeature($value){ /* Return the feature id name on the base of id*/
 	global $mysqli;
-	$result = $mysqli->query("SELECT * FROM pairness_features where id='$vvalue'");
+	$result = $mysqli->query("SELECT * FROM pairness_features where id='$value'");
 	while($row = $result->fetch_object()){
 		return $p = $row->name;
 	}
@@ -657,7 +666,33 @@ function family_feature($family_val){ // select features name for drop down list
 	echo $list->name;		
 }*/
 
-function family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg){ //search query
+function family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg,$start,$limit){ //search query
+	
+	global $mysqli;
+	$search_query = "";
+		$search_query.= "SELECT * FROM pairness_family WHERE ";
+		if($seekingcountry > 0)
+		{
+			$search_query.= "familycountry LIKE '$seekingcountry' AND "; 	
+		}
+		if($seekingminage > 0 && $seekingmaxage > 0)
+		{
+			$search_query.= "familyage BETWEEN '$seekingminage' and '$seekingmaxage' AND ";
+		}
+		if($seekingimg > 0)
+		{
+			$search_query.= "familyprofileimage > '' and familyprofileimage !='default.png' AND ";
+		}
+		
+		$search_query.="familygender LIKE '$seekinggender' ORDER BY id ASC LIMIT $start, $limit;";
+	
+		//echo $search_query;
+		$q = $mysqli->query($search_query);	
+		return $q;
+	
+}
+
+function family_search_numofrecords($seekinggender,$seekingminage,$seekingmaxage,$seekingcountry,$seekingimg){ //search query
 	
 	global $mysqli;
 	$search_query = "";
@@ -676,15 +711,171 @@ function family_search($seekinggender,$seekingminage,$seekingmaxage,$seekingcoun
 		}
 		
 		$search_query.="familygender LIKE '$seekinggender';";
-	
+		
 		//echo $search_query;
-		$q = $mysqli->query($search_query);	
+		$query = $mysqli->query($search_query);
+		$q = $query->num_rows;	
 		return $q;
 	
 }
 
+function match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry,$start,$limit){ //match query
+	global $mysqli;
+	$search_query = "";
+	$search_query.= "SELECT * FROM pairness_family WHERE ";
+	if($pcountry > 0)
+	{
+		$search_query.= "familycountry LIKE '$pcountry' AND "; 	
+	}
+	if($pminage > 0 && $pmaxage > 0)
+	{
+		$search_query.= "familyage BETWEEN '$pminage' and '$pmaxage' AND ";
+	}
+	if($pstate > 0)
+	{
+		$search_query.= "familystate LIKE '$pstate' AND ";
+	}
+	if($pcity>0)
+	{
+		$search_query.= "familycity LIKE '$pcity' AND ";	
+	}
+	if($phaircolor>0)
+	{
+		$search_query.= "familyhaircolor LIKE '$phaircolor' AND ";	
+	}
+	if($phairtype>0)
+	{
+		$search_query.= "familyhairtype LIKE '$phairtype' AND ";	
+	}
+	if($phaircolor>0)
+	{
+		$search_query.= "familyhaircolor LIKE '$phaircolor' AND ";	
+	}
+	if($peyecolor>0)
+	{
+		$search_query.= "familyeyecolor LIKE '$peyecolor' AND ";	
+	}
+	if($peyewear>0)
+	{
+		$search_query.= "familyeyewear LIKE '$peyewear' AND ";	
+	}
+	if($pheight>0)
+	{
+		$search_query.= "familyheight LIKE '$pheight' AND ";	
+	}
+	if($pweight>0)
+	{
+		$search_query.= "familyweight LIKE '$pweight' AND ";	
+	}
+	if($pbodytype>0)
+	{
+		$search_query.= "familybodytype LIKE '$pbodytype' AND ";	
+	}
+	if($pappearance>0)
+	{
+		$search_query.= "familyappearance LIKE '$pappearance' AND ";	
+	}
+	if($pfacialhair>0)
+	{
+		$search_query.= "familyfacialhair LIKE '$pfacialhair' AND ";	
+	}
+	if($pphysicalstatus>0)
+	{
+		$search_query.= "familyphysicalstatus LIKE '$pphysicalstatus' AND ";	
+	}
+	if($pmaritalstatus>0)
+	{
+		$search_query.= "familymaritalstatus LIKE '$pmaritalstatus' AND ";	
+	}
+	if($phavechildrens>0)
+	{
+		$search_query.= "familyhavechildrens LIKE '$phavechildrens' AND ";	
+	}
+	if($pvalues>0)
+	{
+		$search_query.= "familyvalues LIKE '$pvalues' AND ";	
+	}
+	if($plivingsituation>0)
+	{
+		$search_query.= "familylivingsituation LIKE '$plivingsituation' AND ";	
+	}
+	if($pfoodhabits>0)
+	{
+		$search_query.= "familyfoodhabits LIKE '$pfoodhabits' AND ";	
+	}
+	if($peducation>0)
+	{
+		$search_query.= "familyeducation LIKE '$peducation' AND ";	
+	}
+	if($poccupation>0)
+	{
+		$search_query.= "familyoccupation LIKE '$poccupation' AND ";	
+	}
+	if($prelocate>0)
+	{
+		$search_query.= "familyrelocate LIKE '$prelocate' AND ";	
+	}
+	if($preligion>0)
+	{
+		$search_query.= "familyreligion LIKE '$preligion' AND ";	
+	}
+	if($pbornreverted>0)
+	{
+		$search_query.= "familybornreverted LIKE '$pbornreverted' AND ";	
+	}
+	if($preligiousvalues>0)
+	{
+		$search_query.= "familyreligiousvalues LIKE '$preligiousvalues' AND ";	
+	}
+	if($pattendreligiousservices>0)
+	{
+		$search_query.= "familyattendreligiousservices LIKE '$pattendreligiousservices' AND ";	
+	}
+	if($pmothertongue>0)
+	{
+		$search_query.= "familymothertongue LIKE '$pmothertongue' AND ";	
+	}
+	if($pethnicity>0)
+	{
+		$search_query.= "familyethnicity LIKE '$pethnicity' AND ";	
+	}
+	if($pnationality>0)
+	{
+		$search_query.= "familynationality LIKE '$pnationality' AND ";	
+	}
+	if($pplaceofbirth>0)
+	{
+		$search_query.= "familyplaceofbirth LIKE '$pplaceofbirth' AND ";	
+	}
+	if($planguagesspoken>0)
+	{
+		$search_query.= "familylanguagesspoken LIKE '$planguagesspoken' AND ";	
+	}
+	if($pgetmarried>0)
+	{
+		$search_query.= "familygetmarried LIKE '$pgetmarried' AND ";	
+	}
+	if($pwantmorechildrens>0)
+	{
+		$search_query.= "familywantmorechildrens LIKE '$pwantmorechildrens' AND ";	
+	}
+	if($pdowry>0)
+	{
+		$search_query.= "familydowry LIKE '$pdowry' AND ";	
+	}
+	if($pgender)
+	{
+	$search_query.="familygender LIKE '$pgender' ";
+	}
+	
+	$search_query.="ORDER BY id ASC LIMIT $start,$limit;"; 
+	//echo $search_query;
+	$q = $mysqli->query($search_query);	
+	return $q;	
+	
+}
 
-function match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry){
+function match_search_numofrecords($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phaircolor,$phairtype,$peyecolor,$peyewear,$pheight,$pweight,$pbodytype,$pappearance,$pfacialhair,$pphysicalstatus,$pmaritalstatus,$phavechildrens,$pvalues,$plivingsituation,$pfoodhabits,$peducation,$poccupation,$prelocate,$preligion,$pbornreverted,$preligiousvalues,$pattendreligiousservices,$pmothertongue,$pethnicity,$pnationality,$pplaceofbirth,$planguagesspoken,$pgetmarried,$pwantmorechildrens,$pdowry){ //match query
 	global $mysqli;
 	$search_query = "";
 	$search_query.= "SELECT * FROM pairness_family WHERE ";
@@ -832,13 +1023,17 @@ function match_search($pgender,$pminage,$pmaxage,$pcountry,$pstate,$pcity,$phair
 	{
 	$search_query.="familygender LIKE '$pgender';";
 	}
-	//echo $search_query;
-	$q = $mysqli->query($search_query);	
-	return $q;	
+	
+	
+	$query = $mysqli->query($search_query);
+	$q = $query->num_rows;	
+	return $q;
 	
 }
 
-function getfeatures($featureid){
+
+
+function getfeatures($featureid){ //get feature name against feature id
 
 	global $mysqli;
 	$p = $mysqli->query("SELECT * from pairness_features WHERE id = '$featureid'");
@@ -851,13 +1046,114 @@ function getfeatures($featureid){
 	return $val;
 }
 
+function pagination($per_page, $page, $url, $total){    // Pagination module
+
+	$adjacents = "2";
+
+	$page = ($page == 0 ? 1 : $page); 
+	$start = ($page - 1) * $per_page; 
+
+	$prev = $page - 1; 
+	$next = $page + 1;
+	$lastpage = ceil($total/$per_page);
+	$lpm1 = $lastpage - 1;
+
+	$pagination = "";
+	if($lastpage > 1)
+	{ 
+		$pagination .= "<ul class='pagination'>";
+		$pagination .= "<li class='details'>Page $page of $lastpage</li>";
+	if ($lastpage < 7 + ($adjacents * 2))
+	{ 
+		for ($counter = 1; $counter <= $lastpage; $counter++)
+		{
+			if ($counter == $page)
+				$pagination.= "<li><a class='current'>$counter</a></li>";
+			else
+				$pagination.= "<li><a href='{$url}$counter'>$counter</a></li>"; 
+		}
+	}
+	elseif($lastpage > 5 + ($adjacents * 2))
+	{
+		if($page < 1 + ($adjacents * 2)) 
+		{
+			for ($counter = 1; $counter < 4 + ($adjacents * 2); $counter++)
+			{
+				if ($counter == $page)
+					$pagination.= "<li><a class='current'>$counter</a></li>";
+				else
+					$pagination.= "<li><a href='{$url}$counter'>$counter</a></li>"; 
+			}
+			$pagination.= "<li class='dot'>...</li>";
+			$pagination.= "<li><a href='{$url}$lpm1'>$lpm1</a></li>";
+			$pagination.= "<li><a href='{$url}$lastpage'>$lastpage</a></li>"; 
+		}
+		elseif($lastpage - ($adjacents * 2) > $page && $page > ($adjacents * 2))
+		{
+			$pagination.= "<li><a href='{$url}1'>1</a></li>";
+			$pagination.= "<li><a href='{$url}2'>2</a></li>";
+			$pagination.= "<li class='dot'>...</li>";
+			for ($counter = $page - $adjacents; $counter <= $page + $adjacents; $counter++)
+			{
+				if ($counter == $page)
+					$pagination.= "<li><a class='current'>$counter</a></li>";
+				else
+					$pagination.= "<li><a href='{$url}$counter'>$counter</a></li>"; 
+			}
+			$pagination.= "<li class='dot'>..</li>";
+			$pagination.= "<li><a href='{$url}$lpm1'>$lpm1</a></li>";
+			$pagination.= "<li><a href='{$url}$lastpage'>$lastpage</a></li>"; 
+		}
+		else
+		{
+			$pagination.= "<li><a href='{$url}1'>1</a></li>";
+			$pagination.= "<li><a href='{$url}2'>2</a></li>";
+			$pagination.= "<li class='dot'>..</li>";
+			for ($counter = $lastpage - (2 + ($adjacents * 2)); $counter <= $lastpage; $counter++)
+			{
+				if ($counter == $page)
+					$pagination.= "<li><a class='current'>$counter</a></li>";
+				else
+					$pagination.= "<li><a href='{$url}$counter'>$counter</a></li>"; 
+			}
+		}
+	}
+
+	if ($page < $counter - 1)
+	{
+		$pagination.= "<li><a href='{$url}$next'>Next</a></li>";
+		// $pagination.= "<li><a href='{$url}$lastpage'>Last</a></li>";
+	}
+	else{
+		//$pagination.= "<li><a class='current'>Next</a></li>";
+		// $pagination.= "<li><a class='current'>Last</a></li>";
+	}
+	$pagination.= "</ul>\n"; 
+	} 
+	return $pagination;
+} 
+
+
+
 /////////////////////////////////////////////
 
 function start_app(){ /* Initialize Different Variables */
 	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage, $editpreferencespage;
-	$mysqli = new mysqli("localhost", "root", "", "pairness");
-	$contactemail = "rahber@cozmuler.com";
-	$sitepath ="http://localhost/pairness.com/";
+	// WebHost setting 
+	  
+	
+	$mysqli = new mysqli("68.178.216.14", "pairnessdb", "Pairness#113", "pairnessdb");
+	//$contactemail = "rahber@cozmuler.com";
+	$contactemail = "we@cozmuler.com";
+	$sitepath ="http://cozmuler.com/projects/dev/pairness.com/";
+	
+	
+	
+	// Localhost setting
+	
+	/*$mysqli = new mysqli("localhost", "root", "", "pairness");
+	$contactemail = "we@cozmuler.com";
+	$sitepath ="http://localhost/pairness.com/";*/
 	
 	$enablecache = 0;
 	
