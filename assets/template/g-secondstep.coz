@@ -1,0 +1,475 @@
+<section class="content">
+
+
+
+<h1>Complete your profile.</h1>
+</section><?php
+
+$familyid = $_SESSION['familyid'];
+$id = $_SESSION['id'];
+$finfo = $_REQUEST['finfo'];
+//$view = $_REQUEST['view'];
+//echo $view . " :email";
+if($_POST){    // if post start
+				
+				
+				//-----------image1 uploading code here---------------------------------
+
+$profile_picture = $_FILES['profile_picture']['name'];
+//echo property_image."<br>";
+if ($_FILES['profile_picture']['error'] == 0) 
+{
+  // check for file format/extension
+  $profile_picture = basename ($_FILES['profile_picture']['name']);
+    if(($_FILES['profile_picture']['type'] == "image/gif")
+        || ($_FILES['profile_picture']['type'] == "image/jpeg")
+        || ($_FILES['profile_picture']['type'] == "image/pjpeg")
+		|| ($_FILES['profile_picture']['type'] == "image/png")
+		|| ($_FILES['profile_picture']['type'] == "image/jpg")
+		|| ($_FILES['profile_picture']['type'] == "image/bmp"))
+
+  {
+		    //get the path where file is to be saved
+			//$filepath=dirname (__FILE__).'/images/';
+			$new_file_name = 'upload_images/'.$profile_picture;
+			//echo $new_file_name;
+			//checking for file name duplication on server
+	     if ( ! file_exists ( $new_file_name ) )
+	   {
+			   //move uploaded file to permanent place on server
+		      if ( ( move_uploaded_file ( $_FILES ['profile_picture']['tmp_name'] , $new_file_name) ) )
+		   {
+		          $profile_picture = $profile_picture;
+				  //echo $profile_picture;
+			      //echo 'File data has been Successfully saved as '.$new_file_name;
+		   }
+		      else
+		   {
+			      //echo 'Error uploading file </br>';      
+		   }
+	    }	   
+	      else
+		   {
+		          //echo 'Error: file '.$_FILES['image_upload']['name'].' Already Exists </br>';
+		   }
+    }
+  	else
+	{
+		       //echo 'Error: files with formats jpg , jpeg , png , gif , bmp </br>';                       
+    } 
+	}
+else
+{
+	     //echo "Thank you:No file uploaded<br>";
+}
+	
+	//-----------image1 uploading code Ends here---------------------------------
+	
+	
+	//-----------image2 uploading code here---------------------------------
+
+$family_image = $_FILES['family_image']['name'];
+//echo property_image."<br>";
+if ($_FILES['family_image']['error'] == 0) 
+{
+  // check for file format/extension
+  $filename_two = basename ($_FILES['family_image']['name']);
+    if(($_FILES['family_image']['type'] == "image/gif")
+        || ($_FILES['family_image']['type'] == "image/jpeg")
+        || ($_FILES['family_image']['type'] == "image/pjpeg")
+		|| ($_FILES['family_image']['type'] == "image/png")
+		|| ($_FILES['family_image']['type'] == "image/jpg")
+		|| ($_FILES['family_image']['type'] == "image/bmp"))
+
+  {
+		    //get the path where file is to be saved
+			//$filepath=dirname (__FILE__).'/images/';
+			$new_file_name = 'upload_images/'.$filename_two;
+			//echo $new_file_name;
+			//checking for file name duplication on server
+	     if ( ! file_exists ( $new_file_name ) )
+	   {
+			   //move uploaded file to permanent place on server
+		      if ( ( move_uploaded_file ( $_FILES ['family_image']['tmp_name'] , $new_file_name) ) )
+		   {
+		          $family_image = $filename_two;
+				  //echo $family_image;
+			      //echo 'File data has been Successfully saved as '.$new_file_name;
+		   }
+		      else
+		   {
+			      //echo 'Error uploading file </br>';      
+		   }
+	    }	   
+	      else
+		   {
+		          //echo 'Error: file '.$_FILES['image_upload']['name'].' Already Exists </br>';
+		   }
+    }
+  	else
+	{
+		       //echo 'Error: files with formats jpg , jpeg , png , gif , bmp </br>';                       
+    } 
+	}
+else
+{
+	     //echo "Thank you:No file uploaded<br>";
+	}
+	
+	//-----------image2 uploading code Ends here---------------------------------
+				
+	
+				
+				$id = request_var('id','');
+				$ip = $_SERVER['REMOTE_ADDR'];
+				$parientid = request_var('parientid','');
+				$username =  request_var('username','');
+				$email =  request_var('email','');
+				$password = request_var('password','');
+				$gender = request_var('gender','');
+				$seeking_gender = request_var('seeking_gender','');
+				$dateofbirth = request_var('dateofbirth','');
+				$country = request_var('country','');
+				$state = request_var('state','');
+				$city = request_var('city','');
+				$terms = request_var('terms','');
+				$first_name = request_var('first_name','');
+				$last_name = request_var('last_name','');
+				$phone = request_var('phone','');
+				$mobile = request_var('mobile','');
+				if($profile_picture=='')
+				{
+					$profile_picture='default.png';
+				}
+				//$profile_picture = request_var('profile_picture','');
+				//$t = time();
+				//$t = time();
+				$profile_date = date("Y-m-d H:i:s");//request_var('profile_date','');
+				$profile_time = date("H:i:s");//request_var('profile_time','');
+				$haircolor = request_var('haircolor','');
+				$hairtype = request_var('hairtype','');
+				$eyecolor = request_var('eyecolor','');
+				$eyewear = request_var('eyewear','');
+				$height = request_var('height','');
+				$weight = request_var('weight','');
+				$bodytype = request_var('bodytype','');
+				$appearance = request_var('appearance','');
+				$facialhair = request_var('facialhair','');
+				$physicalstatus = request_var('physicalstatus','');
+				$maritalstatus = request_var('maritalstatus','');
+				$children = request_var('children','');
+				$familyvalues = request_var('familyvalues','');
+				$livingsituation = request_var('livingsituation','');
+				$likes = request_var('likes','');
+				$dislikes = request_var('dislikes','');
+				$zodiachormony = request_var('zodiachormony','');
+				$foodhabits = request_var('foodhabits','');
+				$education = request_var('education','');
+				$occupation = request_var('occupation','');
+				$relocate = request_var('relocate','');
+				$religion = request_var('religion','');
+				$bornreverted = request_var('bornreverted','');
+				$religiousvalues = request_var('religiousvalues','');
+				$religiousservices = request_var('religiousservices','');
+				$mother_language = request_var('mother_language','');
+				$ethnicity = request_var('ethnicity','');
+				$cast = request_var('cast','');
+				$nationality = request_var('nationality','');
+				$placeofbirth = request_var('placeofbirth','');
+				$languagesspoken = request_var('languagesspoken','');
+				$ambition = request_var('ambition','');
+				$hobbies = request_var('hobbies','');
+				$dreams = request_var('dreams','');
+				$getmarried = request_var('getmarried','');
+				$morechildren = request_var('morechildren','');
+				$dowry = request_var('dowry','');
+				$cnic = request_var('cnic','');
+				//$family_image = request_var('family_image','');
+				$age = age($dateofbirth); // calculate dateofbirth
+				
+				
+				if($finfo==1 || $finfo==0){
+					
+					//echo $gender . " :Gender";
+					//echo $seeking_gender . "  :Seeking Gender";	
+				$q_family = "UPDATE pairness_family SET id = '$id', ip = '$ip', familyid = '$parientid', familyfullname = '$username', familyemailaddress = '$email', familypassword = '$password', familygender = '$gender', familyseekinggender = '$seeking_gender', familydateofbirth = '$dateofbirth', familycountry = '$country', familystate = '$state', familycity = '$city', familyterms = '$terms', familyfirstname = '$first_name', familylastname = '$last_name', familyphone = '$phone', familycell = '$mobile', familyprofileimage = '$profile_picture', familyprofiledate = '$profile_date', familyprofiletime = '$profile_time', familyhaircolor = '$haircolor', familyhairtype = '$hairtype', familyeyecolor = '$eyecolor', familyeyewear = '$eyewear', familyheight = '$height', familyweight = '$weight', familybodytype = '$bodytype', familyappearance = '$appearance', familyfacialhair = '$facialhair', familyphysicalstatus = '$physicalstatus', familymaritalstatus = '$maritalstatus', familyhavechildrens = '$children', familyvalues = '$familyvalues', familylivingsituation = '$livingsituation', familylikes = '$likes', familydislikes = '$dislikes', familyzodiachormony = '$zodiachormony', familyfoodhabits = '$foodhabits', familyeducation = '$education', familyoccupation = '$occupation', familyrelocate = '$relocate', familyreligion = '$religion', familybornreverted = '$bornreverted', familyreligiousvalues = '$religiousvalues', familyattendreligiousservices = '$religiousservices', familymothertongue = '$mother_language', familyethnicity = '$ethnicity', familycast = '$cast', familynationality = '$nationality', familyplaceofbirth = '$placeofbirth', familylanguagesspoken = '$languagesspoken', familyambition = '$ambition', familyhobbies = '$hobbies', familydreams = '$dreams', familygetmarried = '$getmarried', familywantmorechildrens = '$morechildren', familydowry = '$dowry', familycnicnumber = '$cnic', familycnicimage = '$family_image', familyage = '$age' WHERE familyemailaddress = '$email';";
+				
+				
+				$mysqli->query($q_family);
+				
+				//echo $mysqli->error;
+				//echo "<h4 class='style9'>Second Step Complete</h4><br>";
+					if($seeking_gender=='' || $dateofbirth=='' || $country=='' || $state=='' || $city=='' || $first_name=='' || $last_name==''|| $phone=='' || $mobile=='' || $cnic=='')
+					{
+						echo "<div class='success'>Profile successfully Updated! Click <a class='login-mini' href='#'>here</a> for Login</div>";
+					}
+					else 
+					{
+						echo "<div class='success'>Profile successfully Completed! Click <a class='login-mini' href='#'>here</a> for Login </div>";
+					}
+				
+				
+				
+				
+				}
+				
+				/*else{
+				
+				insert ()?
+				}*/
+					
+				 
+	 } 		// if post ends
+
+
+
+ 
+ 	$tp = $mysqli->query("select * from login where sc = '$skey'");
+ 
+
+	if($finfo==1 || $finfo==0){
+
+		$p = $mysqli->query("SELECT * from pairness_family WHERE familyemailaddress = '$view'");
+		
+				  while($row= $p->fetch_object())
+				{
+					
+				$id = $row->id;
+				$ip = $row->ip;
+				$familyid = $row->familyid;
+				$familyfullname = $row->familyfullname;				
+				$familyemailaddress = $row->familyemailaddress;		
+				$familypassword = $row->familypassword;
+				$familygender = $row->familygender;
+				$familyseekinggender = $row->familyseekinggender;
+				$familydateofbirth = $row->familydateofbirth;
+				$familycountry = $row->familycountry;
+				$familystate = $row->familystate;
+				$familycity = $row->familycity;
+				$familyterms = $row->familyterms;
+				$familyfirstname = $row->familyfirstname;
+				$familylastname = $row->familylastname;
+				$familyphone = $row->familyphone;
+				$familycell = $row->familycell;
+				$familyprofileimage = $row->familyprofileimage;
+				$familyprofiledate = $row->familyprofiledate;
+				$familyprofiletime = $row->familyprofiletime;
+				$familyhaircolor = $row->familyhaircolor;
+				$familyhairtype = $row->familyhairtype;
+				$familyeyecolor = $row->familyeyecolor;
+				$familyeyewear = $row->familyeyewear;
+				$familyheight = $row->familyheight;
+				$familyweight = $row->familyweight;
+				$familybodytype = $row->familybodytype;
+				$familyappearance = $row->familyappearance;
+				$familyfacialhair = $row->familyfacialhair;
+				$familyphysicalstatus = $row->familyphysicalstatus;
+				$familymaritalstatus = $row->familymaritalstatus;
+				$familyhavechildrens = $row->familyhavechildrens;
+				$familyvalues = $row->familyvalues;
+				$familylivingsituation = $row->familylivingsituation;
+				$familylikes = $row->familylikes;
+				$familydislikes = $row->familydislikes;
+				$familyzodiachormony = $row->familyzodiachormony;
+				$familyfoodhabits = $row->familyfoodhabits;
+				$familyeducation = $row->familyeducation;
+				$familyoccupation = $row->familyoccupation;
+				$familyrelocate = $row->familyrelocate;
+				$familyreligion = $row->familyreligion;
+				$familybornreverted = $row->familybornreverted;
+				$familyreligiousvalues = $row->familyreligiousvalues;
+				$familyattendreligiousservices = $row->familyattendreligiousservices;
+				$familymothertongue = $row->familymothertongue;
+				$familyethnicity = $row->familyethnicity;
+				$familycast = $row->familycast;
+				$familynationality = $row->familynationality;
+				$familyplaceofbirth = $row->familyplaceofbirth;
+				$familylanguagesspoken = $row->familylanguagesspoken;
+				$familyambition = $row->familyambition;
+				$familyhobbies = $row->familyhobbies;
+				$familydreams = $row->familydreams;
+				$familygetmarried = $row->familygetmarried;
+				$familywantmorechildrens = $row->familywantmorechildrens;
+				$familydowry = $row->familydowry;
+				$familycnicnumber = $row->familycnicnumber;
+				$familycnicimage = $row->familycnicimage;
+								
+				}	// while ends here
+		
+	}
+
+				
+	if($tp->num_rows==1){
+	?>	
+	<form action="" method="post" name="nextstep" id="nextstep" enctype="multipart/form-data">
+	<table width="600" border="0" cellspacing="0" cellpadding="0">
+  	<input hidden="text" name="id" id="id" value="<?php echo $id;  ?>" />
+    <input hidden="text" name="ip" id="ip" value="<?php echo $ip ?>" />
+    <input hidden="text" name="parientid" id="parientid" value="<?php  echo $familyid; ?>" />
+    <input type="hidden" name="password" id="password" value="<?php echo $familypassword; ?>" />
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  	</tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><input type="text" name="email" readonly="readonly" id="email" value="<?php echo $familyemailaddress; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Full Name:</td>
+    <td><input type="text" name="username" readonly="readonly" id="username" value="<?php  echo $familyfullname; ?>" /></td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Gender:</td>
+    <td><input type="text" name="gender" readonly="readonly" id="gender" value="<?php  echo $familygender; ?>" />
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+ <tr>
+    <td>Seeking Gender:</td>
+    <td><select name="seeking_gender" id="seeking_gender">
+  <option value="">Select Gender</option>
+  <?php if ($familygender=='female'){ ?>
+  <option value="male" selected="selected">Male</option>
+  <option value="female">Female</option>
+  <?php } else{ ?>
+  <option value="male">Male</option>
+  <option value="female" selected="selected">Female</option>
+  <?php }?>
+</select> </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Date of Birth:</td>
+    <td><input type="text" name="dateofbirth" id="dateofbirth" class="tcal_two" placeholder="YYYY-MM-DD" value="<?php  echo $familydateofbirth; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Country:</td>
+    <td><select name="country" id="country">
+    <option value="0">Select Country</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."' >". $row->name ."</option>";
+			}
+     ?>
+        
+    </select>
+    
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>State:</td>
+    <td><input type="text" name="state" placeholder="Enter Your State" id="state" value="<?php  echo $familystate; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td><input type="text" name="city" id="city" placeholder="Enter Your City" value="<?php  echo $familycity; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>First Name:</td>
+    <td><input type="text" name="first_name" id="first_name" placeholder="Enter Your First Name" value="<?php  echo $familyfirstname; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Last Name:</td>
+    <td><input type="text" name="last_name" id="last_name" placeholder="Enter Your Last Name" value="<?php  echo $familylastname; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Phone:</td>
+    <td><input type="text" name="phone" id="phone" placeholder="Enter Your Phone No" value="<?php  echo $familyphone; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Mobile:</td>
+    <td><input type="text" name="mobile" id="mobile" placeholder="Enter Your Mobile No" value="<?php  echo $familycell; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Profile Picture:</td>
+    <td><input type="file" name="profile_picture" id="profile_picture"  /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>CNIC:</td>
+    <td><input type="text" placeholder="Enter Your CNIC No" name="cnic" id="cnic" value="<?php  echo $familycnicnumber; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Family Image:</td>
+    <td><input type="file" name="family_image" id="family_image" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="submit" id="submit" value="Submit" />&nbsp;&nbsp;&nbsp;<input type="reset" name="rest" id="rest" value="Reset" /></td>
+  </tr>
+</table>
+</form>
+
+<?php }else{
+echo "<h1>You are missing security key!</h1>";
+} ?>

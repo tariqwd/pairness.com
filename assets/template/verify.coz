@@ -6,8 +6,6 @@ takemehome();}
 $emailt = request_var('email','');
 $keyt= request_var('key','');
 
-
-
 ?>
 
 

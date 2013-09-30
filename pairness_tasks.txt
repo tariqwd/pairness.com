@@ -15,4 +15,34 @@ width="710" border="0" align="left" style="margin-top:10px;" border="0" cellspac
 
 	(v):   second_step.coz Insert Query of isfanily. 
 
-	(vi):  Email verfication send mail to the user.		
+	(vi):  Email verfication send mail to the user.	
+
+
+
+Beta Version issues.
+
+1. registration, login form on the middle of the screen (Done)
+
+2. guardien profile second step should be seprate. (done)
+
+3. guardien add sub members 
+
+4. zoadic sign calculator
+
+5. matching criteria 
+
+6. social media facebook to oursite
+
+7. remove quick search  (Done)
+
+8. search 19 to 35   (Done)
+
+9. generate email on matches  (corn-job will do the task)
+
+10. change subject if not from list ()
+
+11. email password reset (done half part not reset but email all the credentials)
+
+12. fail and success auto hide give there cross (done)
+
+ 	

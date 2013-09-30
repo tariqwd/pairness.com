@@ -13,7 +13,7 @@
 global $mysqli;
 
 
-function startSession($timeout = 600){ /* Start session and session cronning */
+function startSession($timeout = 6000){ /* Start session and session cronning */
 	global $mysqli;
 	session_name('czid');
 	session_set_cookie_params(0);
@@ -467,7 +467,14 @@ function verify_id($email,$cs){ /* Verification of email*/
 				$subject = "Your Email has been succsessfully verified";
 				$body = "Yay this is the body of succesfuly verified email";
 				send_email($email,$subject,$body);
-				return "<div class='success'>Successfully Verified. Click <a href='complete_profile.php?finfo=".$fm."&view=".urlencode(encrypt_text($email))."&key=".urlencode(encrypt_text($cs))."'>here</a> for next step</div>";
+				if($fm)
+				{
+					return "<div class='success'>Successfully Verified. Click <a href='complete_profile_g.php?finfo=".$fm."&view=".urlencode(encrypt_text($email))."&key=".urlencode(encrypt_text($cs))."'>here</a> for next step</div>";
+				}
+				else 
+				{
+					return "<div class='success'>Successfully Verified. Click <a href='complete_profile_s.php?finfo=".$fm."&view=".urlencode(encrypt_text($email))."&key=".urlencode(encrypt_text($cs))."'>here</a> for next step</div>";
+				}
 		
 
 			}else{
@@ -478,6 +485,108 @@ function verify_id($email,$cs){ /* Verification of email*/
 			return "<div class='error'>Invalid Key or Email!</div>";
 		}
 }
+
+/*function complete_secondstep($email,$cs){
+	global $mysqli;
+
+			return "<div class='error'>Invalid Key or Email!</div>";
+		
+}*/
+
+
+function recover_cred($emailt,$emailr){ /* Recover credentials */
+	global $mysqli;
+	
+	if ($emailt!='' && $emailr!='')
+	{
+		
+		return "<div class='error'>Please Specify email address</div>";
+		 	
+	}
+	elseif ($emailt=='' && $emailr=='')
+	{
+		
+		return "<div class='error'>No email address found</div>";
+	
+	}
+	else
+	{  
+		if($emailt)
+		{
+			$query = $mysqli->query("select * from login where email='$emailt'");
+			
+			if($query->num_rows==1){
+				
+			$finfo = $query ->fetch_assoc();
+			$fm = $finfo['isfamily'];
+			$user = $finfo['username'];
+			$em = $finfo['email'];
+			$pass = $finfo['password'];
+			
+			$subject = "Account Credentials";
+			
+			$message = '<table width="600" border="0" cellspacing="0" cellpadding="0" align="center" style="border:solid 5px #025285;">';
+								  $message .=  '<tr>';
+								  $message .=    '<th colspan="2" scope="row" align="center"><span style="color:#025285;"><hr/></span></th>';
+								  $message .=  '</tr>';
+								  $message .= '<tr>';
+								  $message .=    '<td align="left" valign="top">';
+								  $message .=		'<table width="400" border="0" cellspacing="0" cellpadding="0" style="padding-top:20px;">';
+								  $message .=		  '<tr>';
+								  $message .=			'<th scope="row"><h2 style="color:#025285; font-family:Arial, Helvetica, sans-serif; text-align:center;">Pairness Account Credentials</h2></th>';
+								  $message .=		  '</tr>';
+								  $message .=		  '<tr>';
+								  $message .=		  	'<td>&nbsp;</td>';
+								  $message .=		  '</tr>';
+								  $message .=		  '<tr>';
+								  $message .=			'<td style="color:#464646; padding-left:15px; font-family:Arial, Helvetica, sans-serif;">';
+								  $message .=				'<span style=""><strong>Username: </strong>'.$user.'</span> <br />';
+								  $message .=				'<p><br /></p>';
+								  $message .=				'<span style=""><strong>Email Address: </strong>'.$em.'</span> <br />';
+								  $message .=				'<p><br /></p>';
+								  $message .=				'<span style=""><strong>Password: </strong>'.$pass.'</span>';
+								  $message .=				'<p><br /> <br /></p>';
+								  $message .=				'<p style="font-size:13px;">';
+								  $message .=					'Please don&#39;t share this information.<br />';
+								  $message .=				'</p>';
+								  $message .=				'<p style="font-size:13px;">';
+								  $message .=					'<a href="http://www.cozmuler.com/projects/dev/pairness.com/verify.php">Click Here</a> to Find your match<br />';
+								  $message .=				'</p>';
+								  $message .=				'<p></p>';
+								  $message .=				'<p>';
+								  $message .=					'<br />Regards, <br /> Pairness Team<br />';
+								  $message .=				'</p>';
+								  $message .=				'<p>';
+								  $message .=					'<a href="http://www.pairness.com">http://www.pairness.com</a>';
+								  $message .=				'</p>';
+								  $message .=			'</td>';
+								  $message .=		  '</tr>';
+								  $message .=		'</table>';
+								  $message .=	'</td>';
+								  $message .=    '<td valign="top">';
+								  $message .=	'</td>';
+								  $message .=  '</tr>';
+								  $message .='</table>';
+			
+		    send_email($emailt,$subject,$message);
+		    return "<div class='success'>Please check your email for further instructions</div>";	
+			}
+			
+			else
+			{
+				 return "<div class='warning'>Email Address Not Registered with us</div>";
+			}
+				
+		}
+		
+		if ($emailr)
+		{
+			
+			 return "<div class='warning'>Still working on that!</div>";
+		}
+	}
+}
+
 
 function add_log($uid,$action){ /* Add log values*/
 	global $mysqli;
@@ -492,7 +601,7 @@ function cron_session(){ /* Check if the session that exist in database is older
 	$queryy =  $mysqli->query("Select * from session");
 		while ($row = $queryy->fetch_object()){
 			$op = $row->sessionid;
-			if((($t) - ($row->t)) > 600){
+			if((($t) - ($row->t)) > 6000){
 			$mysqli->query("DELETE FROM session WHERE sessionid='$op'");
 			}
 		}
@@ -602,13 +711,13 @@ function getvars(){ /* Initilaize Variables to get default variables using get o
 global $ret,$f,$view,$skey;
 	$ret = request_var('return','');  
 	if(pgname()=='candidate'){$f= request_var('f',0);  }
-	if(pgname()=='profile' || pgname()=='complete_profile'){$view = request_var('view','0'); 
+	if(pgname()=='profile' || pgname()=='complete_profile_s' || pgname()=='complete_profile_g'){$view = request_var('view','0'); 
 	if($view=='0'){
 	}else{
 	 $view = urldecode(decrypt_text($view));
 	}
 	}
-	if( pgname()=='complete_profile'){$skey = request_var('key',''); 
+	if( pgname()=='complete_profile_s' || pgname()=='complete_profile_g'){$skey = request_var('key',''); 
 	if($skey==''){
 	}else{
 	 $skey = urldecode(decrypt_text($skey));
@@ -1133,27 +1242,96 @@ function pagination($per_page, $page, $url, $total){    // Pagination module
 	return $pagination;
 } 
 
+function getprofilelevel($em){
+	
+	global $mysqli;
+	$count=0;
+	//echo $em;
+	$p = $mysqli->query("SELECT * from pairness_family WHERE familyemailaddress = '$em'");
+	
+            	while($row = $p->fetch_object()){
+					//echo "m in";
+					
+					if ($row->familyseekinggender==''){$count++;}
+					if ($row->familydateofbirth==0){$count++;}
+					if ($row->familycountry==0){$count++;}
+					if ($row->familystate==''){$count++;}
+					if ($row->familycity==''){$count++;}
+					if ($row->familyterms==''){$count++;}
+					if ($row->familyfirstname==''){$count++;}
+					if ($row->familylastname==''){$count++;}
+					if ($row->familyphone==''){$count++;}
+					if ($row->familycell==''){$count++;}
+					if ($row->familyprofileimage==''){$count++;}
+					if ($row->familyhaircolor==0){$count++;}
+					if ($row->familyhairtype==0){$count++;}
+					if ($row->familyeyecolor==0){$count++;}
+					if ($row->familyeyewear==0){$count++;}
+					if ($row->familyheight==0){$count++;}
+					if ($row->familyweight==0){$count++;}
+					if ($row->familyappearance==0){$count++;}
+					if ($row->familyfacialhair==0){$count++;}
+					if ($row->familyphysicalstatus==0){$count++;}
+					if ($row->familymaritalstatus==0){$count++;}
+					if ($row->familyhavechildrens==0){$count++;}
+					if ($row->familyvalues==0){$count++;}
+					if ($row->familylivingsituation==0){$count++;}
+					if ($row->familylikes==''){$count++;}
+					if ($row->familydislikes==''){$count++;}
+					if ($row->familyzodiachormony==''){$count++;}
+					if ($row->familyfoodhabits==0){$count++;}
+					if ($row->familyeducation==0){$count++;}
+					if ($row->familyoccupation==0){$count++;}
+					if ($row->familyrelocate==0){$count++;}
+					if ($row->familyreligion==0){$count++;}
+					if ($row->familybornreverted==0){$count++;}
+					if ($row->familyreligiousvalues==0){$count++;}
+					if ($row->familyattendreligiousservices==0){$count++;}
+					if ($row->familymothertongue==0){$count++;}
+					if ($row->familyethnicity==0){$count++;}
+					if ($row->familycast==''){$count++;}
+					if ($row->familynationality==0){$count++;}
+					if ($row->familyplaceofbirth==0){$count++;}
+					if ($row->familylanguagesspoken==0){$count++;}
+					if ($row->familyambition==''){$count++;}
+					if ($row->familyhobbies==''){$count++;}
+					if ($row->familydreams==''){$count++;}
+					if ($row->familygetmarried==0){$count++;}
+					if ($row->familywantmorechildrens==0){$count++;}
+					if ($row->familydowry==0){$count++;}
+					if ($row->familycnicnumber==0){$count++;}
+					if ($row->familycnicimage==''){$count++;}
+				}	
+	
+	$tskill = 49; 
+	$skillnotcompleted = $tskill - $count;
+	$val = ($skillnotcompleted / $tskill) * 100; 
 
+	return round($val);
+	
+	
+	
+}
 
 /////////////////////////////////////////////
 
 function start_app(){ /* Initialize Different Variables */
-	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage, $editpreferencespage;
+	global $mysqli,$enablecache,$purgepage,$membershippage,$indexpage,$candidatepage,$uploadpath,$matchpage,$sitepath,$contactemail,$explorepage,$inboxpage,$homepage,$accountpage,$searchpage,$logoutpage,$photospage,$settingspage,$profilepage,$viewprofilepage, $editpreferencespage,$addaccount,$editprofilepage;
 	// WebHost setting 
 	  
 	
-	$mysqli = new mysqli("68.178.216.14", "pairnessdb", "Pairness#113", "pairnessdb");
+	/*$mysqli = new mysqli("68.178.216.14", "pairnessdb", "Pairness#113", "pairnessdb");
 	//$contactemail = "rahber@cozmuler.com";
 	$contactemail = "we@cozmuler.com";
-	$sitepath ="http://cozmuler.com/projects/dev/pairness.com/";
+	$sitepath ="http://cozmuler.com/projects/dev/pairness.com/";*/
 	
 	
 	
 	// Localhost setting
 	
-	/*$mysqli = new mysqli("localhost", "root", "", "pairness");
+	$mysqli = new mysqli("localhost", "root", "", "pairness");
 	$contactemail = "we@cozmuler.com";
-	$sitepath ="http://localhost/pairness.com/";*/
+	$sitepath ="http://localhost/pairness.com/";
 	
 	$enablecache = 0;
 	
@@ -1173,7 +1351,9 @@ function start_app(){ /* Initialize Different Variables */
 	$membershippage ="membership.php";
 	$candidatepage ="candidate.php";
 	$matchpage = "search.php?action=match";
+	$addaccount = "addact.php";
 	$uploadpath = $sitepath. "/upload_images/";
+	$editprofilepage = "editprofile.php";
 	
 	error_reporting(0);
 	startSession();

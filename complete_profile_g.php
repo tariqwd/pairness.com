@@ -9,7 +9,7 @@
 *********************************************/
 include('./includes/functions.php');
 include('./assets/template/header.coz');
-include('./assets/template/secondstep.coz');
+include('./assets/template/g-secondstep.coz');
 include('./assets/template/footer.coz');
 
 ?>

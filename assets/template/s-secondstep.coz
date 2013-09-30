@@ -1,0 +1,1086 @@
+<section class="content">
+<h1>Complete your profile.</h1>
+</section><?php
+
+$familyid = $_SESSION['familyid'];
+$id = $_SESSION['id'];
+$finfo = $_REQUEST['finfo'];
+//$view = $_REQUEST['view'];
+//echo $view . " :email";
+if($_POST){    // if post start
+				
+				
+				//-----------image1 uploading code here---------------------------------
+
+$profile_picture = $_FILES['profile_picture']['name'];
+//echo property_image."<br>";
+if ($_FILES['profile_picture']['error'] == 0) 
+{
+  // check for file format/extension
+  $profile_picture = basename ($_FILES['profile_picture']['name']);
+    if(($_FILES['profile_picture']['type'] == "image/gif")
+        || ($_FILES['profile_picture']['type'] == "image/jpeg")
+        || ($_FILES['profile_picture']['type'] == "image/pjpeg")
+		|| ($_FILES['profile_picture']['type'] == "image/png")
+		|| ($_FILES['profile_picture']['type'] == "image/jpg")
+		|| ($_FILES['profile_picture']['type'] == "image/bmp"))
+
+  {
+		    //get the path where file is to be saved
+			//$filepath=dirname (__FILE__).'/images/';
+			$new_file_name = 'upload_images/'.$profile_picture;
+			//echo $new_file_name;
+			//checking for file name duplication on server
+	     if ( ! file_exists ( $new_file_name ) )
+	   {
+			   //move uploaded file to permanent place on server
+		      if ( ( move_uploaded_file ( $_FILES ['profile_picture']['tmp_name'] , $new_file_name) ) )
+		   {
+		          $profile_picture = $profile_picture;
+				  //echo $profile_picture;
+			      //echo 'File data has been Successfully saved as '.$new_file_name;
+		   }
+		      else
+		   {
+			      //echo 'Error uploading file </br>';      
+		   }
+	    }	   
+	      else
+		   {
+		          //echo 'Error: file '.$_FILES['image_upload']['name'].' Already Exists </br>';
+		   }
+    }
+  	else
+	{
+		       //echo 'Error: files with formats jpg , jpeg , png , gif , bmp </br>';                       
+    } 
+	}
+else
+{
+	     //echo "Thank you:No file uploaded<br>";
+}
+	
+	//-----------image1 uploading code Ends here---------------------------------
+	
+	
+	//-----------image2 uploading code here---------------------------------
+
+$family_image = $_FILES['family_image']['name'];
+//echo property_image."<br>";
+if ($_FILES['family_image']['error'] == 0) 
+{
+  // check for file format/extension
+  $filename_two = basename ($_FILES['family_image']['name']);
+    if(($_FILES['family_image']['type'] == "image/gif")
+        || ($_FILES['family_image']['type'] == "image/jpeg")
+        || ($_FILES['family_image']['type'] == "image/pjpeg")
+		|| ($_FILES['family_image']['type'] == "image/png")
+		|| ($_FILES['family_image']['type'] == "image/jpg")
+		|| ($_FILES['family_image']['type'] == "image/bmp"))
+
+  {
+		    //get the path where file is to be saved
+			//$filepath=dirname (__FILE__).'/images/';
+			$new_file_name = 'upload_images/'.$filename_two;
+			//echo $new_file_name;
+			//checking for file name duplication on server
+	     if ( ! file_exists ( $new_file_name ) )
+	   {
+			   //move uploaded file to permanent place on server
+		      if ( ( move_uploaded_file ( $_FILES ['family_image']['tmp_name'] , $new_file_name) ) )
+		   {
+		          $family_image = $filename_two;
+				  //echo $family_image;
+			      //echo 'File data has been Successfully saved as '.$new_file_name;
+		   }
+		      else
+		   {
+			      //echo 'Error uploading file </br>';      
+		   }
+	    }	   
+	      else
+		   {
+		          //echo 'Error: file '.$_FILES['image_upload']['name'].' Already Exists </br>';
+		   }
+    }
+  	else
+	{
+		       //echo 'Error: files with formats jpg , jpeg , png , gif , bmp </br>';                       
+    } 
+	}
+else
+{
+	     //echo "Thank you:No file uploaded<br>";
+	}
+	
+	//-----------image2 uploading code Ends here---------------------------------
+				
+	
+				
+				$id = request_var('id','');
+				$ip = $_SERVER['REMOTE_ADDR'];
+				$parientid = request_var('parientid','');
+				$username =  request_var('username','');
+				$email =  request_var('email','');
+				$password = request_var('password','');
+				$gender = request_var('gender','');
+				$seeking_gender = request_var('seeking_gender','');
+				$dateofbirth = request_var('dateofbirth','');
+				$country = request_var('country','');
+				$state = request_var('state','');
+				$city = request_var('city','');
+				$terms = request_var('terms','');
+				$first_name = request_var('first_name','');
+				$last_name = request_var('last_name','');
+				$phone = request_var('phone','');
+				$mobile = request_var('mobile','');
+				if($profile_picture=='')
+				{
+					$profile_picture='default.png';
+				}
+				//$profile_picture = request_var('profile_picture','');
+				//$t = time();
+				//$t = time();
+				$profile_date = date("Y-m-d H:i:s");//request_var('profile_date','');
+				$profile_time = date("H:i:s");//request_var('profile_time','');
+				$haircolor = request_var('haircolor','');
+				$hairtype = request_var('hairtype','');
+				$eyecolor = request_var('eyecolor','');
+				$eyewear = request_var('eyewear','');
+				$height = request_var('height','');
+				$weight = request_var('weight','');
+				$bodytype = request_var('bodytype','');
+				$appearance = request_var('appearance','');
+				$facialhair = request_var('facialhair','');
+				$physicalstatus = request_var('physicalstatus','');
+				$maritalstatus = request_var('maritalstatus','');
+				$children = request_var('children','');
+				$familyvalues = request_var('familyvalues','');
+				$livingsituation = request_var('livingsituation','');
+				$likes = request_var('likes','');
+				$dislikes = request_var('dislikes','');
+				$zodiachormony = request_var('zodiachormony','');
+				$foodhabits = request_var('foodhabits','');
+				$education = request_var('education','');
+				$occupation = request_var('occupation','');
+				$relocate = request_var('relocate','');
+				$religion = request_var('religion','');
+				$bornreverted = request_var('bornreverted','');
+				$religiousvalues = request_var('religiousvalues','');
+				$religiousservices = request_var('religiousservices','');
+				$mother_language = request_var('mother_language','');
+				$ethnicity = request_var('ethnicity','');
+				$cast = request_var('cast','');
+				$nationality = request_var('nationality','');
+				$placeofbirth = request_var('placeofbirth','');
+				$languagesspoken = request_var('languagesspoken','');
+				$ambition = request_var('ambition','');
+				$hobbies = request_var('hobbies','');
+				$dreams = request_var('dreams','');
+				$getmarried = request_var('getmarried','');
+				$morechildren = request_var('morechildren','');
+				$dowry = request_var('dowry','');
+				$cnic = request_var('cnic','');
+				//$family_image = request_var('family_image','');
+				$age = age($dateofbirth); // calculate dateofbirth
+				
+				
+				if($finfo==1 || $finfo==0){
+					
+					//echo $gender . " :Gender";
+					//echo $seeking_gender . "  :Seeking Gender";	
+				$q_family = "UPDATE pairness_family SET id = '$id', ip = '$ip', familyid = '$parientid', familyfullname = '$username', familyemailaddress = '$email', familypassword = '$password', familygender = '$gender', familyseekinggender = '$seeking_gender', familydateofbirth = '$dateofbirth', familycountry = '$country', familystate = '$state', familycity = '$city', familyterms = '$terms', familyfirstname = '$first_name', familylastname = '$last_name', familyphone = '$phone', familycell = '$mobile', familyprofileimage = '$profile_picture', familyprofiledate = '$profile_date', familyprofiletime = '$profile_time', familyhaircolor = '$haircolor', familyhairtype = '$hairtype', familyeyecolor = '$eyecolor', familyeyewear = '$eyewear', familyheight = '$height', familyweight = '$weight', familybodytype = '$bodytype', familyappearance = '$appearance', familyfacialhair = '$facialhair', familyphysicalstatus = '$physicalstatus', familymaritalstatus = '$maritalstatus', familyhavechildrens = '$children', familyvalues = '$familyvalues', familylivingsituation = '$livingsituation', familylikes = '$likes', familydislikes = '$dislikes', familyzodiachormony = '$zodiachormony', familyfoodhabits = '$foodhabits', familyeducation = '$education', familyoccupation = '$occupation', familyrelocate = '$relocate', familyreligion = '$religion', familybornreverted = '$bornreverted', familyreligiousvalues = '$religiousvalues', familyattendreligiousservices = '$religiousservices', familymothertongue = '$mother_language', familyethnicity = '$ethnicity', familycast = '$cast', familynationality = '$nationality', familyplaceofbirth = '$placeofbirth', familylanguagesspoken = '$languagesspoken', familyambition = '$ambition', familyhobbies = '$hobbies', familydreams = '$dreams', familygetmarried = '$getmarried', familywantmorechildrens = '$morechildren', familydowry = '$dowry', familycnicnumber = '$cnic', familycnicimage = '$family_image', familyage = '$age' WHERE familyemailaddress = '$email';";
+				
+				
+				$mysqli->query($q_family);
+				//echo $mysqli->error;
+				//echo "<h4 class='style9'>Second Step Complete</h4><br>";
+				
+					if($seeking_gender=='' || $dateofbirth=='' || $country=='' || $state=='' || $city=='' || $terms=='' || $first_name=='' || $last_name==''|| $phone=='' || $mobile=='' || $haricolor=='' || $hairtype=='' || $eyecolor=='' || $eyewear=='' || $height=='' || $weight=='' || $bodytype=='' || $appearance=='' || $facialhair=='' || $physicalstatus=='' || $maritalstatus=='' || $children=='' || $familyvalues=='' || $livingsituation=='' || $likes=='' || $dislikes=='' || $zodiachormony=='' || $foodhabits=='' || $education=='' || $occupation=='' || $relocate=='' || $religion=='' || $bornreverted=='' || $religiousvalues=='' || $religiousservices=='' || $mother_language=='' || $ethnicity=='' || $cast=='' || $nationality=='' || $placeofbirth=='' || $languagesspoken=='' || $ambition=='' || $hobbies=='' || $dreams=='' || $getmarried=='' || $morechildren=='' || $dowry=='' || $cnic=='' )
+					{
+						echo "<div class='success'>Profile successfully Updated! Click <a class='login-mini' href='#'>here</a> for Login</div>";
+					}
+					else 
+					{
+						echo "<div class='success'>Profile successfully Completed! Click <a class='login-mini' href='#'>here</a> for Login </div>";
+					}
+				
+
+				}
+				
+				/*else{
+				
+				insert ()?
+				}*/
+					
+				 
+	 } 		// if post ends
+
+
+
+ 
+ 	$tp = $mysqli->query("select * from login where sc = '$skey'");
+ 
+
+	if($finfo==1 || $finfo==0){
+
+		$p = $mysqli->query("SELECT * from pairness_family WHERE familyemailaddress = '$view'");
+		
+				  while($row= $p->fetch_object())
+				{
+					
+				$id = $row->id;
+				$ip = $row->ip;
+				$familyid = $row->familyid;
+				$familyfullname = $row->familyfullname;				
+				$familyemailaddress = $row->familyemailaddress;		
+				$familypassword = $row->familypassword;
+				$familygender = $row->familygender;
+				$familyseekinggender = $row->familyseekinggender;
+				$familydateofbirth = $row->familydateofbirth;
+				$familycountry = $row->familycountry;
+				$familystate = $row->familystate;
+				$familycity = $row->familycity;
+				$familyterms = $row->familyterms;
+				$familyfirstname = $row->familyfirstname;
+				$familylastname = $row->familylastname;
+				$familyphone = $row->familyphone;
+				$familycell = $row->familycell;
+				$familyprofileimage = $row->familyprofileimage;
+				$familyprofiledate = $row->familyprofiledate;
+				$familyprofiletime = $row->familyprofiletime;
+				$familyhaircolor = $row->familyhaircolor;
+				$familyhairtype = $row->familyhairtype;
+				$familyeyecolor = $row->familyeyecolor;
+				$familyeyewear = $row->familyeyewear;
+				$familyheight = $row->familyheight;
+				$familyweight = $row->familyweight;
+				$familybodytype = $row->familybodytype;
+				$familyappearance = $row->familyappearance;
+				$familyfacialhair = $row->familyfacialhair;
+				$familyphysicalstatus = $row->familyphysicalstatus;
+				$familymaritalstatus = $row->familymaritalstatus;
+				$familyhavechildrens = $row->familyhavechildrens;
+				$familyvalues = $row->familyvalues;
+				$familylivingsituation = $row->familylivingsituation;
+				$familylikes = $row->familylikes;
+				$familydislikes = $row->familydislikes;
+				$familyzodiachormony = $row->familyzodiachormony;
+				$familyfoodhabits = $row->familyfoodhabits;
+				$familyeducation = $row->familyeducation;
+				$familyoccupation = $row->familyoccupation;
+				$familyrelocate = $row->familyrelocate;
+				$familyreligion = $row->familyreligion;
+				$familybornreverted = $row->familybornreverted;
+				$familyreligiousvalues = $row->familyreligiousvalues;
+				$familyattendreligiousservices = $row->familyattendreligiousservices;
+				$familymothertongue = $row->familymothertongue;
+				$familyethnicity = $row->familyethnicity;
+				$familycast = $row->familycast;
+				$familynationality = $row->familynationality;
+				$familyplaceofbirth = $row->familyplaceofbirth;
+				$familylanguagesspoken = $row->familylanguagesspoken;
+				$familyambition = $row->familyambition;
+				$familyhobbies = $row->familyhobbies;
+				$familydreams = $row->familydreams;
+				$familygetmarried = $row->familygetmarried;
+				$familywantmorechildrens = $row->familywantmorechildrens;
+				$familydowry = $row->familydowry;
+				$familycnicnumber = $row->familycnicnumber;
+				$familycnicimage = $row->familycnicimage;
+								
+				}	// while ends here
+		
+	}
+
+				
+	if($tp->num_rows==1){
+	?>	
+	<form action="" method="post" name="nextstep" id="nextstep" enctype="multipart/form-data">
+	<table width="600" border="0" cellspacing="0" cellpadding="0">
+  	<input hidden="text" name="id" id="id" value="<?php echo $id;  ?>" />
+    <input hidden="text" name="ip" id="ip" value="<?php echo $ip ?>" />
+    <input hidden="text" name="parientid" id="parientid" value="<?php  echo $familyid; ?>" />
+    <input type="hidden" name="password" id="password" value="<?php echo $familypassword; ?>" />
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  	</tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><input type="text" name="email" readonly="readonly" id="email" value="<?php echo $familyemailaddress; ?>" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Full Name:</td>
+    <td><input type="text" name="username" readonly="readonly" id="username" value="<?php  echo $familyfullname; ?>" /></td>
+  </tr>
+  
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Gender:</td>
+    <td><input type="text" name="gender" readonly="readonly" id="gender" value="<?php  echo $familygender; ?>" />
+    
+    
+    <!--<select name="gender" id="gender">
+  <option value="">Select Gender</option>
+  <option value="male">Male</option>
+  <option value="female">Female</option>
+</select>--> 
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+ <tr>
+    <td>Seeking Gender:</td>
+    <td><select name="seeking_gender" id="seeking_gender">
+  <option value="">Select Gender</option>
+  <?php if ($familygender=='female'){ ?>
+  <option value="male" selected="selected">Male</option>
+  <option value="female">Female</option>
+  <?php } else{ ?>
+  <option value="male">Male</option>
+  <option value="female" selected="selected">Female</option>
+  <?php }?>
+</select> </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Date of Birth:</td>
+    <td><input type="text" name="dateofbirth" id="dateofbirth" class="tcal_two" placeholder="YYYY-MM-DD" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Country:</td>
+    <td><select name="country" id="country">
+    <option value="0">Select Country</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."' >". $row->name ."</option>";
+			}
+     ?>
+        
+    </select>
+    
+    </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>State:</td>
+    <td><input type="text" name="state" placeholder="Enter Your State" id="state" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td><input type="text" name="city" id="city" placeholder="Enter Your City" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Terms:</td>
+    <td><textarea name="terms" id="terms" placeholder="Enter some text about Family Terms..." cols="30" rows="5">
+</textarea>
+</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>First Name:</td>
+    <td><input type="text" name="first_name" id="first_name" placeholder="Enter Your First Name" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Last Name:</td>
+    <td><input type="text" name="last_name" id="last_name" placeholder="Enter Your Last Name" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Phone:</td>
+    <td><input type="text" name="phone" id="phone" placeholder="Enter Your Phone No" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Mobile:</td>
+    <td><input type="text" name="mobile" id="mobile" placeholder="Enter Your Mobile No" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Profile Picture:</td>
+    <td><input type="file" name="profile_picture" id="profile_picture"  /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Hair Color:</td>
+    <td><select name="haircolor" id="haircolor"> 
+    <option value="0" >Select Your Hair Color</option>
+     <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '1' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Hair Type:</td>
+    <td><select name="hairtype" id="hairtype"> 
+    <option value="0">Select Your Hair Type</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '2' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Eye Color:</td>
+    <td><select name="eyecolor" id="eyecolor"> 
+     <option value="0">Select Your Eye Color</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '3' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Eye Wear:</td>
+    <td><select name="eyewear" id="eyewear"> 
+    <option value="0">Select Your Eye Wear</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '4' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Height:</td>
+    <td><select name="height" id="height"> 
+    <option value="0">Select Your Height</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '5' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Weight:</td>
+    <td><select name="weight" id="weight"> 
+    <option value="0">Select Your Weight</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '6' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+                            
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Body Type:</td>
+    <td><select name="bodytype" id="bodytype"> 
+    <option value="0">Select Your Body Type</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '7' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Appearance:</td>
+    <td><select name="appearance" id="appearance"> 
+     <option value="0">Select Your Appearance</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '8' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Facialhair:</td>
+    <td><select name="facialhair" id="facialhair"> 
+    <option value="0">Select Your Facial Hair</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '9' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Physical Status:</td>
+    <td><select name="physicalstatus" id="physicalstatus"> 
+     <option value="0">Select Your Physical Status</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '10' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                           
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Marital Status:</td>
+    <td><select name="maritalstatus" id="maritalstatus"> 
+   <option value="0">Select Your Marital Status</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '11' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                            
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Childrens:</td>
+    <td><select name="children" id="children"> 
+    <option value="0">Select Your Children</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '12' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                            
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Family Values:</td>
+    <td><select name="familyvalues" id="familyvalues"> 
+    <option value="0">Select Your Family Values</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '13' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                          
+</select></td>
+  </tr>
+
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Living Situation:</td>
+    <td><select name="livingsituation" id="livingsituation"> 
+    <option value="0">Select Your Living Situation</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '14' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                        
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Likes:</td>
+    <td><textarea name="likes" placeholder="Enter some text about Family Likes..." id="likes" cols="30" rows="5">
+</textarea>
+</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Dislikes:</td>
+    <td><textarea name="dislikes" placeholder="Enter some text about Family Dislikes..." id="dislikes" cols="30" rows="5">
+</textarea>
+</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Zodiac Hormony:</td>
+    <td><input type="text" name="zodiachormony" id="zodiachormony" placeholder="Enter Your Zodia Chormony"></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Food Habits:</td>
+    <td><select name="foodhabits" id="foodhabits"> 
+    <option value="0">Select Your Food Habits</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '15' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Education:</td>
+    <td><select name="education" id="education"> 
+    <option value="0">Select Your Education</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '16' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Occupation:</td>
+    <td><select name="occupation" id="occupation"> 
+     <option value="0">Select Your Occupation</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '17' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                 
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Relocate:</td>
+    <td><select name="relocate" id="relocate"> 
+    <option value="0">Select Your Relocate</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '18' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Religion:</td>
+    <td><select name="religion" id="religion"> 
+     <option value="0">Select Your Religion</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '19' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Born Reverted:</td>
+    <td><select name="bornreverted" id="bornreverted"> 
+   <option value="0">Select Born Reverted</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '20' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                   
+</select></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Religious Values:</td>
+    <td><select name="religiousvalues" id="religiousvalues"> 
+    <option value="0">Select Your Religious Values</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '21' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                   
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Religious Services:</td>
+    <td><select name="religiousservices" id="religiousservices"> 
+    <option value="0">Select Your Religious Services</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '22' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Mother Language:</td>
+    <td><select name="mother_language" id="mother_language"> 
+    <option value="0" >Select Your Mother Language</option>
+   	<?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '23' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Ethnicity:</td>
+    <td><select name="ethnicity" id="ethnicity"> 
+    <option value="0" >Select Your Ethnicity</option>
+   	<?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '24' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Cast:</td>
+    <td><input type="text" placeholder="Enter Your Cast" name="cast" id="cast" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Nationality:</td>
+    
+   <td> <select name="nationality" id="nationality"> 
+   <option value="0" >Select Your Nationality</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Place of Birth:</td>
+    <td> <select name="placeofbirth" id="placeofbirth"> 
+    <option value="0">Select Your Place of Birth</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Languages Spoken:</td>
+    <td><select name="languagesspoken" id="languagesspoken"> 
+    <option value="0">Select Your Languages Spoken</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '26' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Ambition:</td>
+    <td><input type="text" placeholder="Enter Your Ambition" name="ambition" id="ambition" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Hobbies:</td>
+    <td><input type="text" placeholder="Enter Your Hobbies" name="hobbies" id="hobbies" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Dreams:</td>
+    <td><input type="text" placeholder="Enter Your Dreams" name="dreams" id="dreams" /></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Get Married:</td>
+    <td><select name="getmarried" id="getmarried"> 
+    <option value="0">Select Get Married</option>
+   	 <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '27' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>More Children:</td>
+    <td><select name="morechildren" id="morechildren"> 
+    <option value="0">Select Want More Children</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '28' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                    
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Dowry:</td>
+    <td><select name="dowry" id="dowry"> 
+    <option value="0">Select Dowry</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '29' ORDER by name ASC");
+	
+	
+            	while($row = $p->fetch_object()){
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>                   
+</select></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>CNIC:</td>
+    <td><input type="text" placeholder="Enter Your CNIC No" name="cnic" id="cnic" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>Family Image:</td>
+    <td><input type="file" name="family_image" id="family_image" /></td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="submit" id="submit" value="Submit" />&nbsp;&nbsp;&nbsp;<input type="reset" name="rest" id="rest" value="Reset" /></td>
+  </tr>
+</table>
+</form>
+
+<?php }else{
+echo "<h1>You are missing security key!</h1>";
+} ?>

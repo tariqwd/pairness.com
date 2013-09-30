@@ -15,7 +15,7 @@ auth_check();
 <?php 
 //include "dbconnect.php";
 $page=1;//Default page
-$limit=1;//Records per page
+$limit=6;//Records per page
 $start=0;//starts displaying records from 0
 if(isset($_GET['page']) && $_GET['page']!=''){
 $page=$_GET['page'];
@@ -125,7 +125,7 @@ switch ($action) {
     break;
 	default:
 ?>
-	<form action="?action=main" method="post" name="search" id="search">
+	<!--<form action="?action=main" method="post" name="search" id="search">
 	<table width="600" border="0" cellspacing="0" cellpadding="0">
 	<tr>
     <td>Search Here:</td>
@@ -195,7 +195,7 @@ switch ($action) {
   <td><input type="image" src="./assets/css/img/btn_quick_search.png" name="submit" id="submit" value="Submit" /></td>
   </tr>
   </table>
-  </form>
+  </form>-->
   
   
   
@@ -267,11 +267,11 @@ switch ($action) {
         <?php 
 		for($i=1;$i<=100;$i++)
 			{
-				if ($i!=30)
+				if ($i!=35)
 				{
 					echo '<option value="'.$i.'" >' . $i . '</option>';
 				}
-				if($i==30)
+				if($i==35)
 				{
 					echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';			
 				}

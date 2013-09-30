@@ -1,13 +1,23 @@
-<section class="content">
+<div class="roundedContainer">
+<div class="mainHeading ">Edit Profile</div>
+<!--<section class="content">
+<h2> </h2>
+Answering these profile questions will help other users find you in search results and help us to find you more accurate matches.<br /> Answer all questions below to complete this step.
+</section>-->
 
 
 
-<h1>Complete your profile.</h1>
-</section><?php
 
+<?php
 $familyid = $_SESSION['familyid'];
 $id = $_SESSION['id'];
-$finfo = $_REQUEST['finfo'];
+$em = getemail($_SESSION['id']);
+
+$query = $mysqli->query("select * from login where id='$id' and email='$em'");
+		if($query->num_rows==1){
+			$finfo = $query ->fetch_assoc();
+			$fm = $finfo['isfamily'];
+		}
 //$view = $_REQUEST['view'];
 //echo $view . " :email";
 if($_POST){    // if post start
@@ -127,19 +137,25 @@ else
 				$email =  request_var('email','');
 				$password = request_var('password','');
 				$gender = request_var('gender','');
-				$seeking_gender = request_var('seeking_gender','');
+				$seeking_gender = request_var('seekinggender','');
 				$dateofbirth = request_var('dateofbirth','');
 				$country = request_var('country','');
 				$state = request_var('state','');
 				$city = request_var('city','');
 				$terms = request_var('terms','');
-				$first_name = request_var('first_name','');
-				$last_name = request_var('last_name','');
+				$first_name = request_var('firstname','');
+				$last_name = request_var('lastname','');
 				$phone = request_var('phone','');
 				$mobile = request_var('mobile','');
+				if($profile_picture=='')
+				{
+					$profile_picture='default.png';
+				}
 				//$profile_picture = request_var('profile_picture','');
-				$profile_date = request_var('profile_date','');
-				$profile_time = request_var('profile_time','');
+				//$t = time();
+				//$t = time();
+				$profile_date = date("Y-m-d H:i:s");//request_var('profile_date','');
+				$profile_time = date("H:i:s");//request_var('profile_time','');
 				$haircolor = request_var('haircolor','');
 				$hairtype = request_var('hairtype','');
 				$eyecolor = request_var('eyecolor','');
@@ -191,8 +207,18 @@ else
 				
 				$mysqli->query($q_family);
 				//echo $mysqli->error;
-				echo "<h4 class='style9'>Second Step Complete</h4><br>";
+				//echo "<h4 class='style9'>Second Step Complete</h4><br>";
 				
+					if($seeking_gender=='' || $dateofbirth=='' || $country=='' || $state=='' || $city=='' || $terms=='' || $first_name=='' || $last_name==''|| $phone=='' || $mobile=='' || $haricolor=='' || $hairtype=='' || $eyecolor=='' || $eyewear=='' || $height=='' || $weight=='' || $bodytype=='' || $appearance=='' || $facialhair=='' || $physicalstatus=='' || $maritalstatus=='' || $children=='' || $familyvalues=='' || $livingsituation=='' || $likes=='' || $dislikes=='' || $zodiachormony=='' || $foodhabits=='' || $education=='' || $occupation=='' || $relocate=='' || $religion=='' || $bornreverted=='' || $religiousvalues=='' || $religiousservices=='' || $mother_language=='' || $ethnicity=='' || $cast=='' || $nationality=='' || $placeofbirth=='' || $languagesspoken=='' || $ambition=='' || $hobbies=='' || $dreams=='' || $getmarried=='' || $morechildren=='' || $dowry=='' || $cnic=='' )
+					{
+						echo "<div class='success'>Profile successfully Updated! Click <a class='login-mini' href='#'>here</a> for Login</div>";
+					}
+					else 
+					{
+						echo "<div class='success'>Profile successfully Completed! Click <a class='login-mini' href='#'>here</a> for Login </div>";
+					}
+				
+
 				}
 				
 				/*else{
@@ -206,12 +232,12 @@ else
 
 
  
- 	$tp = $mysqli->query("select * from login where sc = '$skey'");
+ 	//$tp = $mysqli->query("select * from login where sc = '$skey'");
  
 
-	if($finfo==1 || $finfo==0){
+	if($fm==0){
 
-		$p = $mysqli->query("SELECT * from pairness_family WHERE familyemailaddress = '$view'");
+		$p = $mysqli->query("SELECT * from pairness_family WHERE familyemailaddress = '$em'");
 		
 				  while($row= $p->fetch_object())
 				{
@@ -280,9 +306,11 @@ else
 		
 	}
 
-				
-	if($tp->num_rows==1){
-	?>	
+
+	?>
+<ul class="formContainer">
+    <li id="discription"> Answering these profile questions will help other users find you in search results and help us to find you more accurate matches.<br /> <em> Answer all questions below to complete this step.</em> </li>
+    <div class="mainHeadinginner">Your Basics</div>
 	<form action="" method="post" name="nextstep" id="nextstep" enctype="multipart/form-data">
 	<table width="600" border="0" cellspacing="0" cellpadding="0">
   	<input hidden="text" name="id" id="id" value="<?php echo $id;  ?>" />
@@ -293,85 +321,219 @@ else
     <td>&nbsp;</td>
     <td>&nbsp;</td>
   	</tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>Email:</td>
-    <td><input type="text" name="email" readonly="readonly" id="email" value="<?php echo $familyemailaddress; ?>" /></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>Full Name:</td>
-    <td><input type="text" name="username" readonly="readonly" id="username" value="<?php  echo $familyfullname; ?>" /></td>
-  </tr>
-  
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>Gender:</td>
-    <td><input type="text" name="gender" readonly="readonly" id="gender" value="<?php  echo $familygender; ?>" />
+
+    <li> 
+    <label class="questionLabel">Email:</label>
+    <span > <input type="text" name="email" readonly="readonly" id="email" value="<?php echo $familyemailaddress; ?>" />
+    </span>
+    </li>
     
+    <li> 
+    <label class="questionLabel">First Name:</label>
+    <span > <input type="text" name="firstname" id="firstname" value="<?php echo $familyfirstname; ?>" />
+    </span>
+    </li>
     
-    <!--<select name="gender" id="gender">
-  <option value="">Select Gender</option>
-  <option value="male">Male</option>
-  <option value="female">Female</option>
-</select>--> 
-    </td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
- <tr>
-    <td>Seeking Gender:</td>
-    <td><select name="seeking_gender" id="seeking_gender">
-  <option value="">Select Gender</option>
-  <?php if ($familygender=='female'){ ?>
-  <option value="male" selected="selected">Male</option>
-  <option value="female">Female</option>
-  <?php } else{ ?>
-  <option value="male">Male</option>
-  <option value="female" selected="selected">Female</option>
-  <?php }?>
-</select> </td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>Date of Birth:</td>
-    <td><input type="text" name="dateofbirth" id="dateofbirth" class="tcal_two" value="<?php echo $familydateofbirth; ?>" /></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>Country:</td>
-    <td><select name="country" id="country">
-    <option>Select Country</option>
-    <?php 
+    <li> 
+    <label class="questionLabel">Last Name:</label>
+    <span > <input type="text" name="lastname"  id="lastname" value="<?php echo $familylastname; ?>" />
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">I'm a:</label>
+    <span > 
+    <select name="gender" id="gender">
+    <option value="male" <?php if($familygender=='male'){  ?> selected="selected" <?php } ?>>Male</option>
+ 	<option value="female" <?php if($familygender=='female'){  ?>  selected="selected" <?php } ?>>Female</option>
+	</select>
+    </span>
+    </li>
+	
+    <li> 
+    <label class="questionLabel">Seeking for:</label>
+    <span > 
+    <select name="seekinggender" id="seekinggender">
+    <?php if ($familygender=='female'){ ?>
+    <option value="male" selected="selected">Male</option>
+    <option value="female">Female</option>
+    <?php } else{ ?>
+    <option value="male">Male</option>
+    <option value="female" selected="selected">Female</option>
+    <?php }?>
+	</select>
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">Date of Birth:</label>
+    <span > <input type="text" name="dateofbirth" id="dateofbirth" class="tcal_two" placeholder="YYYY-MM-DD" value="<?php echo $familydateofbirth; ?>" />
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">Country:</label>
+    <span > 
+    <select name="country" id="country">
+    <option value="0">Select Country</option>
+     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
 	
 	
             	while($row = $p->fetch_object()){
+					
+				if ($familycountry == $row->id)
+				{
+					echo 	"<option value='". $row->id ."' selected='selected'>". $row->name ."</option>";
+				}
+				else 
+				{
                 echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+				}
 			}
-     ?>
-        
+			
+     ?>      
     </select>
+    </span>
+    </li>
     
-    </td>
-  </tr>
+    <li> 
+    <label class="questionLabel">State/Province:</label>
+    <span > <input type="text" name="state"  id="state" value="<?php echo $familystate; ?>" />
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">City:</label>
+    <span > <input type="text" name="city"  id="city" value="<?php echo $familycity; ?>" />
+    </span>
+    </li>
+    
+    <div class="mainHeadinginner">Your Appearance</div>
+
+    <li> 
+    <label class="questionLabel">Hair Color:</label>
+    <span > 
+    <select name="haircolor" id="haircolor"> 
+    <option value="0" >Select Your Hair Color</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '1' ORDER by name ASC");
+	
+            	while($row = $p->fetch_object()){
+				
+				if ($familyhaircolor == $row->id)
+				{
+					echo 	"<option value='". $row->id ."' selected='selected'>". $row->name ."</option>";
+				}
+				else 
+				{
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+				}	
+			}
+        ?>
+	</select>
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">Hair Type:</label>
+    <span > 
+    <select name="hairtype" id="hairtype"> 
+    <option>Select Your Hair Type</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '2' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+					
+				if ($familyhairtype == $row->id)
+				{
+					echo 	"<option value='". $row->id ."' selected='selected'>". $row->name ."</option>";
+				}
+				else 
+				{
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+				}
+				
+			}
+        ?>
+	</select>
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">Eye Color:</label>
+    <span > 
+    <select name="eyecolor" id="eyecolor"> 
+    <option>Select Your Eye Color</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '3' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                if ($familyeyecolor == $row->id)
+				{
+					echo 	"<option value='". $row->id ."' selected='selected'>". $row->name ."</option>";
+				}
+				else 
+				{
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+				}
+				
+			}
+        ?>
+	</select>
+    </span>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">Eye Wear:</label>
+    <span > 
+    <select name="eyewear" id="eyewear"> 
+    <option>Select Your Eye Wear</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '4' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                if ($familyeyewear == $row->id)
+				{
+					echo 	"<option value='". $row->id ."' selected='selected'>". $row->name ."</option>";
+				}
+				else 
+				{
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+				}
+				
+			}
+        ?>
+	</select>
+    </li>
+    
+    <li> 
+    <label class="questionLabel">Height:</label>
+    <span > 
+   <select name="height" id="height"> 
+    <option>Select Your Height</option>
+    <?php 
+	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '5' ORDER by id DESC");
+	
+	
+            	while($row = $p->fetch_object()){
+                if ($familyheight == $row->id)
+				{
+					echo 	"<option value='". $row->id ."' selected='selected'>". $row->name ."</option>";
+				}
+				else 
+				{
+                echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+				}
+				//echo  "<option value='". $row->id ."'>". $row->name ."</option>";
+			}
+        ?>
+	</select>
+    </li>
+    
   <tr>
     <td>&nbsp;</td>
     <td>&nbsp;</td>
@@ -443,25 +605,9 @@ else
     <td>&nbsp;</td>
   </tr>
   <tr>
-    <td>Profile Date:</td>
-    <td><input type="text" name="profile_date" id="profile_date" class="tcal" value="" /></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
-    <td>Profile Time:</td>
-    <td><input type="text" name="profile_time" id="profile_time" value="<?php echo $familyprofiletime; ?>" /></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
-  <tr>
     <td>Hair Color:</td>
     <td><select name="haircolor" id="haircolor"> 
-    <option value="" >Select Your Hair Color</option>
+    <option value="0" >Select Your Hair Color</option>
      <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '1' ORDER by name ASC");
 	
@@ -479,7 +625,7 @@ else
   <tr>
     <td>Hair Type:</td>
     <td><select name="hairtype" id="hairtype"> 
-    <option>Select Your Hair Type</option>
+    <option value="0">Select Your Hair Type</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '2' ORDER by id DESC");
 	
@@ -497,7 +643,7 @@ else
   <tr>
     <td>Eye Color:</td>
     <td><select name="eyecolor" id="eyecolor"> 
-     <option>Select Your Eye Color</option>
+     <option value="0">Select Your Eye Color</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '3' ORDER by id DESC");
 	
@@ -515,7 +661,7 @@ else
   <tr>
     <td>Eye Wear:</td>
     <td><select name="eyewear" id="eyewear"> 
-    <option>Select Your Eye Wear</option>
+    <option value="0">Select Your Eye Wear</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '4' ORDER by id DESC");
 	
@@ -533,7 +679,7 @@ else
   <tr>
     <td>Height:</td>
     <td><select name="height" id="height"> 
-    <option>Select Your Height</option>
+    <option value="0">Select Your Height</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '5' ORDER by id DESC");
 	
@@ -551,7 +697,7 @@ else
   <tr>
     <td>Weight:</td>
     <td><select name="weight" id="weight"> 
-    <option>Select Your Weight</option>
+    <option value="0">Select Your Weight</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '6' ORDER by id DESC");
 	
@@ -570,7 +716,7 @@ else
   <tr>
     <td>Body Type:</td>
     <td><select name="bodytype" id="bodytype"> 
-    <option>Select Your Body Type</option>
+    <option value="0">Select Your Body Type</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '7' ORDER by id DESC");
 	
@@ -588,7 +734,7 @@ else
   <tr>
     <td>Appearance:</td>
     <td><select name="appearance" id="appearance"> 
-     <option>Select Your Appearance</option>
+     <option value="0">Select Your Appearance</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '8' ORDER by id DESC");
 	
@@ -606,7 +752,7 @@ else
   <tr>
     <td>Facialhair:</td>
     <td><select name="facialhair" id="facialhair"> 
-    <option>Select Your Facial Hair</option>
+    <option value="0">Select Your Facial Hair</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '9' ORDER by id DESC");
 	
@@ -624,7 +770,7 @@ else
   <tr>
     <td>Physical Status:</td>
     <td><select name="physicalstatus" id="physicalstatus"> 
-     <option>Select Your Physical Status</option>
+     <option value="0">Select Your Physical Status</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '10' ORDER by id DESC");
 	
@@ -642,7 +788,7 @@ else
   <tr>
     <td>Marital Status:</td>
     <td><select name="maritalstatus" id="maritalstatus"> 
-   <option>Select Your Marital Status</option>
+   <option value="0">Select Your Marital Status</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '11' ORDER by id DESC");
 	
@@ -660,7 +806,7 @@ else
   <tr>
     <td>Childrens:</td>
     <td><select name="children" id="children"> 
-    <option>Select Your Children</option>
+    <option value="0">Select Your Children</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '12' ORDER by id DESC");
 	
@@ -678,7 +824,7 @@ else
   <tr>
     <td>Family Values:</td>
     <td><select name="familyvalues" id="familyvalues"> 
-    <option>Select Your Family Values</option>
+    <option value="0">Select Your Family Values</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '13' ORDER by id DESC");
 	
@@ -697,7 +843,7 @@ else
   <tr>
     <td>Living Situation:</td>
     <td><select name="livingsituation" id="livingsituation"> 
-    <option>Select Your Living Situation</option>
+    <option value="0">Select Your Living Situation</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '14' ORDER by id DESC");
 	
@@ -734,7 +880,7 @@ else
   </tr>
   <tr>
     <td>Zodiac Hormony:</td>
-    <td><input type="text" name="zodiachormony" id="zodiachormony" placeholder="Enter Your Family Zodia Chormony"></td>
+    <td><input type="text" name="zodiachormony" id="zodiachormony" placeholder="Enter Your Zodia Chormony"></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -743,7 +889,7 @@ else
   <tr>
     <td>Food Habits:</td>
     <td><select name="foodhabits" id="foodhabits"> 
-    <option>Select Your Food Habits</option>
+    <option value="0">Select Your Food Habits</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '15' ORDER by id DESC");
 	
@@ -761,7 +907,7 @@ else
   <tr>
     <td>Education:</td>
     <td><select name="education" id="education"> 
-    <option>Select Your Education</option>
+    <option value="0">Select Your Education</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '16' ORDER by id DESC");
 	
@@ -779,7 +925,7 @@ else
   <tr>
     <td>Occupation:</td>
     <td><select name="occupation" id="occupation"> 
-     <option>Select Your Occupation</option>
+     <option value="0">Select Your Occupation</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '17' ORDER by id DESC");
 	
@@ -797,7 +943,7 @@ else
   <tr>
     <td>Relocate:</td>
     <td><select name="relocate" id="relocate"> 
-    <option>Select Your Relocate</option>
+    <option value="0">Select Your Relocate</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '18' ORDER by id DESC");
 	
@@ -815,7 +961,7 @@ else
   <tr>
     <td>Religion:</td>
     <td><select name="religion" id="religion"> 
-     <option>Select Your Religion</option>
+     <option value="0">Select Your Religion</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '19' ORDER by id DESC");
 	
@@ -833,7 +979,7 @@ else
   <tr>
     <td>Born Reverted:</td>
     <td><select name="bornreverted" id="bornreverted"> 
-   <option>Select Born Reverted</option>
+   <option value="0">Select Born Reverted</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '20' ORDER by id DESC");
 	
@@ -851,7 +997,7 @@ else
   <tr>
     <td>Religious Values:</td>
     <td><select name="religiousvalues" id="religiousvalues"> 
-    <option>Select Your Religious Values</option>
+    <option value="0">Select Your Religious Values</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '21' ORDER by id DESC");
 	
@@ -869,7 +1015,7 @@ else
   <tr>
     <td>Religious Services:</td>
     <td><select name="religiousservices" id="religiousservices"> 
-    <option>Select Your Religious Services</option>
+    <option value="0">Select Your Religious Services</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '22' ORDER by id DESC");
 	
@@ -887,7 +1033,7 @@ else
   <tr>
     <td>Mother Language:</td>
     <td><select name="mother_language" id="mother_language"> 
-    <option value="" >Select Your Mother Language</option>
+    <option value="0" >Select Your Mother Language</option>
    	<?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '23' ORDER by id DESC");
 	
@@ -905,7 +1051,7 @@ else
   <tr>
     <td>Ethnicity:</td>
     <td><select name="ethnicity" id="ethnicity"> 
-    <option value="" >Select Your Ethnicity</option>
+    <option value="0" >Select Your Ethnicity</option>
    	<?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '24' ORDER by id DESC");
 	
@@ -932,7 +1078,7 @@ else
     <td>Nationality:</td>
     
    <td> <select name="nationality" id="nationality"> 
-   <option value="" >Select Your Nationality</option>
+   <option value="0" >Select Your Nationality</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
 	
@@ -950,7 +1096,7 @@ else
   <tr>
     <td>Place of Birth:</td>
     <td> <select name="placeofbirth" id="placeofbirth"> 
-    <option value="" >Select Your Place of Birth</option>
+    <option value="0">Select Your Place of Birth</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '25' ORDER by name ASC");
 	
@@ -968,7 +1114,7 @@ else
   <tr>
     <td>Languages Spoken:</td>
     <td><select name="languagesspoken" id="languagesspoken"> 
-    <option value="" >Select Your Languages Spoken</option>
+    <option value="0">Select Your Languages Spoken</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '26' ORDER by name ASC");
 	
@@ -1010,7 +1156,7 @@ else
   <tr>
     <td>Get Married:</td>
     <td><select name="getmarried" id="getmarried"> 
-    <option value="" >Select Get Married</option>
+    <option value="0">Select Get Married</option>
    	 <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '27' ORDER by name ASC");
 	
@@ -1028,7 +1174,7 @@ else
   <tr>
     <td>More Children:</td>
     <td><select name="morechildren" id="morechildren"> 
-    <option value="" >Select Want More Children</option>
+    <option value="0">Select Want More Children</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '28' ORDER by name ASC");
 	
@@ -1046,7 +1192,7 @@ else
   <tr>
     <td>Dowry:</td>
     <td><select name="dowry" id="dowry"> 
-    <option value="" >Select Dowry</option>
+    <option value="0">Select Dowry</option>
     <?php 
 	$p = $mysqli->query("SELECT * from pairness_features WHERE category_id = '29' ORDER by name ASC");
 	
@@ -1084,6 +1230,6 @@ else
 </table>
 </form>
 
-<?php }else{
-echo "<h1>You are missing security key!</h1>";
-} ?>
+</ul>
+
+</div>

@@ -1,10 +1,46 @@
 $.pnotify.defaults.styling = "bootstrap";
 
-function centerdiv(el)
+/*function centerdiv(el)
 {
     el.css("position","fixed");
     el.css("top", ($(window).height() / 2) - ((el.outerHeight() / 2)+100));
     el.css("left", ($(window).width() / 2) - (el.outerWidth() / 2));
+	return el;
+}*/
+
+function centerdiv1(el)
+{
+    el.css("position","fixed");
+    el.css("top", "50%");
+    el.css("left","50%");
+	el.css("margin-top", "-110px");
+    el.css("margin-left","-215px");
+	el.css(" width", "600px");
+    el.css(" height","400px");
+	return el;
+}
+
+function centerdiv2(el)
+{
+    el.css("position","fixed");
+    el.css("top", "50%");
+    el.css("left","50%");
+	el.css("margin-top", "-0px");
+    el.css("margin-left","-230px");
+	el.css(" width", "600px");
+    el.css(" height","400px");
+	return el;
+}
+
+function centerdiv(el)
+{
+    el.css("position","fixed");
+    el.css("top", "50%");
+    el.css("left","50%");
+	el.css("margin-top", "-200px");
+    el.css("margin-left","-350px");
+	el.css(" width", "600px");
+    el.css(" height","400px");
 	return el;
 }
 
@@ -15,6 +51,14 @@ function changegender(ep){
 
 $(document).ready(function(){
 	centerdiv( $('.not-wrapper') );
+});
+
+$(document).ready(function(){
+	centerdiv1( $('.not-wrapper') );
+});
+
+$(document).ready(function(){
+	centerdiv2( $('.not-wrapper') );
 });
 
 $(document.documentElement).keyup(function (event) {
@@ -28,24 +72,25 @@ $("body").on("click", ".close-wrapper", function (e) {
 });
 
 $( ".login-mini" ).click(function(e) {
-	centerdiv( $('.not-wrapper') );
-	$(".not-wrapper").css("display","none");	
+	
+	centerdiv1( $('.not-wrapper') );
+	$(".not-wrapper").css("display","none");
 	$(".not-wrapper").css("display","block");
 	$('.not-wrapper').load('./assets/template/sub/login.html');	
-	centerdiv( $('.not-wrapper') );
+	centerdiv1( $('.not-wrapper') );
 	$(document).attr('title', 'Login');
 	$('#login-form input').focus();
 
 });
 
 $( ".message-mini" ).click(function(e) {
-	centerdiv( $('.not-wrapper') );
+	centerdiv1( $('.not-wrapper') );
 	$(".not-wrapper").css("display","none");	
 	$(".not-wrapper").css("display","block");
 	var recordid = $(this).attr("id");
 	//alert(recordid);
 	$('.not-wrapper').load('./message.php?recordid='+recordid);	
-	centerdiv( $('.not-wrapper') );
+	centerdiv1( $('.not-wrapper') );
 	$(document).attr('title', 'Message Detail');
 });
 
@@ -70,7 +115,7 @@ $( "#register-mini" ).click(function(e) {
 	$(".not-wrapper").css("display","block");
 	e.preventDefault();
 	$('.not-wrapper').load('./assets/template/register.coz');
-	centerdiv( $('.not-wrapper') );
+	centerdiv2( $('.not-wrapper') );	
 	location.hash = 'register';
 	$(document).attr('title', 'Register');
 
@@ -164,7 +209,6 @@ $("body").on("click", ".login-submit", function (e) {
 					title: 'Success',
 					text: 'You have successfully logged in..'
 					});  
-				
 					if (data.r!=''){
 						window.location = baseurl+data.r+".php";
 					}

@@ -1,3 +1,4 @@
+<div class="close-wrapper"><a href="#"><img src="./assets/css/img/cross.png"></a></div>
 <section class="register-select">
 <span><a class="g-register" href="#g-register">I am a guardian</a></span>    | <span><a class="s-register" href="#s-register">I am registering for myself</a></span>  
 

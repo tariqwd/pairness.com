@@ -44,6 +44,10 @@ if(pgname()!='index'){
 <img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
 <a class="topmenu" href="<?php  echo $searchpage; ?>">Search</a>
 <img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+	<?php if(isfamily()){?>
+		<a class="topmenu" href="<?php  echo $addaccount; ?>">Add Account</a>
+		<img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
+	<?php }s?>
 <a class="topmenu" href="<?php  echo $matchpage; ?>">Matches</a>
 <img src="<?php echo $sitepath;  ?>/assets/css/img/menu_bg_03.png" width="4" height="36" />
 <a class="topmenu" href="<?php  echo $inboxpage; ?>">Inbox</a>
@@ -67,6 +71,7 @@ if(pgname()!='index'){
 	
 
 		</section>
+        
 		<section class="layout">
 		<?php if(pgname()!='index' && pgname()!='candidate' && check_login()){
 		
@@ -87,6 +92,24 @@ Hello <?php  echo $_SESSION['name'];  ?>
 	<a href="<?php echo $photospage; ?>">Manage Photos</a><br />
 	<a href="<?php echo $editpreferencespage; ?>">Edit Preferences</a></div></div>
 </div>
+<?php if(!isfamily()){ ?>
+<div class="dpl">
+<div class="gray bar">Profile Completion</div>
+<div class="profilecompletionbar">
+<?php $percentage =  getprofilelevel($_SESSION['email']) ?>
+<div class="profilecompletionlevel" style="width:<?php echo $percentage ?>%;">
+<p class="profilecompletionlevellabel"> <?php echo $percentage ?>%</p>
+
+</div>
+
+</div>
+<?php if($percentage!=100){ ?>
+<div class="">
+<a href="<?php echo $editprofilepage;?>"> <img src="<?php echo $sitepath;  ?>/assets/css/img/completeProfile_btn.gif" width="190" height="45" /> </a>
+</div>
+<?php } ?>
+</div>
+<?php } ?>
 
 <div class="dpl">
 <div class="blue bar">
@@ -162,7 +185,7 @@ Upgrade Now!
 Login
 </div>
 <div class="sub-bar"><a class="login-mini" href="#">Login</a></div>
-<div class="sub-bar"><a href="#">Forgot Password</a></div>
+<div class="sub-bar"><a href="recover.php">Forgot Password</a></div>
 
 <div class="green bar">
 Learn More

@@ -235,12 +235,12 @@ if($_POST){    // if post start
 				}
 				else 
 				{
-					if ($i!=30)
+					if ($i!=35)
 					{
 						echo '<option value="'.$i.'">' . $i . '</option>';
 					}
 				
-					if($i==30)
+					if($i==35)
 					{	
 									
 						echo '<option value="'.$i.'" selected="selected">'.$i.'</option>';			
